@@ -1,0 +1,177 @@
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Webinar Setting </h4>
+                    <div class="addBtn" *ngIf="recordNotFound == true">
+                        <button type="button" class="btn btn-primary" (click)="addpbx()">+ Add Configuration</button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                     <table class="table table-bordered table-striped table-md">
+                         
+                        <tr>
+                            <th>S.no </th>
+                            <th>FQDN</th>
+                            <th>Extension Number</th>
+                            <th>Action</th>
+                           
+                        </tr>
+                        <tbody>
+                            <tr *ngIf="recordNotFound == false">
+                                <td>1</td>
+                                <td>{{this.fqdn}}</td>
+                                <td>{{this.extension_number}}</td>
+                                <td>
+                                    <span class="user-icon" style="cursor: pointer;"><i class="far fa-edit" (click)="editPbc()"></i></span>
+                                </td>
+                            </tr>
+
+                            <tr *ngIf="recordNotFound == true">
+                             <td colspan="12">Data not found</td>
+                         </tr>
+                     </tbody>
+                     
+                 </table>
+             </div>
+         </div>
+         
+     </div>
+ </div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-md" id="edit_pbxform">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">PBX settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="row">
+                        
+                        
+                       <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_url">FQDN</label>
+                            <input type="text" id="fqdn" class="form-control" value="{{this.fqdn}}">
+                            
+                        </div>
+                    </div>   
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_port">API token</label>
+                            <input type="text" id="api_token" class="form-control" value="{{this.api_token}}">
+                        </div>
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_port">Extension Number</label>
+                            <input type="text" id="extension_number" class="form-control" value="{{this.extension_number}}" >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_port">Subscribers Limit</label>
+                            <input type="text" id="subscribers_limit" class="form-control" value="{{this.subscribers_limit}}" >
+                        </div>
+                    </div>                    
+                    
+                    <div class="col-md-6">
+                     <div class="form-group">
+                         <label for="country">Country</label>
+                         <select name="country" id="country" class="form-control" >
+                            <!-- <option ng-repeat="(key, value) in countries" value="{{key}}">{{value}}</option> -->
+                            <option *ngFor="let item of countries" value="{{item.iso}}" >{{item.name}}</option>
+                        </select>
+                         <!-- <input type="text" id="country" class="form-control" value="{{this.country}}" /> -->
+                     </div>
+                 </div>                        
+             </div>
+
+         </div>
+
+         <div class="modal-footer">
+            <div class="buttons">
+                <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+                <input type="button" class="btn btn-primary update_agent" value="Update" (click)="updtaeConf()">
+            </div>
+        </div>
+</div>
+</div>
+</div>
+
+
+<div class="modal fade bd-example-modal-md" id="add_pbxform">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Webinar Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="row">
+                        
+                        
+                       <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_url">FQDN</label>
+                            <input type="text" id="a_fqdn" class="form-control" >
+                            
+                        </div>
+                    </div>   
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_port">API token</label>
+                            <input type="text" id="a_api_token" class="form-control" >
+                        </div>
+                    </div> 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_port">Extension Number</label>
+                            <input type="text" id="a_extension_number" class="form-control"  >
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="sip_port">Subscribers Limit</label>
+                            <input type="text" id="a_subscribers_limit" class="form-control"  >
+                        </div>
+                    </div>                    
+                    
+                    <div class="col-md-6">
+                     <div class="form-group">
+                         <label for="status">Country</label>
+                         <select name="status" id="a_country" class="form-control" >
+                            <option *ngFor="let item of countries" value="{{item.iso}}" >{{item.name}}</option>
+                        </select>
+                       
+                     </div>
+                 </div>                        
+             </div>
+
+         </div>
+
+            <div class="modal-footer">
+                <div class="buttons">
+                    <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+                    <input type="button" class="btn btn-primary update_agent" value="Submit" (click)="addConf()">
+                </div>
+            </div>
+
+    </div>
+</div>
+</div>

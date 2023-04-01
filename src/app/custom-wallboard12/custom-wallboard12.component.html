@@ -1,0 +1,269 @@
+<div class="section-body">
+	<div class="row">
+		<div class="col-12 col-md-12 col-lg-12">
+			<div class="card" id="wallboardFullPanel">
+				<input type="hidden" value="" id="ques_list12" (click)="changeData()">
+				<input type="hidden" value="" id="sendonload12" (click)="sendOnload()">
+				<input type="hidden" value="" id="mrVoipType12" (click)="changeWallType()">
+				<input type="hidden" value="" id="single_queue12" (click)="single_queue()">
+				<div class="card-header">
+					<div class="max-icon" (click)="fullWindow()">
+						<i class="fas fa-compress feather"></i>
+					</div>
+					<h4>Wallboard</h4>
+					<div class="addBtn">
+						<div class="default-view">
+							<button type="button" class="btn btn-warning" (click)="fullWindow()"><i class="fas fa-compress-arrows-alt"></i> Default View</button>
+						</div>
+						<button *ngIf="show_act_wall" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLicence" data-backdrop="static" >Activate Wallboard</button>
+
+					</div>
+					<a href="https://omni.mconnectapps.com/api/v1.0/pro_contents/pro_wallboard 3.pdf" target="_blank"><i style="font-size:24px;" class="fa fa-exclamation-circle"></i></a>
+
+				</div>
+
+				<div class="card-body wallboard-full-view custom-wallboard-three p-30">
+					<div class="custom-wallboard-wrapper">
+
+						<div class="card">
+							<div class="card-header">
+								<h4>QUEUE MANAGEMENT</h4>
+								<div class="addBtn btn-group"  *ngIf="this.has_admin">
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addQueue"><i class="fas fa-plus"></i> Add Queue</button>
+									<button type="button" class="btn btn-primary" (click)="reloadQueue()"><i class="fas fa-sync-alt"></i> Reset</button>
+								</div>
+							</div>
+						</div>
+<div  class="wallboard-wrapper">
+  <div  class="row no-gutters">
+    <div  class="col">
+      <div  class="wallboard-item-three normal-box light-green-bg-clr">
+        <h2 class="fl">{{this.call_offers}}</h2>
+        <h6  class="fl">CALL OFFER</h6>
+      </div>
+    </div>
+    <div  class="col">
+      <div  class="wallboard-item-three normal-box has-call-queue yellow-bg-clr">
+        <h2  class="fl">{{this.abandoned}}</h2>
+        <h6  class="fl">Abandoned Calls</h6>
+      </div>
+    </div>
+    <div  class="col">
+      <div  class="wallboard-item-three normal-box red-bg-clr">
+        <h2   class="fl">{{this.slacount}}</h2>
+        <h6  class="fl">SLA Count</h6>
+      </div>
+    </div>
+    <div  class="col">
+      <div  class="wallboard-item-three normal-box blue-bg-clr">
+        <h2  class="fl">{{this.call_waiting}}</h2>
+        <h6  class="fl">Call Waiting</h6>
+      </div>
+    </div>
+  </div>
+  <div  class="row no-gutters">
+    <div  class="col">
+      <div  class="wallboard-item-three wall-large-box violet-bg-clr">
+        <table>
+        	<thead>
+        		<tr>
+	        		<th class="wall-3-title">Queue No</th>
+	        		<th class="wall-3-title">Call Offer</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr *ngFor="let item1 of queueData">
+        			<td>{{item1.queue_no}}</td>
+        			<td id="{{item1.queue_no}}12_total_call">{{item1.total_call}}</td>
+        		</tr>
+        	</tbody>
+        </table>
+      </div>
+    </div>
+    <div  class="col">
+      <div  class="wallboard-item-three wall-large-box dark-green-bg-clr">
+        <table>
+        	<thead>
+        		<tr>
+	        		<th class="wall-3-title">Queue No</th>
+	        		<th class="wall-3-title">% Abad. Call</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr *ngFor="let item2 of queueData">
+        			<td>{{item2.queue_no}}</td>
+        			<td id="{{item2.queue_no}}12_pabandond">{{item2.p_abandond}}%</td>
+        		</tr>
+        	
+        	</tbody>
+        </table>
+      </div>
+    </div>
+    <div  class="col">
+      <div  class="wallboard-item-three wall-large-box ping-bg-clr">
+        <table>
+        	<thead>
+        		<tr>
+	        		<th class="wall-3-title">Queue No</th>
+	        		<th class="wall-3-title">SLA % </th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr *ngFor="let item3 of queueData">
+        			<td>{{item3.queue_no}}</td>
+        			<td id="{{item3.queue_no}}12_sla_per">{{item3.sla_per}}%</td>
+        		</tr>
+        		
+        	</tbody>
+        </table>
+      </div>
+    </div>
+    <div  class="col">
+      <div  class="wallboard-item-three wall-large-box red-bg-clr">
+        <table>
+        	<thead>
+        		<tr>
+	        		<th class="wall-3-title">Queue No</th>
+	        		<th class="wall-3-title">Call Waiting</th>
+        		</tr>
+        	</thead>
+        	<tbody>
+        		<tr *ngFor="let item4 of queueData">
+        			<td>{{item4.queue_no}}</td>
+        			<td id="{{item4.queue_no}}12_callwaiting">{{item4.callwaiting}}</td>
+        		</tr>
+        	</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-md" id="addQueue">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myLargeModalLabel">Add Queue</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-md">
+								<tr>
+									<th>
+										<div class="pretty p-icon p-smooth">
+											<input type="checkbox"  (click)="slectAllQue()" id="selectAllQ" >
+											<div class="state p-warning">
+												<i class="icon material-icons">done</i>
+												<label></label>
+											</div>
+										</div>
+									</th>
+									<th>QUEUE NAME</th>
+									<th>QUEUE NO</th>
+								</tr>
+								<tbody>
+									<tr *ngFor="let item of queueData">
+										<td>
+											<div class="pretty p-icon p-smooth">
+												<input type="checkbox" name="queues_check" value="{'QName':'{{item.queue_name}}','no':'{{item.queue_number}}'}" class="queues_check"  [checked]="item.select == 1">
+												<div class="state p-warning">
+													<i class="icon material-icons">done</i>
+													<label></label>
+												</div>
+											</div>
+										</td>
+										<td>{{item.queue_name}}</td>
+										<td>{{item.queue_number}}</td>
+									</tr>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="modal-footer">
+				<div class="buttons">
+					<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+					<input type="submit" class="btn btn-primary update_agent" value="Update" (click)="getQueues()">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-md" id="addLicence">
+	<div class="modal-dialog modal-md">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="myLargeModalLabel">Activate Wallboard</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div class="row">
+			<div class="col-md-12">
+			  <div class="about-app">
+				<img src="assets/images/omni-channels-logo.jpg">
+			  </div>
+			  <div class="version-details" *ngIf="has_admin">
+				<h5>Your Wallboard is INACTIVE. Please, enter your Mr.VoIP Licence Key and press Submit or contact Admin</h5>
+			  </div>
+			  <div class="version-details" *ngIf="has_user">
+				<h5>Your Wallboard is Inactive, Please contact your admin</h5>
+			  </div>
+			  <div class="col-md-12 col-12"  *ngIf="has_admin">
+				<div class="form-group">
+					<label for="widget-name">Mr.VoIP Licence Key</label>
+					<input type="text" class="form-control" name="licence_key" id="licence_key">
+				</div>
+			</div>
+			</div>
+		  </div>
+		</div>
+  
+	
+
+		<div class="modal-footer" *ngIf="has_admin">
+			<div class="buttons">
+				<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+				<input type="button" class="btn btn-primary update_agent" value="Submit"  (click)="activateLicenseKey()">
+			</div>
+		</div>
+  
+	  </div>
+	</div>
+  </div>

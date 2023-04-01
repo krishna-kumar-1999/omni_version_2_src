@@ -1,0 +1,13 @@
+.fr {
+    float: right;
+    width: 100%;
+}
+
+
+.version-controls{
+    font-size: 11px;
+    color: #626c80;
+    font-weight: 600;
+    margin: 0px 10px;
+    text-transform: capitalize;
+}

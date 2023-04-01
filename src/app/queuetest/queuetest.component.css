@@ -1,0 +1,8 @@
+.totalsec{
+    display: flex;
+    width: auto;
+    align-items: center;
+    float: right;
+    /* margin: 0px; */
+    margin-right: 25px;
+}

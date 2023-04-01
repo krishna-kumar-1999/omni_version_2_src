@@ -1,0 +1,938 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Call Queue</h4>
+                </div>
+
+                <div class="card-body call-queue-wizard">
+                    <div id="wizard_horizontal" class="wizard clearfix">
+                        <div class="steps">
+                            <ul class="nav nav-tabs">
+                                <!-- <li class="nav-item">
+<a class="nav-link active" data-toggle="tab" href="#generalQueue">
+<span class="wizard-icon"><i class="fas fa-user-shield"></i></span> General</a>
+</li> -->
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#agentsQueue">
+                                        <span class="wizard-icon"><i class="fas fa-users"></i></span> Agents</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#queueAdvanced">
+                                        <span class="wizard-icon"><i class="fas fa-users-cog"></i></span> Advanced</a>
+                                </li>
+                                <!-- <li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#queueNotifications">
+<span class="wizard-icon"><i class="fas fa-bell"></i></span> Notifications</a>
+</li> -->
+                                <!-- <li class="nav-item">
+<a class="nav-link" data-toggle="tab" href="#Click2Talk">
+<span class="wizard-icon"><i class="fas fa-phone" style="transform: rotate(90deg); margin-top: 6px;"></i></span> Click2Talk/Click2Meet</a>
+</li> -->
+
+                            </ul>
+                        </div>
+                        <!-- Tab panes -->
+                        <div class="tab-content content">
+                            <!---- Tab List -->
+                            <div id="generalQueue" class="body tab-pane">
+                                <div class="card-header">
+                                    <h4><span class="wizard-icon"><i class="fas fa-user-shield"></i></span> General</h4>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header noMargin">
+                                        <h4>General</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="queue_name">Name</label>
+                                                    <input class="form-control" id="queue_name" name="queue_name"
+                                                        type="text" value="Developement">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="queue_extension">Extension</label>
+                                                    <input class="form-control" readonly="readonly" id="queue_extension"
+                                                        name="queue_extension" type="text" value="905">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="user_name">Polling Strategy</label>
+                                                    <select class="form-control">
+                                                        <option value="Prioritized Hunt">Prioritized Hunt</option>
+                                                        <option value="Ring All">Ring All</option>
+                                                        <option value="Hunt Random Start">Hunt Random Start</option>
+                                                        <option value="Round Robin">Round Robin</option>
+                                                        <option value="Longest waiting">Longest waiting</option>
+                                                        <option value="Least Talk Time">Least Talk Time</option>
+                                                        <option value="Fewest Answered">Fewest Answered</option>
+                                                        <option value="Hunt by Threes Random">Hunt by Threes Random
+                                                        </option>
+                                                        <option value="Hunt by Threes Prioritized">Hunt by Threes
+                                                            Prioritized</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="queue_ring_time">Ring Time (Seconds)</label>
+                                                    <input class="form-control" id="queue_ring_time"
+                                                        name="queue_ring_time" type="text" value="30">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header noMargin">
+                                        <h4>Direct Inbound Dialing (DID)</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-12">
+                                                <p>Optionally assign a DID to receive calls directly to this extension
+                                                </p>
+                                                <button class="btn btn-success" data-toggle="modal"
+                                                    data-target="#addDid">Add a DID/DDI</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header noMargin">
+                                        <h4>Destination if no answer</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="queue_wait_time">Maximum Queue Wait Time
+                                                        (seconds)</label>
+                                                    <input class="form-control" readonly="readonly" id="queue_wait_time"
+                                                        name="queue_wait_time" type="text" value="1800">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="queue_wait_time">No answer call route to</label>
+                                                    <select class="form-control">
+                                                        <option value="End Call">End Call</option>
+                                                        <option value="Connect to Extension">Connect to Extension
+                                                        </option>
+                                                        <option value="Voicemail box for Extension">Voicemail box for
+                                                            Extension</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header noMargin">
+                                        <h4>Music on Hold: Format WAV (PCM, 8 kHz, 16 bit, Mono, Max size: 100MB)</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="welcome.wav">welocme.wav</option>
+                                                        <option value="intro.wav">welocme.wav</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="settings-btn-group">
+                                                    <button class="btn btn-info"><i class="fas fa-upload"></i>
+                                                        Upload</button>
+                                                    <button class="btn btn-info"><i class="fas fa-download"></i>
+                                                        Download</button>
+                                                    <button class="btn btn-info"><i class="fas fa-play"></i>
+                                                        Play</button>
+                                                    <button class="btn btn-info"><i class="fas fa-microphone"></i>
+                                                        Record</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header noMargin">
+                                        <h4>
+                                            <div class="pretty p-default"><input type="checkbox">
+                                                <div class="state p-primary"><label></label></div>
+                                            </div>
+                                            Play Intro Prompt(Format WAV (PCM, 8 kHz, 16 bit, Mono, Max size: 100MB))
+                                        </h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <select class="form-control">
+                                                        <option value="welcome.wav">welocme.wav</option>
+                                                        <option value="intro.wav">welocme.wav</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="settings-btn-group">
+                                                    <button class="btn btn-info"><i class="fas fa-upload"></i>
+                                                        Upload</button>
+                                                    <button class="btn btn-info"><i class="fas fa-download"></i>
+                                                        Download</button>
+                                                    <button class="btn btn-info"><i class="fas fa-play"></i>
+                                                        Play</button>
+                                                    <button class="btn btn-info"><i class="fas fa-microphone"></i>
+                                                        Record</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <div class="pretty p-default"><input type="checkbox">
+                                                        <div class="state p-primary"><label> &nbsp;Play full intro
+                                                                prompt before calling agents.</label></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card">
+                                    <div class="card-header noMargin">
+                                        <h4>Options</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-12 col-12">
+                                                <div class="form-group">
+                                                    <div class="pretty p-default"><input type="checkbox">
+                                                        <div class="state p-primary"><label> &nbsp;Announce Queue
+                                                                position to caller</label></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="queue_language">Standard English Prompts Set</label>
+                                                    <select id="queue_language" class="form-control">
+                                                        <option value="Standard English Prompts Set">Standard English
+                                                            Prompts Set</option>
+                                                        <option value="intro.wav">welocme.wav</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="form-group">
+                                                    <label for="announcement_interval">Announcement Interval
+                                                        (seconds)</label>
+                                                    <input class="form-control" id="announcement_interval"
+                                                        name="announcement_interval" type="text" value="30">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                            <!---- Tab List End -->
+
+                            <!---- Tab List -->
+                            <div id="agentsQueue" class="body tab-pane active">
+                                <div class="card-header">
+                                    <h4><span class="wizard-icon"><i class="fas fa-users"></i></span> Agents</h4>
+                                </div>
+                                <p>Select which extensions will be agents for this Call Queue. User must also login to
+                                    the Call Queue to start taking calls.</p>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Call Queue Agents</h4>
+                                                <div class="addBtn">
+                                                    <button type="button" data-toggle="modal" data-target="#addAgent"
+                                                        class="btn btn-primary">+ Update</button>
+                                                    <!-- <button type="button" class="btn btn-primary" (click)="retriveFrom3cx()" *ngIf="this.hardware_id !=''">Retrive From 3cx</button> -->
+                                                    <input type="hidden" value="" id="datagetsucced"
+                                                        (click)="datagetsucced()">
+                                                    <input type="hidden" value="" id="datagetsfailed"
+                                                        (click)="datagetsfailed()">
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped table-md">
+
+                                                        <tr>
+                                                            <th>Extension</th>
+                                                            <th>Name</th>
+                                                            <th>Email</th>
+                                                            <!-- <th>Action</th> -->
+                                                        </tr>
+
+                                                        <tbody>
+
+
+                                                            <ng-container *ngFor="let agent of agents_list">
+                                                                <tr
+                                                                    *ngIf="userchecked && userchecked.indexOf(agent.sip_login) != -1">
+                                                                    <td>{{agent.sip_login}}</td>
+                                                                    <td>{{agent.agent_name}}</td>
+                                                                    <td>{{agent.email_id}}</td>
+                                                                    <!-- <td>
+            <span class="user-icon" style="cursor: pointer;" (click)="deleteDoc(agent.sip_login)" ><i class="far fa-trash-alt"></i></span>
+            </td> -->
+                                                                </tr>
+                                                            </ng-container>
+
+
+
+
+
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---- Tab List End -->
+
+                            <!---- Tab List -->
+                            <div id="queueAdvanced" class="body tab-pane">
+                                <div class="card-header">
+                                    <h4><span class="wizard-icon"><i class="fas fa-users-cog"></i></span> Advanced</h4>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12">
+                                        <!-- <div class="card">
+<div class="card-header noMargin">
+<h4><div class="pretty p-default"><input type="checkbox"><div class="state p-primary"><label></label></div></div>
+Enable callback</h4>
+</div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-12 col-12">
+<div class="form-group">
+<label>Callback mode</label>
+<div class="form-check">
+<div class="custom-control custom-radio">
+<input type="radio" id="call_back_1" name="callBackMode" class="custom-control-input">
+<label class="custom-control-label" for="call_back_1">Triggered on user request (Press 2)</label>
+</div><br />
+<div class="custom-control custom-radio">
+<input type="radio" id="call_back_2" name="callBackMode" class="custom-control-input">
+<label class="custom-control-label" for="call_back_2">Offered to caller after timeout in seconds</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-6 col-12">
+<div class="form-group">
+<label for="callback_timeout">Callback timeout</label>
+<input class="form-control" disabled="disabled" id="callback_timeout" name="callback_timeout" type="text" value="700">
+</div>
+</div>
+
+<div class="col-md-6 col-12">
+<div class="form-group">
+<label for="callback-outbound-prefix">Callback Outbound Prefix</label>
+<input class="form-control" readonly="readonly" id="callback-outbound-prefix" name="callback-outbound-prefix" type="text" value="Callback Outbound Prefix">
+</div>
+</div>
+</div>		
+</div>
+</div> -->
+
+                                        <div class="card">
+                                            <div class="card-header noMargin">
+                                                <h4>Queue Preferences</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="wrap-up-time">Wrap-Up Time (seconds)</label>
+                                                            <input class="form-control" id="wrapup_time"
+                                                                name="wrap-up-time" type="text"
+                                                                value="{{this.wrapup_time}}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="max-callers-queue">Maximum Callers in
+                                                                Queue</label>
+                                                            <input class="form-control" id="max_callers"
+                                                                name="max-callers-queue" type="text"
+                                                                value="{{this.max_callers}}">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="max-callers-queue">Priority Queue Select</label>
+                                                            <div class="pretty p-default"><input type="checkbox"
+                                                                    id="priority">
+                                                                <div class="state p-primary"><label> &nbsp;Priority
+                                                                        Queue</label></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <label for="sla">Configure SLA Time in Seconds</label>
+                                                            <input class="form-control" id="sla_sec" name="sla"
+                                                                type="text" value="{{this.sla_sec}}">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="form-group">
+                                                            <button type="button" class="btn btn-primary"
+                                                                (click)="editQueues(this.param)">Update</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <!-- <div class="card">
+<div class="card-header noMargin">
+<h4><div class="pretty p-default"><input type="checkbox"><div class="state p-primary"><label></label></div></div>
+Queue Recording</h4>
+</div>
+<div class="card-body">
+<div class="row">
+<div class="col-md-12 col-12">
+<div class="form-group">
+<label>Configure how recording will be managed when users call this queue and press DTMF 3</label>
+<div class="form-check">
+<div class="custom-control custom-radio">
+<input type="radio" id="queue_recording_1" name="queueRecording" class="custom-control-input">
+<label class="custom-control-label" for="queue_recording_1">Allow caller to opt-out of being recorded</label>
+</div><br />
+<div class="custom-control custom-radio">
+<input type="radio" id="queue_recording_2" name="queueRecording" class="custom-control-input">
+<label class="custom-control-label" for="queue_recording_2">Ask caller to be recorded (opt-in)</label>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!---- Tab List End -->
+
+                            <!---- Tab List -->
+                            <div id="queueNotifications" class="body tab-pane">
+                                <div class="card-header">
+                                    <h4><span class="wizard-icon"><i class="fas fa-bell"></i></span> Notifications</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h4>Select queue manager extension number</h4>
+                                                <div class="addBtn">
+                                                    <button type="button" data-toggle="modal" data-target="#addAgent"
+                                                        class="btn btn-primary">+ Add</button>
+                                                </div>
+                                            </div>
+                                            <div class="card-body p-0">
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped table-md">
+                                                        <tr>
+                                                            <th>Extension</th>
+                                                            <th>First Name</th>
+                                                            <th>Last Name</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>001</td>
+                                                                <td>Naveen</td>
+                                                                <td>J</td>
+                                                                <td>
+                                                                    <span class="user-icon" style="cursor: pointer;"><i
+                                                                            class="far fa-trash-alt"></i></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>002</td>
+                                                                <td>Selva</td>
+                                                                <td>K</td>
+                                                                <td>
+                                                                    <span class="user-icon" style="cursor: pointer;"><i
+                                                                            class="far fa-trash-alt"></i></span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>003</td>
+                                                                <td>Thilak</td>
+                                                                <td>R</td>
+                                                                <td>
+                                                                    <span class="user-icon" style="cursor: pointer;"><i
+                                                                            class="far fa-trash-alt"></i></span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header noMargin">
+                                                <h4>Queue Email Notifications</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-12">
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="queue_email_notifications_1"
+                                                                        name="queueEmailNotifications"
+                                                                        class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="queue_email_notifications_1">Notify Queue
+                                                                        manager via email when SLA time has been
+                                                                        Breached</label>
+                                                                </div><br />
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="queue_email_notifications_2"
+                                                                        name="queueEmailNotifications"
+                                                                        class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="queue_email_notifications_2"> Notify Queue
+                                                                        Manager when a Callback is made</label>
+                                                                </div><br />
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="queue_email_notifications_3"
+                                                                        name="queueEmailNotifications"
+                                                                        class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="queue_email_notifications_3">Notify Queue
+                                                                        manager when a Callback fails</label>
+                                                                </div><br />
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="queue_email_notifications_4"
+                                                                        name="queueEmailNotifications"
+                                                                        class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="queue_email_notifications_4"> Notify Queue
+                                                                        Manager when a Queue call is lost</label>
+                                                                </div><br />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---- Tab List End -->
+
+
+                            <!---- Tab List -->
+                            <div id="Click2Talk" class="body tab-pane">
+                                <div class="card-header">
+                                    <h4><span class="wizard-icon"><i class="fas fa-phone"
+                                                style="transform: rotate(90deg); margin-top: 6px;"></i></span>
+                                        Click2Talk/Click2Meet</h4>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header noMargin">
+                                                <h4>
+                                                    <div class="pretty p-default"><input type="checkbox">
+                                                        <div class="state p-primary"><label></label></div>
+                                                    </div>
+                                                    Click2Talk
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-12">
+                                                        <p>Switch on Click2Talk to allow callers to call your extension
+                                                            or queue directly - No additional software required.
+                                                            (Requires Firefox or Chrome)</p>
+
+                                                        <div class="form-group">
+                                                            <label for="configure_name">Configure a friendly
+                                                                name:</label>
+                                                            <input class="form-control" id="configure_name"
+                                                                name="configure_name" type="text" disabled="disabled">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Your Click2Meet is: &nbsp;<a
+                                                                    href="https://aryansearch.3cx.sg:5001/callus"
+                                                                    target="_blank"><strong
+                                                                        style="color: #6777ef;">https://aryansearch.3cx.sg:5001/callus&nbsp;&nbsp;</strong>
+                                                                    <span style="float: left;"><i
+                                                                            class="fas fa-external-link-alt"></i></span></a></label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="pretty p-default"><input type="checkbox">
+                                                                <div class="state p-primary"><label> &nbsp; Allow Phone
+                                                                        Call</label></div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            &nbsp;&nbsp;&nbsp;<div class="pretty p-default"><input
+                                                                    type="checkbox">
+                                                                <div class="state p-primary"><label> &nbsp; Allow
+                                                                        Video</label></div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-12 col-lg-12">
+                                        <div class="card">
+                                            <div class="card-header noMargin">
+                                                <h4>
+                                                    <div class="pretty p-default"><input type="checkbox">
+                                                        <div class="state p-primary"><label></label></div>
+                                                    </div>
+                                                    Click2Meet
+                                                </h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-12 col-12">
+                                                        <p>Use this URL to allow someone to setup a direct adhoc
+                                                            webmeeting with you. No additional software required.
+                                                            (Requires Firefox or Chrome)</p>
+
+                                                        <div class="form-group">
+                                                            <label for="configure_name">Configure a friendly
+                                                                name:</label>
+                                                            <input class="form-control" id="configure_name"
+                                                                name="configure_name" type="text" disabled="disabled">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label>Your Click2Meet is: &nbsp;<a
+                                                                    href="https://aryansearch.3cx.sg:5001/callus"
+                                                                    target="_blank"><strong
+                                                                        style="color: #6777ef;">https://aryansearch.3cx.sg:5001/callus&nbsp;&nbsp;</strong>
+                                                                    <span style="float: left;"><i
+                                                                            class="fas fa-external-link-alt"></i></span></a></label>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <div class="form-check">
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="clickToCall_1"
+                                                                        name="clickToCall" class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="clickToCall_1"> Notify me by chat of new
+                                                                        meeting request</label>
+                                                                </div><br />
+                                                                <div class="custom-control custom-radio">
+                                                                    <input type="radio" id="clickToCall_2"
+                                                                        name="clickToCall" class="custom-control-input">
+                                                                    <label class="custom-control-label"
+                                                                        for="clickToCall_2"> Requires you to connect to
+                                                                        meeting first</label>
+                                                                </div><br /><br />
+                                                                <div class="form-group">
+                                                                    <div class="pretty p-default"><input
+                                                                            type="checkbox">
+                                                                        <div class="state p-primary"><label>
+                                                                                &nbsp;Approve participants that join the
+                                                                                meeting</label></div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!---- Tab List End -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-------------------------------
+Modal For Add DID
+-------------------------------->
+<div class="modal fade bd-example-modal-md" id="addDid">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Select a DID/DDI from the list below</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td class="search-text-tbl">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <br />
+                        <h6>DID/DDI Number</h6>
+                    </div>
+                </div>
+
+                <div class="row has-row-space">
+                    <div class="col-md-12">
+                        <div class="addAgent">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-md">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 20px;">
+                                                <div class="pretty p-default">
+                                                    <input type="checkbox">
+                                                    <div class="state p-primary">
+                                                        <label></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>62501500</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20px;">
+                                                <div class="pretty p-default">
+                                                    <input type="checkbox">
+                                                    <div class="state p-primary">
+                                                        <label></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>6667777</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20px;">
+                                                <div class="pretty p-default">
+                                                    <input type="checkbox">
+                                                    <div class="state p-primary">
+                                                        <label></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>658401122</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 20px;">
+                                                <div class="pretty p-default">
+                                                    <input type="checkbox">
+                                                    <div class="state p-primary">
+                                                        <label></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>82501200</td>
+                                        </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="buttons">
+                    <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+                    <input type="submit" class="btn btn-primary update_agent" value="Update">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-------------------------------
+Modal For Add DID End
+-------------------------------->
+
+<!-------------------------------
+Modal Add Agent
+-------------------------------->
+<div class="modal fade bd-example-modal-md" id="addAgent">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Select queue agents</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <table>
+                            <tr>
+                                <td class="search-text-tbl">
+                                    <div class="input-group">
+                                        <input class="form-control" type="text">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary">
+                                                <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="row has-row-space">
+                    <div class="col-md-12">
+                        <div class="addAgent">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped table-md">
+
+                                    <tr>
+                                        <th style="width: 20px;">
+                                            <div class="pretty p-default">
+                                                <div class="state p-primary">
+                                                    <label></label>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th>Extension</th>
+                                        <th>Name</th>
+                                        <th>Email </th>
+                                    </tr>
+
+                                    <tbody>
+                                        <tr *ngFor="let agent of agents_list">
+                                            <td style="width: 20px;">
+                                                <div class="pretty p-default">
+                                                    <input type="checkbox"
+                                                        [attr.checked]="userchecked && userchecked.indexOf(agent.sip_login) == -1 ? checked : ''"
+                                                        class="ads_Checkbox" value="{{agent.sip_login}}"
+                                                        name="listusers[]">
+                                                    <div class="state p-primary">
+                                                        <label></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{agent.sip_login}}</td>
+                                            <td>{{agent.agent_name}}</td>
+                                            <td>{{agent.email_id}}</td>
+                                        </tr>
+
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="buttons">
+                    <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+                    <input type="submit" class="btn btn-primary update_agent" value="Update"
+                        (click)="updateQueueUsers(this.param)">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<input type="hidden" id="editinQueuser" (click)="editAgentsInQueues(this.param)">
+<input type="hidden" id="editnotinQueuser">
+<!-------------------------------
+Modal Add Agent End
+-------------------------------->

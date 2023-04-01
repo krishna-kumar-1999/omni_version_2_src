@@ -1,0 +1,48 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Call Report</h4>
+
+                </div>
+                <div class="card-body p-30">
+                    <form [formGroup]="getRep" (ngSubmit)="getReports()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="from_dt">Date</label>
+                                    <input type="date" id="from_dt" class="form-control" formControlName="from_dt">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="to_dt">Sec</label>
+                                    <input type="number" id="sec" class="form-control" formControlName="sec">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <div class='input-field col s6'>
+                                    <input type="text" id="datepicker" readonly/>
+                                    <label for="datepicker">Month Picker</label>
+                                </div>
+                            </div>
+
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="getReports()">Generate Report</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div> 
+</div>

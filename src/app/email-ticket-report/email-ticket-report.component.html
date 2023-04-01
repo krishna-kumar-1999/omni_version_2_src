@@ -1,0 +1,189 @@
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Email Ticketing Report</h4>
+                  
+                </div>
+                <div class="card-body p-30">
+                <form >
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="from_date">From Date</label>
+                                <input type="date" id="from_date" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="to_date">To Date</label>
+                                <input type="date" id="to_date" class="form-control" >
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="show badge badge-primary fr pointer collapsed" data-toggle="collapse" href="#generalFilter">
+                                <i class="fas fa-filter"></i> &nbsp; Filter
+                            </div>
+                       </div>
+                    </div>
+                    <div id="accordion" class="card accordion">
+                        <div id="generalFilter" class="card-body collapse" data-parent="#accordion">
+                          <div id="wizard_horizontal" class="wizard filterTab">
+                            <!-- <div class="steps">
+                              <ul class="nav nav-tabs">
+                                <li class="nav-item">
+                                  <a class="nav-link active" data-toggle="tab" href="#generalFilterTab">
+                                    <span class="wizard-icon"> <i class="fas fa-filter"></i></span>
+                                    General Filter
+                                  </a>
+                                </li>
+                              </ul>
+                            </div>                 -->
+                            <!-- <div class="tab-content content"> -->
+                              <!-------------------
+                              General Filter
+                              ------------------->
+                              <div id="generalFilterTab" style="overflow: hidden;" class="tab-pane active">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="queue_id">Select Queue (Optional)</label>
+                                            <select (change)="getdeptUser($event.target.value)" id="queue_id" class="form-control ">
+                                                <option value="">Select Queue</option>
+                                                <option *ngFor="let user of Queue_options" value="{{user.dept_id}}">{{user.department_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+            
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="agent_id">Select Agent (Optional)</label>
+                                            <select id="agent_id" class="form-control">
+                                                <option value="">Select Agents</option>
+                                                <option *ngFor="let user of Agent_options" value="{{user.user_id}}">{{user.user_id}} - {{user.agent_name}}</option>
+                                            </select>
+                                            <p *ngIf="recordNotFound == true">No Records Found</p>
+                                        </div>
+                                    </div>
+                                </div>
+                              </div>
+                
+                              <!-------------------
+                              Customised Filter
+                              ------------------->
+                             
+                            <!-- </div> -->
+                          </div>
+                          <!-- Tab panes End -->
+                        </div>
+                      </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" (click)="searchData({})">Custom Search</button>&nbsp;&nbsp;
+
+                                <button type="button" class="btn btn-primary" (click)="exportcsv()">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Email Tickets</h4>
+                    <!-- <div class="addBtn">
+                        <button type="button" class="btn btn-primary" (click)="exportcsv()"> Export as CSV</button>
+                    </div> -->
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                       <table class="table table-bordered table-striped table-md">
+                        <tr>
+                            <td colspan="12" class="search-text-tbl">
+                                <div class="input-group"><input type="text" placeholder="Search Ticket number" class="form-control" (keyup.enter)="searchData({'search_text':call_history_search.value})" #call_history_search>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" (click)="searchData({'search_text':call_history_search.value})"><i class="fas fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>#</th>
+                            <!-- <th>Customer</th> -->
+                            <th>Ticket No</th> 
+                            <th>Date</th>
+                            <th>Department</th>
+                            <th>Agent</th>
+                            <!-- <th>First Response(Queue)</th> -->
+                            <th>Time in Queue</th> 
+                            <th>Time to Closed</th> 
+                            <th>Count Reassigned(QUEUE) </th> 
+                            <th>Count Reassigned(Agent) </th> 
+                            <th>Time taken to Close</th> 
+                            <th>First Response</th>
+                        </tr>
+
+                        <tbody>
+                            <tr *ngFor="let queue of chat_panel_list; let i=index">
+                                <td>{{offset_count+i+1}}</td>
+                                <td>{{queue.ticket_no}}</td>
+                                <td>{{queue.created_time}}</td>
+                                <td>{{queue.dept_name}}</td>
+                                <td>{{queue.agent_name}}</td>
+                                <!-- <td>{{queue.first_response_time}}</td> -->
+                                <td>{{queue.assigned_diff}}</td>
+                                <td>{{queue.closed_time}}</td>
+                                <td>{{queue.reassign_hit}}</td>
+                                <td>{{queue.reassign_hit_agent}}</td>
+                                <td>{{queue.closed_diff}}</td>
+                                <td>{{queue.response_diff}}</td>
+                                </tr>
+
+                            <tr *ngIf="recordNotFound == true">
+                             <td colspan="12">Data not found</td>
+                         </tr>
+                     </tbody>
+                     
+                 </table>
+             </div>
+         </div>
+         <div class="card-footer text-right" *ngIf="recordNotFound == false">
+            <nav class="d-inline-block">
+            <ul class="pagination mb-0" *ngIf="paginationData.info == 'show'">
+
+                    <li class="page-item">
+                        <a [class]="paginationData.backtab=='show' ? 'page-link' :'page-link disabled'" href="javascript:void(0)" (click)="paginationData.backtab=='show' ? searchData({'search_text':call_history_search.value,'offset':paginationData.start}) : false"><i class="fas fa-angle-left"></i></a>
+                    </li>
+                    <li class="page-item" *ngIf="paginationData.backtab =='show'">
+                        <a class="page-link" href="javascript:void(0)" (click)="searchData({'search_text':call_history_search.value,'offset':paginationData.back})"><i class="fas fa-angle-double-left"></i></a>
+                    </li>
+
+
+                    <li [class]="pagination.load ==false ? 'page-item active' :'page-item'" *ngFor="let pagination of paginationData.data;let i=index">
+                        <a class="page-link" href="javascript:void(0)" (click)=" pagination.load ==true ? searchData({'search_text':call_history_search.value,'offset':pagination.offset_count}) : false">{{pagination.btn_length}} <span class="sr-only" *ngIf="pagination.load ==false">(current)</span></a>
+                    </li>
+
+                    <li class="page-item" *ngIf="paginationData.nexttab =='show'">
+                        <a class="page-link" href="javascript:void(0)" (click)="searchData({'search_text':call_history_search.value,'offset':paginationData.next})"><i class="fas fa-angle-double-right"></i></a>
+                    </li>
+
+                    <li class="page-item">
+                        <a [class]="paginationData.nexttab =='show' ? 'page-link' : 'page-link disabled'" href="javascript:void(0)" (click)="paginationData.nexttab =='show' ? searchData({'search_text':call_history_search.value,'offset':paginationData.end}) : false"><i class="fas fa-angle-right"></i></a>
+                    </li>
+            </ul>
+        </nav>
+    </div>
+     </div>
+ </div>
+</div>

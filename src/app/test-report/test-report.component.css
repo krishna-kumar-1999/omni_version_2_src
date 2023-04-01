@@ -1,0 +1,27 @@
+div .dtp-picker,
+div .dtp-actual-num,
+div .dtp-actual-day {
+  display: none
+}
+
+.dtp > .dtp-content > .dtp-date-view > header.dtp-header {
+  height: 40px;
+  background-color: #0080d0;
+}
+
+.dtp .p10 > a {
+  color: #0080d0;
+}
+
+.dtp div.dtp-actual-year {
+  color: #BAE3FF
+}
+
+.dtp div.dtp-date,
+.dtp div.dtp-time {
+  background-color: #03a9f4
+}
+
+.dtp div.dtp-actual-month {
+  margin-bottom: 10px;
+}

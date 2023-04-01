@@ -1,0 +1,215 @@
+
+<div class="section-body">
+	<div class="row">
+		<div class="col-12 col-md-12 col-lg-12">
+			<div class="card" id="wallboardFullPanel">
+				<input type="hidden" value="" id="mc_event_list" (click)="changeData()">
+				<input type="hidden" value="" id="sendonload" (click)="sendOnload()">
+				<div class="card-header">
+					<div class="max-icon" (click)="fullWindow()">
+						<i class="fas fa-compress feather"></i>
+					</div>
+					<h4>Wallboard</h4>
+					<div class="addBtn btn-group">
+							<button *ngIf="show_act_wall" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLicence" data-backdrop="static" >Activate Wallboard</button>
+					</div>
+					<a (click)="showdoc('https://hp.mconnectapps.com/api/v1.0/pro_contents/wallboardbasic.pdf')"  target="_blank"><i style="font-size: 24px;
+						float: right;" class="fa fa-question-circle"></i></a>
+					<!-- <a href="https://hp.mconnectapps.com/api/v1.0/pro_contents/wallboardbasic.pdf" target="_blank"><i style="font-size: 24px;" class="fa fa-exclamation-circle"></i></a> -->
+				</div>
+				<div class="card-body wallboard-full-view p-30">
+
+					<div class="wallboard-wrapper">
+
+						<div class="walloard-box green-bg-clr">
+							<div class="wallboard-icon">
+								<img src="assets/images/wallboard/whatsapp.svg">
+							</div>
+							<div class="count-circle">
+								{{this.total_wp}}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>WhatsApp</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box yellow-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/chat.svg">
+							</div>
+							<div class="count-circle">
+								{{this.total_chat}}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>Chat</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box light-green-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/sms.svg">
+							</div>
+							<div class="count-circle">
+								{{this.total_sms}}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>SMS</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box ping-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/ticket.svg">
+							</div>
+							<div class="count-circle">
+								{{this.email_ticket_count}}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>Email Ticket</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box violet-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/call-queue.svg">
+							</div>
+							<div class="count-circle">
+								{{ this.waiting_call }}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>Call waiting</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box blue-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/call.svg">
+							</div>
+							<div class="count-circle">
+								{{ this.answered_Call }}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>Answered calls</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box red-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/abandoned-call.svg">
+							</div>
+							<div class="count-circle">
+								{{ this.abandoned_call }}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>Abandoned calls</h5>
+							</div>
+						</div>
+
+						<div class="walloard-box dark-green-bg-clr">
+							<div class="wallboard-icon">
+								 <img src="assets/images/wallboard/total-calls.svg">
+							</div>
+							<div class="count-circle">
+								{{ this.total_call }}
+							</div>
+							<div class="wallboard-item-name">
+								<h5>Total calls</h5>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-md" id="addLicence">
+	<div class="modal-dialog modal-md">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="myLargeModalLabel">Activate Wallboard</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div class="row">
+			<div class="col-md-12">
+			  <div class="about-app">
+				<img src="assets/images/omni-channels-logo.jpg">
+			  </div>
+			  <div class="version-details" *ngIf="has_admin">
+				<h5>Your Wallboard is INACTIVE. Please, enter your Mr.VoIP Licence Key and press Submit or contact Admin.</h5>
+			  </div>
+			  <div class="version-details" *ngIf="has_user">
+				<h5>Your Wallboard is Inactive, Please contact your admin</h5>
+			  </div>
+			  <div class="row" *ngIf="has_admin">
+				<div class="col-12 col-md-12">
+					<div class="row">
+						<div class="col-md-12 col-12">
+							<div class="form-group">
+								<label for="widget-name">Mr.VoIP Licence Key</label>
+								<input type="text" class="form-control" name="licence_key" id="licence_key">
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+			</div>
+		  </div>
+		</div>
+  
+	
+
+		<div class="modal-footer" *ngIf="has_admin">
+			<div class="buttons">
+				<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+				<input type="button" class="btn btn-primary update_agent" value="Submit"  (click)="activateLicenseKey()">
+			</div>
+		</div>
+  
+	  </div>
+	</div>
+  </div>
+
+  <div class="modal fade bd-example-modal-md" id="document_model">
+	<div class="modal-dialog modal-md"  style="max-width: 1200px;">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" style="color:crimson" >Help Manual</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+				  <!-- <iframe [src]="this.doc_link | safe"  width="100%" style="height: 575px;" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+				  <!-- style="margin-bottom: -6px;" width="100%" height="325"  -->
+				<embed [src]="this.doc_link | safe"  width="100%" style="height: 575px;" />
+		</div>     
+		<div class="modal-footer" >
+			<div class="buttons">
+				<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="close">
+			</div>
+		</div>
+  
+	  </div>
+	</div>
+  </div>

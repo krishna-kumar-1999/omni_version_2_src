@@ -1,0 +1,97 @@
+hr.style5 {
+	background-color: #fff;
+	border-top: 2px dashed #8c8b8b;
+}
+.ms-signin {
+    position: relative;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+span.signin-text:before {
+    position: absolute;
+    content: "";
+    width: 80px;
+    height: 1px;
+    background-color: #e3e3e3;
+    left: -89px;
+    top: 6px;
+}
+span.signin-text:after {
+    position: absolute;
+    content: "";
+    width: 80px;
+    height: 1px;
+    background-color: #e3e3e3;
+    right: -89px;
+    top: 6px;
+}
+
+span.signin-text {
+    font-size: 12px;
+    width: 11px;
+    position: relative;
+}
+.ms-img-holder img {
+    background-color: #efefef;
+    padding: 12px;
+}
+
+
+
+/*  */
+
+
+
+
+.qr-scanner-section{position: relative;}
+.exptext{left: 0;right: 0;text-align: center;top: 45%;}
+.panel {
+    background-color: #fff;
+    border-radius: 0;
+}
+.card.card-primary{border:none!important;box-shadow:none;}
+.btnchn{width: 100%;}
+.card.card-primary{height: 100%;width: 350px;position: absolute;right: 0;padding: 20px;border-radius: 0;}
+.tabs li.active-tab {
+    color: #fff;
+    background: #6777ef;
+}
+.img-section{margin-top: 20px;}
+.tabs li{color: #6777ef;}
+ul.tabs.nav.nav-tabs {
+    /* margin-top: 30px; */
+}
+@media only screen and (max-width: 992px) {
+  .panel{
+    background-color: transparent;
+  }
+  .card.card-primary{position: unset;margin: 0 auto;}
+  .exptext{top:45%;}
+}
+
+/* ...................................... */
+.main-bg {
+    height: -webkit-fill-available;
+    /* background-image: url("/../assets/img/help_ticket.jpg"); */
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    margin: 0;
+  }
+
+  .tabs li {
+    width: 48%;
+    float: left;
+    text-align: center;
+    padding: 8px 0;
+    background: #e3e3e3;
+    margin-right: 3px;
+    border-radius: 5px 5px 0 0;
+}
+.mobile-app-scan a:lsat-child { margin-right: 10px; }
+.aligncenter{
+  text-align: center;
+}

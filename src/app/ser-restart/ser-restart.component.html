@@ -1,0 +1,89 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Services</h4>
+                </div>
+                <div class="addBtn btn-group" style="margin-bottom: 15px;">
+                    <button type="button" class="btn btn-primary" (click)="start('start')"><i class="fa fa-play" aria-hidden="true"></i>Start</button>
+                    <button type="button" class="btn btn-primary" (click)="start('stop')"><i class="fa fa-stop" aria-hidden="true"></i>Stop</button>
+                    <button type="button" class="btn btn-primary" (click)="start('restart')"><i class="fa fa-refresh" aria-hidden="true"></i>Restart</button>
+                    <button *ngIf="this.confg_btn==true" type="button" class="btn btn-primary" (click)="config_b()"><i class="fa fa-refresh" aria-hidden="true"></i>Config</button>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-md">
+                        <tr>
+                    <!-- <th>S.no</th> -->
+                    <th>Service Name</th>
+                    <th>Ports</th>
+                    <th>Service Status</th>
+                </tr>
+
+                <tbody>
+                    <tr *ngFor="let item of list_data;let i = index;" (click)="addThisPersonToArray(item.action_name,$event)" [class.active]="isPersonSelected(item.action_name)">
+                        <!-- <td>{{i+1}}</td> -->
+                        <td>{{item.service_name}}</td>
+                        <td>{{item.port}}</td>
+                        <td *ngIf="item.status=='failed'" style="color: red;">Stoped</td>
+                        <td *ngIf="item.status=='active'" style="color: green;">Running</td>
+                        <td *ngIf="item.status=='inactive'" style="color: red;">Stoped</td>
+                    </tr>
+                </tbody>
+                
+                
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<div class="modal fade bd-example-modal-md" id="add_config">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Config Your SSH</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="department_name">USER NAME</label>
+                                <input type="text" id="user_name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="department_name">PASSWORD</label>
+                                <input type="text" id="pass_word" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="department_name">PORT</label>
+                                <input type="text" id="port" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="buttons">
+                        <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+                        <input type="submit" class="btn btn-primary update_agent" value="Update" (click)="submit()">
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

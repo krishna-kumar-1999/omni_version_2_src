@@ -1,0 +1,189 @@
+<div class="section-body">
+	<div class="card">
+		<div class="card-header">
+			<h4>Notes</h4>
+			<div class="addBtn">
+				<button class="btn btn-primary" (click)="bcktoContc(this.contact_id)" style="float: right;"> Back</button> </div>
+			</div>
+		</div> 
+
+		<div *ngIf="ActivityrecordNotFound" style="text-align: center;">
+			<img src="assets/img/notes.png" alt="Notes" style="width: 250px;">
+			<h1>No Record Found</h1>
+		</div>
+
+		<div class="has-color-bg">
+			<div class="row" *ngFor="let note of oldNotes;let i=index">
+				<div class="col-12 col-md-12">
+					<div class="card">
+						<div class="card-header">
+							<h4><i class="fas fa-edit" (click)="editActivity(note.callid)" style="cursor: pointer;"></i> Note</h4>
+							<div class="addBtn call-date-details">
+								
+								<strong> <span class="font-weight-normal"> Created:</span> {{this.serverService.toTimeZone(note.created_dt)}} <span *ngIf="note.note_updated_time != '0000-00-00 00:00:00'">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span class="font-weight-normal" >Last modified: </span> {{this.serverService.toTimeZone(note.note_updated_time)}} </span></strong>
+							</div>
+						</div>
+						<div class="card-body p-0">
+							<div class="call-detail-panel">
+								<h6>Wrap Up Code : {{note.auxcode_name}}</h6>
+								<h6>Opportunity ID : {{note.opportunity_id}}</h6>
+								<p>{{note.call_note}}</p>
+								<div class="note-detais">
+									<h6><span class="user-icon"><i class="far fa-user-circle"></i></span> &nbsp;&nbsp;{{note.creater_name}} - {{note.creater}} left a Note  <span *ngIf="note.edited_name">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Edited By -{{note.edited_name}} </span> </h6>
+									<div class="audio-file" *ngIf="note.call_rec != null ">
+									
+										<h6>Call Recording</h6>
+												<div class="play-audio" *ngIf="note.call_rec != ''" style="text-align: left; margin: 15px 0px;">
+													<a href="{{note.call_rec}}" target="_blank" download="rec.wav">
+													<i class="fas fa-play-circle" ></i>
+												</a>
+												</div>		
+											
+
+											<div class="fl">
+												<button type="button" class="btn btn-primary" (click)="genTicket(note.note)">Generate Ticket</button>
+											</div>
+											</div>
+
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+
+			</div>
+
+
+			<div class="modal fade bd-example-modal-md" id="assign_ticket">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myLargeModalLabel">Generate Ticket</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="departments">Select Department</label>
+										<select name="departments"  id="departments" class="form-control" (change)="getDeptUsers()">
+											<option value='0'> Select Department </option>
+											<option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="activity">Activity</label>
+										<input type="text" id="activity" class="form-control"  >
+
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="res_departments">Select Responsible Department</label>
+										<select name="res_departments"  id="res_departments" class="form-control">
+											<option value='0'> Select Department </option>
+											<option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+										</select>
+									</div>
+								</div>
+							</div>
+
+
+
+						</div>
+
+						<div class="modal-footer">
+							<div class="buttons">
+								<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+								<input type="submit" class="btn btn-primary update_agent" value="Generate & Assign" (click)="assignTicket(this.note_id)">
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+
+
+			<div class="modal fade bd-example-modal-md" id="edit_activity">
+				<div class="modal-dialog modal-md">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="myLargeModalLabel">Edit Notes</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="department">Wrap Up Category</label>
+										<select (change)="getAuxCode()" name="auxcodes" id="dup_auxcodes_pop_dup" class="form-control" [(ngModel)]="wrap_up_category">
+											<option value='0'> Select Category </option>
+											<option *ngFor="let auxcode of auxcode_Category" value="{{auxcode.id}}">
+												{{auxcode.category_name}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="department">Wrap Up Code</label>
+										<select name="auxcodes" id="dup_auxcodes_subcat_dup" class="form-control" [(ngModel)]="wrap_up_codes">
+											<option value='0'> Select Wrap Up Code </option>
+											<option *ngFor="let auxcode of auxcodes" value="{{auxcode.auxcode_name}}">
+												{{auxcode.auxcode_name}}</option>
+										</select>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="opportunity">Opportunity ID</label>
+										<input type="text" id="opportunity" class="form-control" [(ngModel)]="opportunity_ids">
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="notes">Notes <i class="far fa-edit"></i></label>
+										<textarea id="dup_notes" class="form-control" [(ngModel)]="text_notes"></textarea>
+									</div>
+								</div>
+								<!-- <div class="col-md-12">
+									<div class="buttons form-group">
+										<input type="button" class="btn btn-secondary" (click)="toggleClass()" value="Close"
+											type="button">
+										<input type="button" class="btn btn-primary" value="Update Wrap Up"
+											(click)="addWrapUpcode()">
+									</div>
+								</div> -->
+							</div>
+
+
+
+						</div>
+
+						<div class="modal-footer">
+							<!-- <div class="buttons">
+								<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+								<input type="submit" class="btn btn-primary update_agent" value="Generate & Assign" (click)="assignTicket(this.note_id)">
+							</div> -->
+
+							<div class="buttons ">
+								<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+								<input type="button" class="btn btn-primary" value="Update Wrap Up"
+									(click)="updatedNotes()">
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>

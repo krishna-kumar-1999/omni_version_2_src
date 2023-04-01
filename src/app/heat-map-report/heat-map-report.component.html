@@ -1,0 +1,34 @@
+
+<div class="section-body">
+  <div class="row">
+      <div class="col-xl-12">
+          <div class="card">
+              <div class="card-header">
+                  <h4>Heat Map Report</h4>
+              </div>
+<div class="form-group ml-4">
+    <label>From Date</label>
+    <input type="date" id="from_datee" class="form-control" formControlName="from_datee"  style="width: 500px;">
+    <br>
+    <h6>(* the report will generate next 7 days from this date)</h6>
+  </div>
+  
+  
+  
+  <div class="ml-4">
+  <button type="button" class="btn btn-primary" (click)="test()" style="width: 100px;"> Search</button><br>
+  <br>
+  <h6>(*double click to generate report) </h6>
+  </div>
+  <!-- <div [class.hidden]="toDisplay">
+  <h1 > hello </h1>
+  </div> -->
+  <div *ngIf="toDisplay" id="chartdiv"></div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+  <!-- <div [class.hidden]="toDisplay" id="chartdiv"></div> -->
+  
+  

@@ -1,0 +1,16 @@
+
+    <!-- <section class="experiment recordrtc">
+        <button id="btn-start-recording" (click)="startRecording()" >Start Recording</button>
+    </section> -->
+
+
+    <canvas #canvas></canvas>
+
+    <video id='video' controls></video>
+    
+    <div class="row">
+        <div class="col d-flex justify-content-between">
+            <button mat-raised-button color="primary" (click)="startRecording()">Record</button>
+            <button mat-raised-button color="warn" (click)="stopRecording()">Stop</button>
+        </div>
+    </div>

@@ -1,0 +1,97 @@
+
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Survey Summary Report</h4>
+                  
+                </div>
+                <div class="card-body p-30">
+                <form [formGroup]="getRep" (ngSubmit)="getReports()">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="from_date">From Date</label>
+                                <input type="date" id="from_date" class="form-control" formControlName="from_date">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="to_date">To Date</label>
+                                <input type="date" id="to_date" class="form-control" formControlName="to_date">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <button type="button" class="btn btn-primary" (click)="searchData1()">Custom Search</button>
+
+                                <button type="button" class="btn btn-primary" (click)="getReports()">Generate Report</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Call History</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-md">
+                            <!-- <tr>
+                                <td colspan="12" class="search-text-tbl">
+                                    <div class="input-group"><input type="text" class="form-control" (keyup.enter)="searchData({'search_text':call_history_search.value})" #call_history_search>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" (click)="searchData({'search_text':call_history_search.value})"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr> -->
+                            <tr>
+                                <th>#</th>
+                                <th>Survey Name</th>
+                                <th>Nos</th>
+                                <th>Percentage(%)</th>
+                                
+                                
+                                
+                            </tr>
+                            <tr *ngFor="let history of call_history_list;let i=index" >
+                                <td>{{character[i]}}</td>
+                                <td>{{offset_count+i+1}}. {{history.survey_name | slice:14}}</td>
+                                <td>{{history.rating}}</td>
+                                <td>{{history.percent}}</td>
+                            </tr>
+                            <tr  >
+                                <td></td>
+                                <td><b>{{total_name}}</b></td>
+                                <td><b>{{tot_data}}</b></td>
+                                <td><b>{{percent}}</b></td>
+                            </tr>
+                            <tr *ngIf="recordNotFound == true">
+                               <td colspan="12">Data not found</td>
+                            </tr>
+                      
+                        </table>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+
+
+</div>

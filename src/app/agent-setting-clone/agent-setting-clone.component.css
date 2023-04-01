@@ -1,0 +1,44 @@
+
+.col-md-6.disabled .form-check.form-check-inline {
+    pointer-events: none;
+    filter: blur(1px);
+}
+.hidden-things {
+    display: none;
+}
+
+.col-md-6.disabled .hidden-things {
+    display: block;
+    font-size: 13px;
+    color: #ec8787;
+}
+
+.col-md-6.disableds .hidden-things {
+    display: block;
+    font-size: 13px;
+    color: #ec8787;
+}
+.tooltip-container {
+    position: relative;
+}
+.tooltip-container:hover span.cutom-tooltip {
+    display: block;
+}
+span.cutom-tooltip {
+    display: none;
+    background: #000;
+    color: #fff;
+    padding: 6px 10px;
+    font-size: 10px;
+    position: absolute;
+    top: -50px;
+    width: 123px;
+    left: -35px;
+    right: 0;
+    margin: 0 auto;
+    cursor: pointer;
+    border-radius: 4px;
+    line-height: 16px;
+    font-weight: 60;
+    z-index: 999999;
+}

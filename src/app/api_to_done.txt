@@ -1,0 +1,55 @@
+List Spam Emails
+{"operation":"ticket", "moduleType":"ticket", "api_type": "web", "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhc3NhYWJsb3ljYy5tY29ubmVjdGFwcHMuY29tIiwiYXVkIjoiYXNzYWFibG95Y2MubWNvbm5lY3RhcHBzLmNvbSIsImlhdCI6MTYyNTAzMTQ1OSwibmJmIjoxNjI1MDMxNDU5LCJleHAiOjE2MjUwNDk0NTksImFjY2Vzc19kYXRhIjp7InRva2VuX2FjY2Vzc0lkIjoiMTIwMyIsInRva2VuX2FjY2Vzc05hbWUiOiJhc3NhYWJsb3ljYyIsInRva2VuX2FjY2Vzc1R5cGUiOiIyIn19.a-_-8R6RzX5G-5NoFEz8cVVE3ZZ_CrsoIbTAARw0d2s", "element_data":{"action":"getIncomingEmailIds","admin_id":"1203"}}
+
+
+Update and Insert spam and blacklist Emails
+{"operation":"ticket", "moduleType":"ticket", "api_type": "web", "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhc3NhYWJsb3ljYy5tY29ubmVjdGFwcHMuY29tIiwiYXVkIjoiYXNzYWFibG95Y2MubWNvbm5lY3RhcHBzLmNvbSIsImlhdCI6MTYyNTAzMTQ1OSwibmJmIjoxNjI1MDMxNDU5LCJleHAiOjE2MjUwNDk0NTksImFjY2Vzc19kYXRhIjp7InRva2VuX2FjY2Vzc0lkIjoiMTIwMyIsInRva2VuX2FjY2Vzc05hbWUiOiJhc3NhYWJsb3ljYyIsInRva2VuX2FjY2Vzc1R5cGUiOiIyIn19.a-_-8R6RzX5G-5NoFEz8cVVE3ZZ_CrsoIbTAARw0d2s", "element_data":{"action":"blockEmailIds","admin_id":"1203","user_id":"1253","email_id":"Cal4Care | MR < mr@cal4care.com >","spam_status":"0","blacklist_status":"1"}}
+insert and update "spam_status":"1","blacklist_status":"0"
+
+
+Delete spam Emails
+{"operation":"ticket", "moduleType":"ticket", "api_type": "web", "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhc3NhYWJsb3ljYy5tY29ubmVjdGFwcHMuY29tIiwiYXVkIjoiYXNzYWFibG95Y2MubWNvbm5lY3RhcHBzLmNvbSIsImlhdCI6MTYyNTAzMTQ1OSwibmJmIjoxNjI1MDMxNDU5LCJleHAiOjE2MjUwNDk0NTksImFjY2Vzc19kYXRhIjp7InRva2VuX2FjY2Vzc0lkIjoiMTIwMyIsInRva2VuX2FjY2Vzc05hbWUiOiJhc3NhYWJsb3ljYyIsInRva2VuX2FjY2Vzc1R5cGUiOiIyIn19.a-_-8R6RzX5G-5NoFEz8cVVE3ZZ_CrsoIbTAARw0d2s", "element_data":{"action":"delSpamEmail","admin_id":"1203","email":"Cal4Care | RT < rt@cal4care.com >"}}
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+{"operation":"addAuxcode", "moduleType": "contact", "api_type": "web", "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhc3NhYWJsb3ljYy5tY29ubmVjdGFwcHMuY29tIiwiYXVkIjoiYXNzYWFibG95Y2MubWNvbm5lY3RhcHBzLmNvbSIsImlhdCI6MTYyNDU0NDg0MSwibmJmIjoxNjI0NTQ0ODQxLCJleHAiOjE2MjQ1NjI4NDEsImFjY2Vzc19kYXRhIjp7InRva2VuX2FjY2Vzc0lkIjoiMTIwMyIsInRva2VuX2FjY2Vzc05hbWUiOiJhc3NhYWJsb3ljYyIsInRva2VuX2FjY2Vzc1R5cGUiOiIyIn19.vP5CjBk11hDEimwrPWFfePtPlY365rD5WgAaA7l3N0I", "element_data":{"action":"add_aux_code_category","category_name":"New Zealand1","status":"0","admin_id":"1203","dept_id":"6,7"}}
+------------------------------Auxcode category add---------------------------------------------------------
+{"operation":"updateAuxcode", "moduleType": "contact", "api_type": "web", "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhc3NhYWJsb3ljYy5tY29ubmVjdGFwcHMuY29tIiwiYXVkIjoiYXNzYWFibG95Y2MubWNvbm5lY3RhcHBzLmNvbSIsImlhdCI6MTYyNDU0NDg0MSwibmJmIjoxNjI0NTQ0ODQxLCJleHAiOjE2MjQ1NjI4NDEsImFjY2Vzc19kYXRhIjp7InRva2VuX2FjY2Vzc0lkIjoiMTIwMyIsInRva2VuX2FjY2Vzc05hbWUiOiJhc3NhYWJsb3ljYyIsInRva2VuX2FjY2Vzc1R5cGUiOiIyIn19.vP5CjBk11hDEimwrPWFfePtPlY365rD5WgAaA7l3N0I", "element_data":{"action":"update_aux_code_category","category_name":"New Zealand1","cat_id":"29","admin_id":"1203","dept_id":"6,7,8"}}
+---------------------------------------update Auxcode category-----------------------------------------------
+
+
+
+
+----------------------------updateTicketSignature---------------------------------
+
+var form = new FormData();
+form.append("admin_id", "1203");
+form.append("is_default", "0");
+form.append("sig_title", "test");
+form.append("sig_content", "sig_content");
+form.append("sig_id", "19");
+form.append("action", "updateTicketSignature");
+
+var settings = {
+  "url": "https://"+window.location.hostname+":4003/api/v1.0/index_new.php",
+  "method": "POST",
+  "timeout": 0,
+  "headers": {
+    "Authorization": "Basic TWVyY2hhbnQuVEVTVDEwMDAwMDI0NTA0OjQ1NjVhOTI4NGQ0ZjFkMjE3YzI5OTY5ZGUxNTc1YzM2"
+  },
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+
+$.ajax(settings).done(function (response) {
+  console.log(response);
+});
+
+
+-------------- edit signature -------------------------
+
+{"operation":"ticket", "moduleType": "ticket", "api_type": "web", "access_token":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhc3NhYWJsb3ljYy5tY29ubmVjdGFwcHMuY29tIiwiYXVkIjoiYXNzYWFibG95Y2MubWNvbm5lY3RhcHBzLmNvbSIsImlhdCI6MTYyNTE0NzcyOSwibmJmIjoxNjI1MTQ3NzI5LCJleHAiOjE2MjUxNjU3MjksImFjY2Vzc19kYXRhIjp7InRva2VuX2FjY2Vzc0lkIjoiMTIwMyIsInRva2VuX2FjY2Vzc05hbWUiOiJhc3NhYWJsb3ljYyIsInRva2VuX2FjY2Vzc1R5cGUiOiIyIn19.g0g6mhtmSvEqrnMGxeCdFin5fvCiKz9SnFHc9hF0mTE", "element_data":{"action":"editTicketSignature","admin_id":"1203","sig_id":"19"}}

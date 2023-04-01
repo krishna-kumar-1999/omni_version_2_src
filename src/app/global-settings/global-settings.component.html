@@ -1,0 +1,598 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-lg-10">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Global Settings</h4>
+                    <div id="google_translate_element"></div>
+
+                    <input type="hidden" id="checkring" (click)="checkring()">
+                    <input type="hidden" id="refresh_page" (click)="dept_settings()">
+                </div>
+                <div class="card-body p-30">
+                    <div class="row pt-4">
+
+
+
+                        <div class="col-md-2" *ngIf="show_admin_sett">
+
+                            <p>Show Caller Id</p>
+                            <div class="form-check form-check-inline">
+                                <div class="pretty p-switch p-fill">
+                                    <input type="checkbox" id="show_caller_id">
+                                    <div class="state p-success">
+                                        <label for="has_sms"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-md-2" *ngIf="show_admin_sett">
+
+                            <p>Show Cli Creation</p>
+                            <div class="form-check form-check-inline">
+                                <div class="pretty p-switch p-fill">
+                                    <input type="checkbox" id="show_cli_id">
+                                    <div class="state p-success">
+                                        <label for="has_sms"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="col-md-2" *ngIf="show_admin_sett">
+
+                            <p>Show Contact Popup</p>
+                            <div class="form-check form-check-inline">
+                                <div class="pretty p-switch p-fill">
+                                    <input type="checkbox" id="has_contact_popup">
+                                    <div class="state p-success">
+                                        <label for="has_sms"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div> -->
+
+                        <div class="col-md-2" *ngIf="show_admin_sett">
+
+                            <p>Show Case Management</p>
+                            <div class="form-check form-check-inline">
+                                <div class="pretty p-switch p-fill">
+                                    <input type="checkbox" id="has_case_mgnt">
+                                    <div class="state p-success">
+                                        <label for="has_case_mgnt"></label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- <div class="col-md-2" *ngIf="show_admin_sett">
+                                            
+                                                        
+                                                    <p>Video Dialer</p>
+                                                    <div class="form-check form-check-inline">
+                                                        <div class="pretty p-switch p-fill">
+                                                            <input name="video_call" type="checkbox" id="has_video_call" >
+                                                            <div class="state p-success">
+                                                                <label for="video_call"></label>
+                                                            </div>
+                                                        </div>
+                                                    </div>     
+                                               
+                                     </div>  -->
+
+                    </div>
+
+                    <div class="row pt-4">
+
+
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <label for="timezone">Default TimeZone</label>
+                                <select name="timezone" id="timezone" class="form-control">
+                                    <option value='0'> Select TimeZone </option>
+                                    <option *ngFor="let time of queue_list" value="{{time.id}}"
+                                        [selected]="time.id == this.myTime">{{time.name}}</option>
+                                </select>
+                            </div>
+
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="timezone">Dialer Details</label>
+                                <select name="dialer_det" id="dialer_det" class="form-control">
+                                    <option value='2'> Internal </option>
+                                    <option value='1'> External </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" *ngIf="show_admin_sett">
+                            <div class="form-group">
+                                <label for="Webrtc">Select WEBRTC Server</label>
+                                <select name="Webrtc" id="webrtc_server" class="form-control">
+                                    <option value='0'> Select Webrtc </option>
+                                    <option *ngFor="let time of server_list" value="{{time.server_id}}"
+                                        [selected]="time.server_id == this.server_ID">{{time.server_name}}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row pt-4">
+
+                        <div class="col-md-4" *ngIf="show_admin_sett">
+                            <div class="form-panel form-line">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="contact_owner">Main Logo (250px * 68px)</label>
+                                            <input type="file" class="form-control" name="logo_image" id="logo_image"
+                                                size="150">
+                                        </div>
+                                        <img src="{{this.logo_image}}" width="250px">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4" *ngIf="show_admin_sett">
+                            <div class="form-panel form-line">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="contact_owner">Small Logo (65px * 65px)</label>
+                                            <input type="file" class="form-control" name="small_logo_image"
+                                                id="small_logo_image" size="150">
+                                        </div>
+                                        <img src="{{this.small_logo_image}}" width="100px">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <div class="form-panel form-line">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="form-group">
+                                            <label for="contact_owner">Custom Ringtone (Beep alert)</label>
+                                            <div class="slidecontainer">
+                                                <input type="range" min="1" max="4" value="{{dialer_ring_upt}}"
+                                                    (click)="setval()" class="slider" id="volume_step">
+
+                                            </div>
+                                            <label>{{this.valume}}</label>
+                                            <audio id='incommingCalltone6' src='assets/images/incomingcall.mp3'></audio>
+                                            <audio id='incommingCalltone0' src=''></audio>
+                                            <audio id='incommingCalltone1' src='assets/images/Low.mp3'></audio>
+                                            <audio id='incommingCalltone2' src='assets/images/Medium.mp3'></audio>
+                                            <audio id='incommingCalltone3' src='assets/images/High.mp3'></audio>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <p>Default Ringer</p>
+                                        <div class="form-check form-check-inline">
+                                            <div class="pretty p-switch p-fill">
+                                                <input name="ringer" type="checkbox" (click)="setval()"
+                                                    id="has_default_call">
+                                                <div class="state p-success">
+                                                    <label for="ringer"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-success update_agent" value="Update Settings"
+                                    (click)="updateGlobalSet()">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="card" *ngIf="(show_admin_sett && this.h_con == 1)">
+                <div class="card-header">
+                    <h4>CRM Settings</h4>
+                    <input type="hidden" id="refresh_page" (click)="dept_settings()">
+                </div>
+
+                <div class="card-body p-30">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="display-options-default" class="pointer">
+                                    <input id="display-options-default" type="radio" value="0"
+                                        name="has_external_contact" (change)="showCRMlink('default')"> Default
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="display-options-crm" class="pointer">
+                                    <input type="radio" id="display-options-crm" value="1" name="has_external_contact"
+                                        (change)="showCRMlink('ext')"> Custom CRM
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-12" *ngIf="showurlsett">
+                            <div class="form-group">
+                                <label>External CRM</label>
+                                <select name="crm_type" id="crm_type" class="form-control" (change)="crmType()">
+                                    <option value='0'>Select CRM</option>
+                                    <option value='FreshDesk'>FreshDesk</option>
+                                    <option value='HubSpot'>HubSpot</option>
+                                    <option value='Insightly'>Insightly</option>
+                                    <option value='Microsoft_Dynamics'>Microsoft Dynamics 365 CRM</option>
+                                    <option value='SalesForce'>SalesForce</option>
+                                    <option value='Shopify'>Shopify</option>
+                                    <option value='Vtiger'>Vtiger</option>
+                                    <option value='Zendesk'>Zendesk</option>
+                                    <option value='Zoho'>Zoho</option>
+                                    <option value='ZohoDesk'>ZohoDesk</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>External CRM URL</label>
+                                <input type="text" class="form-control" value="{{this.external_contact_url}}"
+                                    id="external_contact_url">
+                            </div>
+                            <div class="form-group">
+                                <label>Behaviour URL</label>
+                                <input type="text" class="form-control" value="{{this.behaviourURL}}">
+                            </div>
+
+                            <div class="form-group" *ngIf="showForHubSpot">
+                                <p>Replace "Hubspot api Key" with your hubspot api key and add below url as External CRM
+                                    URL </p>
+                                <p>External CRM URL :
+                                    https://{{this.host_name}}/#/edit-contacts?q=hubSpot&hapikey=Hubspot api Key</p>
+                            </div>
+                            <div class="form-group" *ngIf="showForZDesk">
+                                <a href="https://accounts.zoho.com/apiauthtoken/create?SCOPE=ZohoSupport/supportapi,ZohoSearch/SearchAPI"
+                                    target="_blank">Click here to generate auth token and add below url as External CRM
+                                    URL</a>
+                                <p>External CRM URL : https://{{this.host_name}}/#/edit-contacts?q=zohoDesk&authkey=Auth
+                                    Key&orgId=orgId</p>
+                            </div>
+
+                            <div class="custom-logos fl" *ngIf="showurlsett">
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-freshdesk.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-hubspot.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-inslightly.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-md.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-zoho.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-shopify.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-vt.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-zendesk.png">
+                                        </figure>
+                                    </div>
+                                    <div class="col-md-2 col-sm-4 col-12">
+                                        <figure>
+                                            <img src="assets/images/crm/logo-sf.png">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row" id="dailyfIframes">
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="settings-btn-group fl">
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-success update_agent margin-align"
+                                        value="Update Settings" (click)="updateCRMSet()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+  
+
+            <div class="col-12 col-lg-12 p-0" *ngIf="this.show_survey==true">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Survey Settings</h4>
+                    </div>
+                    <div class="card-body p-30">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="contact_owner">Survey Number</label>
+                                    <input type="number" id="survey_number" class="form-control" formControlName="ext_num" value="Enter the Survey number" style="
+                                    width: 833px;">
+                                    <br>
+                                </div>
+                                <div class="form-group">
+                                    <input type="button" class="btn btn-success update_agent" value="Update Settings"
+                                        (click)="UpdateSurvey()">
+                                    <a href="{{this.survey_zip_url}}"><input type="button" class="btn btn-success update_agent ml-2" value="Download Zip" *ngIf="show_sury_zip"></a>
+                                </div>
+                            </div>    
+                     
+                            <div class="col-6" *ngIf="this.show_sury_zip==true">
+                                <div class="card-header">
+                                    <h4>Survey Instruction</h4>
+                                </div>
+                                <div class="card-body p-30">
+                                        <p style="-webkit-text-stroke: thin;">1. Download the .ZIP file.<br>
+                                            2. Got to 3CX Management Console -> Advanced -> Call Flow Apps.<br>
+                                            3. Click on +Add and upload the .zip file.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="col-12 col-lg-12 p-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Call Settings</h4>
+                    </div>
+                    <div style="margin-bottom: 11px;" class="card-body p-30">
+    
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <div class="fl mb-15">
+                                    <h6 style="margin-bottom: 0;" class="font-medium3">Call Wrapup code</h6>
+                                </div>
+                            </div>
+    
+                            <div class="col-12 col-md-1">
+                                <div class="connecting-arrow text-center"  style="padding-top: 0 !important;">
+                                    <i class="fa fa-arrow-left"></i>
+                                </div>
+                            </div>
+    
+                            <div class="col-12 col-md-1">
+                                <div class="form-check form-check-inline">
+                                    <div (change)="call_update($event.target.checked)" class="pretty p-switch p-fill">
+                                        <input type="checkbox" id="call_set">
+                                        <div class="state p-success">
+                                            <label for="call_set"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <div class="connecting-arrow text-center"  style="padding-top: 0 !important;">
+                                    <i class="fa fa-arrow-right"></i>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-5">
+                                <div   class="fl mb-15 robin-limit">
+                                    <h6 style="margin-bottom: 0; width: 336px;" class="font-medium2">Call Ticket</h6>        
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-12 p-0">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Call Popup Settings</h4>
+                    </div>
+                    <div style="margin-bottom: 11px;" class="card-body p-30">
+    
+                        <div class="row">
+                            <div class="col-12 col-md-3">
+                                <div class="fl mb-15">
+                                    <h6 style="margin-bottom: 0;" class="font-medium3">3cx Call Popup</h6>
+                                </div>
+                            </div>
+    
+                            <div class="col-12 col-md-1">
+                                <div class="connecting-arrow text-center"  style="padding-top: 0 !important;">
+                                    <i class="fa fa-arrow-left"></i>
+                                </div>
+                            </div>
+    
+                            <div class="col-12 col-md-1">
+                                <div class="form-check form-check-inline">
+                                    <div (change)="call_popup($event.target.checked)" class="pretty p-switch p-fill">
+                                        <input type="checkbox" id="popup_sett">
+                                        <div class="state p-success">
+                                            <label for="call_set"></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-1">
+                                <div class="connecting-arrow text-center"  style="padding-top: 0 !important;">
+                                    <i class="fa fa-arrow-right"></i>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-5">
+                                <div   class="fl mb-15 robin-limit">
+                                    <h6 style="margin-bottom: 0; width: 336px;" class="font-medium2">Predictive Dialer Call Popup</h6>        
+                                </div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="card">
+                <div class="card-header">
+                    <h4>3CX Settings</h4>
+                </div>
+                <div class="card-body p-30">
+                    <div class="row">
+                        <div class="col-xl-3 col-md-6 col-12">
+                            <div class="form-group">
+                                <label for="contact_owner">Update 3CX webclient</label>
+                                <input type="button" class="btn btn-success update_agent" value="Update Settings"
+                                    (click)="Update3cxFiles()">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Predictive-dialer Settings</h4>
+                </div>
+                <div class="card-body p-30">
+                    <div class="row">
+                        <div class="col-6">
+                            <form [formGroup]="ext_form">
+                            <div class="form-group">
+                                <label for="contact_owner">CFD Number</label>
+                                <input type="number" id="number" class="form-control" formControlName="ext_num" value="Enter the CFD number">
+                                <br>
+                            </div>
+                            <div class="form-group">
+                                <label for="contact_owner">Queue Number</label>
+                                <input type="number" id="queue_num" class="form-control" formControlName="queue_num" value="Enter the Queue number">
+                                <br>
+                            </div>
+                            </form>
+                            <div>
+                                <input type="button" class="btn btn-success update_agent" value="Activate"
+                                    (click)="settings()" [disabled]="isDisabled">
+                                    <a href='{{this.list}}'>
+                                        <input type="button" class="btn btn-success m-2 update_agent" value="Click Here To Download"
+                                    (click)="settings()" *ngIf="this.isShown==true" >
+                                        <!-- <button class="btn btn-success form-control click_btn" *ngIf="this.isShown==true" >
+                                            Click Here To Download 
+                                        </button> -->
+                                    </a>
+                                    </div>
+                            <!-- <a href='{{this.list}}'>
+                                <button class="btn btn-success form-control click_btn" *ngIf="this.isShown==true" >
+                                    Click Here To Download 
+                                </button>
+                            </a> -->
+                        </div>
+                        <div class="col-6" *ngIf="this.isShown==true">
+                        <div class="card-header">
+                            <h4>Predictive-dialer Instruction</h4>
+                        </div>
+                        <div class="card-body p-30">
+                                <p style="-webkit-text-stroke: thin;">1. Download the .ZIP file.<br>
+                                    2. Got to 3CX Management Console -> Advanced -> Call Flow Apps.<br>
+                                    3. Click on +Add and upload the .zip file.</p>
+                        </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- <div class="card"  *ngIf="this.has_predict=='1'">
+                <div class="card-header">
+                    <h4>Predictive-dialer Settings</h4>
+                </div>
+                <div class="row">
+                <div class="col-xl-3 col-md-6 col-12">
+                    <div class="form-group field">
+                        <input type="number" id="number" class="form-control" value="Enter the Queue number">
+                    </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success update_agent" value="Activate"
+                            (click)="settings()"[disabled]="isDisabled">
+    
+                        </div>
+                    <a href='{{this.list}}'>
+                        <button class="form-control" *ngIf="isShown" >
+                            Click Here To Download 
+                        </button>
+                    </a>
+                </div>
+          
+        
+            </div> -->
+            <!-- <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="agent_user_pwd">User password </label>
+                     <input type="text" id="agent_user_pwd" class="form-control">
+                  
+                </div>
+            </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success update_agent" value="Update Settings"
+                            (click)="updateGlobalSet()">
+
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+        </div>
+    </div>

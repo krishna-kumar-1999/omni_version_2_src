@@ -1,0 +1,933 @@
+<div class="section-body edit-form call-contact-modal">
+	<input type="hidden" id="pop_user_number">
+	<input type="hidden" id="pop_wrapup_callID">
+	<input type="hidden" id="pop_queue_ids2">
+
+	<div style="margin-left: 27px;" class="card">
+		<div class="card-header">
+			<h4><i class="fa fa-address-book" aria-hidden="true"></i>Contacts</h4>
+			<!-- <p>Contact</p> -->
+			<div class="addBtn" >
+				<button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+			</div>
+		</div>
+	</div>
+	<form  [formGroup]="editContact" (ngSubmit)="updateContact(this.contact_id)" *ngIf="alladmin">
+
+		<div class="row call-contact-inner">
+			<div class="col-12 col-md-12">
+				<div class="card">
+
+					<div class="card-body p-0">
+						<div class="form-panel">
+							<div class="row">		
+											<!-- <div class="col-md-12" *ngIf="showmultiple">
+									<div class="form-group">
+										<label for="contact_owner">Select Contact to Edit</label>
+										<select name="selection_id"  id="selection_id" class="form-control" (change)="selectSingleContact($event)">
+											<option value='0'> Select Contact </option>
+											<option *ngFor="let dept of multipleContacts" value="{{dept.contact_id}}">{{dept.contact_owner}}</option>
+										</select>
+									</div>
+									
+								</div> 	 -->						 
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="contact_owner">Contact Owner  <span style="color: red;">*</span></label>
+										<input type="text" id="pop_contact_owner"  class="form-control" formControlName="contact_owner" >
+									</div>
+								</div> 
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="contact_identifier">Contact Unique Identifier <span style="color: red;">*</span></label>
+										<input type="text"  id="pop_contact_identifier" value="{{contact_identifier}}" class="form-control" formControlName="contact_identifier" >
+									</div>
+								</div>
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="first_name">First Name <span style="color: red;">*</span></label>
+										<input type="text" id="pop_first_name" class="form-control"  formControlName="first_name" (input)="enterfullname()">
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="last_name">Last Name <span style="color: red;">*</span></label>
+										<input type="text" id="pop_last_name" class="form-control"  formControlName="last_name" (input)="enterfullname()">
+									</div>
+								</div>
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="full_name">Full Name </label>
+										<input type="text" id="pop_full_name" class="form-control"  formControlName="full_name" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="account_name">Account Name <span style="color: red;">*</span></label>
+										<input type="text" id="pop_account_name" class="form-control" formControlName="account_name" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="title">Title</label>
+										<input type="text" id="pop_title" class="form-control" formControlName="title" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="email">Email</label>
+										<input type="text" id="email"  class="form-control" formControlName="email" >
+									</div>
+								</div>
+							
+
+
+								<div class="col-md-6" >
+									<div class="form-group">
+										<label for="department">Department</label>
+										<!-- <select name="departments"  id="pop_departments" class="form-control">
+											<option value='0'> Select Department </option>
+											<option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+										</select> -->
+										<input type="text" name="departments"  id="pop_departments" class="form-control" formControlName="department" >
+									</div>
+								</div>
+
+
+								<div class="col-md-4">
+									<div class="form-group">
+
+									<div class="input-group">
+										<label for="phone"><b>Work Phone (Primary Number)</b> <span style="color: red;">*</span></label>
+										<!-- <input type="number" id="pop_country_code" class="form-control" placeholder="country code" formControlName="country_code" > -->
+										<!-- <span class="input-group-addon">
+										  <input type="number" id="pop_ext_no" class="form-control" placeholder="Extension No" formControlName="ext_no" >
+										</span> -->
+										<input type="number" id="pop_phone" class="form-control" formControlName="phone" >
+									</div>
+									<!-- <p>While adding an extension, the country code may be '0'</p> -->
+
+									</div>
+								</div>
+
+								<div class="col-md-2">
+									<div class="form-group">
+
+									<div class="input-group">
+										<label for="phone"><b>Extension No</b> </label>
+										<!-- <input type="number" id="country_code" class="form-control" placeholder="country code" formControlName="country_code" > -->
+										<input type="text" id="pop_ext_no" class="form-control" placeholder="extension no" formControlName="ext_no" >
+									</div>
+									<!-- <p>While adding an extension, the country code may be '0'</p> -->
+
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="home_phone">Home Phone</label>
+										<input type="text" id="pop_home_phone"  class="form-control" formControlName="home_phone" >
+									</div>
+								</div>
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="mobile">Mobile</label>
+										<input type="number" id="pop_mobile"  class="form-control" formControlName="mobile" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="fax">Fax</label>
+										<input type="number" id="pop_fax"  class="form-control" formControlName="fax" >
+									</div>
+								</div>
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="job_roles">Job Role</label>
+										<input type="text" id="pop_job_roles"  class="form-control" formControlName="job_roles" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="acc_org_ids">Account Org ID </label>
+										<input type="text" id="pop_acc_org_ids"  class="form-control" formControlName="acc_org_ids" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="acc_st_names">Account ST Name </label>
+										<input type="text" id="pop_acc_st_names"  class="form-control" formControlName="acc_st_names" >
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="acc_st_ids">Account ST ID </label>
+										<input type="text" id="pop_acc_st_ids"  class="form-control" formControlName="acc_st_ids" >
+									</div>
+								</div>
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="mailing_street">Street</label>
+										<input type="text"  id="pop_mailing_street" class="form-control" formControlName="mailing_street" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="mailing_city">City</label>
+										<input type="text"  id="pop_mailing_city" class="form-control" formControlName="mailing_city" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="mailing_province"> Province</label>
+										<input type="text"  id="pop_mailing_province" class="form-control" formControlName="mailing_province" >
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="mailing_postal_code"> Postal Code</label>
+										<input type="number"  id="pop_mailing_postal_code" class="form-control" formControlName="mailing_postal_code" >
+									</div>
+								</div>
+
+
+								<div class="col-md-6">
+									<div class="form-group">
+										<label for="mailing_country"> Country <span style="color: red;">*</span></label>
+										<input type="text"  id="pop_mailing_country" class="form-control" formControlName="mailing_country">
+									</div>
+								</div>
+
+							  <!-- <i class="fas fa-phone-alt"></i>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="phone">Phone <span class="red-col">*</span><i title="Click to call" class="fa fa-phone-square" aria-hidden="true" (click)="clictToCall('phone')" style="cursor: pointer;"></i>
+										</label>
+										<input type="text" id="pop_phone" class="form-control" formControlName="phone" >
+									</div>
+								</div> 
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="account_name">Account Name</label>
+										<input type="text" id="pop_account_name" class="form-control" formControlName="account_name" >
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="first_name">First Name</label>
+										<input type="text" id="pop_first_name" class="form-control"  formControlName="first_name" >
+									</div>
+								</div>  -->
+
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label for="title">Title</label>
+										<input type="text" id="pop_title"  class="form-control" formControlName="title" >
+									</div>
+								</div>  -->
+
+							 
+
+								  <!-- <div class="col-md-12" (click)="getDepartments()">
+									<div class="form-group">
+										<label for="department">Department</label>
+										<select name="departments"  id="pop_departments" class="form-control">
+											<option value='0'> Select Department </option>
+											<option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+										</select>
+									</div>
+								</div> -->
+
+								<!-- <div class="col-md-12" (click)="getDepartments()">
+									<div class="form-group">
+										<label for="department">Responsible Department</label>
+										<select name="res_departments"  id="pop_res_departments" class="form-control">
+											<option value='0'> Select Department </option>
+											<option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+										</select>
+									</div>
+								</div>  -->
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<div class="input-group">
+
+										<label for="phone">Office Phone</label>
+											<span class="input-group-addon">
+													<input type="text" id="pop_country_code"  class="form-control" formControlName="country_code" >
+											</span>
+										<input type="text" id="pop_phone"  class="form-control" formControlName="phone" >
+
+										 </div>
+										<p>When adding an extension, the country code is not important</p>
+										 
+											 
+									</div>
+								</div> -->
+						
+
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label for="mobile">Mobile</label>
+										<input type="text" id="pop_mobile"  class="form-control" formControlName="mobile" >
+									</div>
+								</div>  -->
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label for="fax">Fax</label>
+										<input type="text" id="pop_fax"  class="form-control" formControlName="fax" >
+									</div>
+								</div> -->
+
+
+
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label for="assistant">Assistant</label>
+										<input type="text"  id="pop_assistant" class="form-control" formControlName="assistant" >
+									</div>
+								</div>
+
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="dob">Date of Birth</label>
+										<input type="text" id="pop_dob"  class="form-control" formControlName="dob" >
+									</div>
+								</div>
+
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="reports_to">Reports To</label>
+										<input type="text"  id="pop_reports_to" class="form-control" formControlName="reports_to" >
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="assitant_phone">Asst Phone</label>
+										<input type="text"  id="pop_assitant_phone" class="form-control" formControlName="assitant_phone" >
+									</div>
+								</div>
+
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="created_by">Created by</label>
+										<input type="text"  id="pop_created_by" class="form-control" formControlName="created_by" readonly>
+										<div class="small">{{ this.created_time }}</div>
+									</div>
+								</div> -->
+
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label for="email_opt">Email Opt Out</label>
+										<input type="checkbox" name="email_opt" class="form-control">
+									</div>
+								</div> -->
+
+								<!-- <div class="col-md-12">
+									<div class="form-group">
+										<label for="modified_by">Modified By</label>
+										<input type="text" value="Naveen" id="pop_modified_by" class="form-control" formControlName="modified_by" readonly>
+										<div class="small">{{ this.modified_time }}</div>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<div class="form-group">
+										<label for="secondary_email">Secondary Email</label>
+										<input type="text" id="pop_secondary_email"  class="form-control" formControlName="secondary_email" >
+									</div>
+								</div>   -->
+							</div>
+							<!-- [disabled]="!editContact.valid" -->
+							<div class="buttons">
+								<input type="button" class="btn btn-primary"  [disabled]="!editContact.valid" value="Save Changes" type="submit">
+						   </div>
+						</div>
+					</div>
+				</div>
+			</div>
+			 
+		</div>
+		
+	</form>
+</div>
+
+
+
+<div class="card" *ngIf="dailyfood">
+	<div class="card-header" *ngIf="this.has_external_contact == '0'">
+		<h4>Has DSK Access</h4>
+	</div>
+	<div class="card-header" *ngIf="this.has_external_contact == '1'">
+		<h4>Contact</h4>
+	</div>
+	<div class="card-body p-0" *ngIf="this.has_external_contact == '0'">
+		<iframe [src]="this.dailyfoodurl " id="pop_dailyfIframe" class="dailyfIfram" width="100%" height="100%"
+			frameborder="0" allowfullscreen></iframe>
+	</div>
+	<div class="card-body p-0" *ngIf="this.has_external_contact == '1'">
+		<div id="pop_dailyfIframes">
+
+		</div>
+	</div>
+</div>
+
+<div class="settingSidebar">
+	<a href="javascript:void(0)" class="settingPanelToggle" (click)="toggleClass()">
+		<span title="Add Wrap Up Code" class="plus-icon"><i class="fas fa-plus" style="margin: 0px;"></i></span>
+		<span class="minus-icon"><i class="fas fa-minus" style="margin: 0px;"></i></span>
+	</a>
+
+	<div class="settingSidebar-body ps-container ps-theme-default" *ngIf="showrap == true">
+		<form>
+			<div class=" fade show active" *ngIf="this.cal_Sett==0">
+				<!-- <button *ngIf="this.no_contact==true" class="btn btn-primary" (click)="AddContact()"
+					style="float: right;margin: 9px 20px 0px 0px;"> Add Contact</button> -->
+
+				<div class="setting-panel-header">Wrap Up Code
+					<button type="button" class="btn btn-primary float-right" (click)="toggleClassActivities()">Activities</button>
+
+				</div>
+				<div class="p-15">
+
+					<div class="row">
+						<!-- <div class="col-md-12" *ngFor="let item of questions">
+       					<div class="form-group">
+       						<label for="department">Question</label>
+       						<p>{{item.question}}</p>
+       					</div>	
+       				</div> -->
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="department">Wrap Up Category</label>
+								<select (change)="getAuxCode()" name="auxcodes" id="pop_auxcodes_pop" class="form-control">
+									<option value='0'> Select Category </option>
+									<option *ngFor="let auxcode of auxcode_Category" value="{{auxcode.id}}">
+										{{auxcode.category_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="department">Wrap Up Code</label>
+								<select name="auxcodes" id="pop_auxcodes_subcat" class="form-control">
+									<option value=''> Select Wrap Up Code </option>
+									<option *ngFor="let auxcode of auxcodes" value="{{auxcode.auxcode_name}}">
+										{{auxcode.auxcode_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="opportunity">Opportunity ID</label>
+								<input type="text" id="opportunity" class="form-control">
+							</div>
+						</div>
+
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="notes">Notes <i class="far fa-edit"></i></label>
+								<textarea id="pop_notes" class="form-control"></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="buttons form-group">
+								<input type="button" class="btn btn-secondary" (click)="toggleClass()" value="Close"
+									type="button">
+								<input type="button" class="btn btn-primary" value="Update Wrap Up"
+									(click)="addWrapupcode()">
+								<!-- <input *ngIf="this.showcreateTicket" type="button" class="btn btn-primary" value="Create Ticket"
+									(click)="createcallticket()"> -->
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class=" fade show active" *ngIf="this.cal_Sett==1">
+				<button *ngIf="this.no_contact==true" class="btn btn-primary" (click)="AddContact()"
+					style="float: right;margin: 9px 20px 0px 0px;"> Add Contact</button>
+					<!-- <button class="btn btn-primary" (click)="generate_ticket()"
+					style="float: right;margin: 9px 20px 0px 0px;"> Create Ticket</button> -->
+				<div class="setting-panel-header">Contact Tickets
+
+
+				</div>
+				<div class="p-15" style="height: 70vh;">
+					<div class="has-color-bg">
+						<div class="row" *ngFor="let item of email">
+							<div class="col-12 col-md-12">
+								<div class="card">
+									<div class="card-header" style="display: block;" >
+										<strong> <span class="font-weight-normal"> EMAIL:</span>{{item.replied_from}}</strong>
+											<!-- <div class="addBtn call-date-details"> -->
+												<strong><span>Created: </span>{{this.serverService.toTimeZone(item.created_dt)}}</strong> 
+											
+											<!-- </div> -->
+									</div>
+									<div class="card-body p-0" >
+										<div class="call-detail-panel" style="max-width: 100%;">
+											<div class="card-items" style="display: block;" >
+												<strong> <span class="font-weight-normal"> TICKET NO : #</span>{{item.ticket_id}}</strong>
+											<!-- <div class="addBtn call-date-details"> -->
+												<strong><span class="font-weight-normal">SUBJECT : </span>{{item.ticket_subject}}</strong>
+												 <span class="font-weight-normal">MESSAGE: </span>
+												 <div class="inner" [innerHtml]="item.ticket_message"></div>
+												<div class="audio-file">
+													<div class="play-audio">
+
+													</div>		
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- <div class="row"> -->
+						<!-- <div class="col-md-12" *ngFor="let item of questions">
+       					<div class="form-group">
+       						<label for="department">Question</label>
+       						<p>{{item.question}}</p>
+       					</div>	
+       					</div> -->
+						<!-- <div class="col-md-12">
+							<div class="form-group">
+								<label for="department">Wrap Up Category</label>
+								<select (change)="getAuxCode()" name="auxcodes" id="dup_auxcodes_pop_dup" class="form-control">
+									<option value='0'> Select Category </option>
+									<option *ngFor="let auxcode of auxcode_Category" value="{{auxcode.id}}">
+										{{auxcode.category_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="department">Wrap Up Code</label>
+								<select name="auxcodes" id="dup_auxcodes_subcat_dup" class="form-control">
+									<option value='0'> Select Wrapup Code </option>
+									<option *ngFor="let auxcode of auxcodes" value="{{auxcode.auxcode_name}}">
+										{{auxcode.auxcode_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="opportunity">Opportunity ID</label>
+								<input type="text" id="opportunity" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="notes">Notes <i class="far fa-edit"></i></label>
+								<textarea id="dup_notes" class="form-control"></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="buttons form-group">
+								<input type="button" class="btn btn-secondary" (click)="toggleClass()" value="Close"
+									type="button">
+								<input type="button" class="btn btn-primary" value="Update Wrapup"
+									(click)="addWrapupcode()">
+							</div>
+						</div> -->
+					<!-- </div> -->
+				</div>
+			</div>
+				
+		</form>
+
+		<div class="dialer-call-action">
+			<div class="row">
+				<!-- <div class="col-md-12" *ngIf="show_ans">
+					<div class="pulse call-attend-btn" (click)="acceptIncomeCall()">
+						<a href="javascript:;" class="btn btn-success">
+							<img src="assets/images/custom-wallboard/call-answered.svg" height="18"
+								class="mr-2 shake-animation"> Answer Call from {{get_dailer_value}}</a>
+					</div>
+				</div>
+				<div class="col-md-12" (click)="closeModelPopup()" *ngIf="show_mini_butons">
+					<a href="javascript:;" class="btn btn-warning fl"><i class="far fa-window-maximize"></i>
+						Minimize</a>
+				</div>
+				<div class="col-md-12" (click)="declineIncomeCall()" *ngIf="show_del">
+					<a href="javascript:;" class="btn btn-danger fl"><i class="fas fa-phone-slash"></i> Decline</a> -->
+				<div class="col-md-12 d-flex justify-content-center" *ngIf="show_ans">
+					<h6>Incoming Call from {{get_dailer_value}}</h6>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-4 d-flex justify-content-center" *ngIf="show_ans">
+					<div class="call-attend-btn" (click)="acceptIncomeCall()">
+						<a href="javascript:;" class="pulse btn btn-success">
+							<i class="fas fa-phone shake-animation"></i>
+							<span class="btn-action-text">Answer</span></a>
+						<!-- <span class="btn-action-text">Answer Call from {{get_dailer_value}}</span></a> -->
+					</div>
+				</div>
+				<div class="col-md-4 d-flex justify-content-center" (click)="declineIncomeCall()" *ngIf="show_del">
+					<a href="javascript:;" class="btn btn-danger fl"><i class="fas fa-phone-slash"></i>
+						<span class="btn-action-text">Decline</span> </a>
+				</div>
+				<div class="col-md-4 d-flex justify-content-center" (click)="closeModelPopup()"
+					*ngIf="show_mini_butons">
+					<a href="javascript:;" class="btn btn-warning fl"><i class="far fa-window-maximize"></i>
+						<span class="btn-action-text">Minimize </span></a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="settingSidebar-body ps-container ps-theme-default scrolling" *ngIf="showactivities == true">
+		<form>
+			<div class=" fade show active">
+				<!-- <button *ngIf="this.no_contact==true" class="btn btn-primary" (click)="AddContact()"
+					style="float: right;margin: 9px 20px 0px 0px;"> Add Contact</button> -->
+
+				<div class="setting-panel-header font-weight-bold sticky-top">Activities
+					<button type="button" class="btn btn-primary float-right" (click)="toggleClassWrap()">Wrap Code</button>
+				</div>
+				<div class="p-15">
+
+					<div class="has-color-bg">
+						<div class="row" *ngFor="let note of oldNotes; let i = index">
+						  <div class="col-12 col-md-12">
+							<div class="card">
+							  <div class="card-header">
+								<h4><i class="fas fa-edit"></i> Note</h4>
+								<div class="addBtn call-date-details">
+								  <small
+									><strong>{{ this.serverService.toTimeZone(note.created_dt) }}</strong></small
+								  >
+								</div>
+							  </div>
+							  <div class="card-body p-0">
+								<div class="call-detail-panel" style="max-width: 100%;">
+									<h6>Wrap Up Code : {{ note.auxcode_name }}</h6>
+									<h6>Opportunity ID : {{note.opportunity_id}}</h6>
+								  <p>{{ note.call_note }}</p>
+								  <div class="note-detais">
+									<h6>
+									  <span class="user-icon"
+										><i class="far fa-user-circle"></i
+									  ></span>
+									  &nbsp;&nbsp;{{note.creater_name}} - {{ note.creater }} left a Note
+									</h6>
+									<div class="audio-file" *ngIf="note.call_rec != null">
+									  <h6>Call Recording</h6>
+									  <div
+										class="play-audio"
+										*ngIf="note.call_rec != ''"
+										style="text-align: left; margin: 15px 0px"
+									  >
+										<a
+										  href="{{ note.call_rec }}"
+										  target="_blank"
+										  download="rec.wav"
+										>
+										  <i class="fas fa-play-circle"></i>
+										</a>
+									  </div>
+					
+									  <div class="fl">
+										<button
+										  type="button"
+										  class="btn btn-primary"
+										  (click)="genTicket(note.note)"
+										>
+										  Generate Ticket
+										</button>
+									  </div>
+									</div>
+								  </div>
+								</div>
+							  </div>
+							</div>
+						  </div>
+						</div>
+					  </div>
+
+
+				</div>
+			</div>
+				
+		</form>
+
+
+	</div>
+</div>
+
+
+
+
+<div class="modal fade bd-example-modal-lg" id="pop_add_refinement">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h5 class="modal-title" id="pop_myLargeModalLabel">Refinement Search</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+
+
+						<!-- <img src="assets/images/test.gif" alt=""> -->
+
+						<div class="col-md-11">
+
+							<div class="form-group">
+								<label>Account Name <span style="color:brown;font-size:12px;">(click
+										enter after typing account name)</span></label>
+								<!-- <select name="add_cat_id" id="pop_add_cat_id" class="form-control">
+									<option value='0'> Select Category </option>
+									<option *ngFor="let cat of cat_query_list" value="{{cat.id}}">
+										{{cat.category_name}}</option>
+									</select> -->
+
+								<!-- <input list="cities" type="text" id="pop_account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (keyup.enter)="searchnumAccount()"
+									(input)="autosuggestAccName()" />
+									<datalist id="pop_cities">
+										<option *ngFor="let test of listsuggestion" value="{{test.accountid}}" >
+									</datalist>
+										<span *ngIf="show_failed" style="color: red;">No contact Found</span> -->
+
+								<!-- <input list="datasid" name="city" value="" id="pop_account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (keyup.enter)="searchnumAccount()"
+									(input)="autosuggestAccName()"> -->
+								<!-- <input list="datasid" name="city" value="" id="pop_account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (keyup.enter)="autosuggestAccName()"
+									> -->
+								<input  name="city" value="" id="pop_account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (input)="autosuggestAccName()" (keyup.enter)="searchnumAccount()"
+									>
+
+								<!-- <datalist id="pop_datasid">
+									<i class="fas fa-angle-left"></i>
+									<option value="{{ls.name}}" *ngFor="let ls of listsuggestion">{{ls.name}}</option>
+              
+								</datalist> -->
+								<div class="card padding-15" *ngIf="showdatalist"> 
+									<ul class="pagination mb-0" *ngFor="let ls of listsuggestion">
+										<li class="page-item" style="cursor: pointer;" (click)="sentDataInInput(ls.name)">{{ls.name}}</li>
+									</ul>
+									<ul class="pagination mb-3 mt-2">
+										<li><a class="page-link" href="javascript:void(0)" (click)="prevPage()"><i class="fas fa-angle-left"></i></a></li>
+										<li><a  class="page-link" href="javascript:void(0)" (click)="nextPage()"><i class="fas fa-angle-right"></i></a></li>
+									</ul>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-1" style="padding-top:4%" *ngIf="showloading">
+							<img src="assets/images/test.gif" style="width: 40px;">
+						</div>
+
+					</div>
+
+					<div class="col-md-12" *ngIf="show_contact_value">
+						<div class="form-group">
+							<label for="add_acc_num">Contact Name</label>
+							<select name="add_acc_num" id="pop_add_acc_num" class="form-control">
+								<option value='0'> Select contact </option>
+								<option *ngFor="let conc of conc_query_list" value="{{conc.contactid}}">
+									{{conc.fullname}}</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer" *ngIf="show_contact_value">
+					<div class="buttons">
+						<input type="button" (click)="cancelbutton()" class="btn btn-outline-secondary" value="Cancel">
+						<input type="button" class="btn btn-primary update_agent" value="Update"
+							(click)="searchGetContact()">
+						<!-- <input type="submit" class="btn btn-primary update_agent" value="Update"> -->
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-xl" id="pop_showpop_timeline">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-body">
+
+				<div id="pop_accordion" class="accordion">
+					<div class="card mb-0">
+						<div class="card-header show" data-toggle="collapse" href="#collapseOne">
+							<h4><i class="fa fa-address-book" aria-hidden="true"></i> Call Details</h4>
+						</div>
+						<div id="pop_collapseOne" class="card-body collapse show" data-parent="#accordion">
+							<div class="modal-body">
+
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Subject</strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Tsubject}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-9">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Phone</strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Tphone}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<div style="padding: 5px 25px;" class="ticket-message-details fl"><strong
+													style="min-width: 72px; float: left;">Direction</strong>
+												<span style="text-align: center;">
+													<span *ngIf="this.Tsubject=='Inbound Call'" class="callType"
+														style="color: #3d77a7;"><b>:&nbsp;&nbsp;<img
+																src="assets/images/incoming-call.svg">
+															Incoming</b></span>
+													<span *ngIf="this.Tsubject=='Outbound Call'" class="callType"
+														style="color: #3d77a7; "><b>:&nbsp;&nbsp; <img
+																src="assets/images/outgoing-call.svg">
+															Outgoing</b></span>
+													<span
+														*ngIf="this.Tsubject!='Outbound Call' && this.Tsubject!='Inbound Call'"
+														class="callType" style="color: #3d77a7;"><b>:&nbsp;&nbsp;<i
+																style="font-size: 17px;" class="fa fa-phone"></i>
+															{{this.Tsubject}}</b></span>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Description</strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Tdescription}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div *ngIf="this.user_type == 2" class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Recording :</strong>
+													<span style="text-align: center;">
+														<a style="cursor: pointer;color: aqua;" target="_blank"
+															href="{{this.Trecord}}" class="blk-clr"><b> &nbsp;&nbsp;
+																{{this.Trecord}}</b></a>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Wrap Up </strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Twrapcode}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Note <i
+															class="fas fa-list-alt"></i></strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Twrapnote}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="buttons">
+					<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="close">
+					<!-- <input type="button" class="btn btn-success update_agent" value="Submit" (click)="AddNote()"> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

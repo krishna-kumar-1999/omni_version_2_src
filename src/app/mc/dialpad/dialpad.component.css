@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Caption:400,700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap');
+
+ .dialpad-wrapper { font-family: 'Open Sans', sans-serif; }
+.digit, .dig { font-family: 'PT Sans Caption', sans-serif; }
+i#resume_btn{
+    color: red;
+}
+
+.ready-hook-status {
+    background-color: #FF5722;
+}
+.forwardDialpadPanel  .digit, .forwardDialpadPanel  .dig { text-align: center; }
+.forwardDialpadPanel .modal-dialog { max-width: 320px; }
+.forwardDialpadPanel .modal-body  { border-radius: 15px; background-color: #353c48;  padding: 0; }
+.forwardDialpadPanel .dial-panel { padding-bottom: 25px;  width: 270px; }
+.forwardDialpadPanel .modal-content { background-color: #353c48; border-radius: 15px; }
+.row.noMargin { margin: 0; }
+.forwardDialpadPanel .search-field input { border-radius: 0; }
+.forwardDialpadPanel .dial-panel { border-radius: 0 0 15px 15px; }
+.forwardDialpadPanel .search-field input { padding: 0; }
+.forwardDialpadPanel .dialpad-header { color: #fff; text-align: center; }
+.forwardDialpadPanel { transition: all 1s; bottom: 30px; position: fixed; width: 270px;     z-index: 9999999999999999;}
+.forwardDialpadPanel.active { transition: all 1s; right: 380px; }
+.forwardDialpadPanel.hide-fwd-dialpad {  transition: all 1s; right: 50px; display: none  !important; }
+.forwordDialPad .dialpad-header label { font-weight: 600; }
+
+.dig.oncall.oncall-btn { width: 100%; }
+/*.forwardDialpadPanel .dialpad-close { width: 28px; height: 28px; border: 0; position: absolute; right: -12px; border-radius: 50%; background-color: #fff; top: -12px; z-index: 9999;  }*/
+
+/* .dig.small-icon {
+    width: 33.3% !important;
+    padding: 5px 22px;
+  } */
+  /* .dig.oncall {
+    pointer-events: none;
+} */
+
+
+
+.forwardDialpadPanel2  .digit, .forwardDialpadPanel2  .dig { text-align: center; }
+.forwardDialpadPanel2 .modal-dialog { max-width: 320px; }
+.forwardDialpadPanel2 .modal-body  { border-radius: 15px; background-color: #353c48;  padding: 0; }
+.forwardDialpadPanel2 .dial-panel { padding-bottom: 25px;  width: 270px; }
+.forwardDialpadPanel2 .modal-content { background-color: #353c48; border-radius: 15px; }
+
+.forwardDialpadPanel2 .search-field input { border-radius: 0; }
+.forwardDialpadPanel2 .dial-panel { border-radius: 0 0 15px 15px; }
+.forwardDialpadPanel2 .search-field input { padding: 0; }
+.forwardDialpadPanel2 .dialpad-header { color: #fff; text-align: center; }
+.forwardDialpadPanel2 { transition: all 1s; bottom: 30px; position: fixed; width: 270px;     z-index: 9999999999999999;}
+.forwardDialpadPanel2.active { transition: all 1s; right: 380px; }
+.forwardDialpadPanel2.hide-fwd-dialpad { transition: all 1s; right: 50px;display: none  !important; }
+/* z-index: -999999999;  */
+
+
+.inactive{
+    color: #8d8d8d;
+}
+
+.active{
+    color: black;
+}
+
+.show-green {
+    background-color: #3c8d40;
+  }
+
+  .random-icon{
+    width: 30px;
+    height: 25px;
+    border-radius: 0%;
+  }
+
+
+/*  */
+
+.record-icon{
+  float: right;
+  padding: 4px 7px 0 3px;
+  font-size: 16px;
+}

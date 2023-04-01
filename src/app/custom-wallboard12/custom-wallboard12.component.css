@@ -1,0 +1,11 @@
+td {
+    text-align: center;
+    padding: 5px;
+}
+.wallboard-item-three.wall-large-box {
+    padding: 20px 15px;
+    height: 312px;
+}
+table th.wall-3-title {
+    background: transparent!important;
+}

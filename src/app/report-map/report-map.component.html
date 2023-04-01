@@ -1,0 +1,20 @@
+
+
+<div class="form-group">
+  <label>From Date</label>
+  <input type="date" id="from_datee" class="form-control" formControlName="from_datee"  style="width: 500px;">
+  <h6>(* the report will generate next 7 days from this date)</h6>
+</div>
+
+
+
+<div>
+<button type="button" class="btn btn-primary" (click)="test()" style="width: 100px;"> Search</button><br>
+<h6>(*double click to generate report) </h6>
+</div>
+<!-- <div [class.hidden]="toDisplay">
+<h1 > hello </h1>
+</div> -->
+<div *ngIf="toDisplay" id="chartdiv"></div>
+<!-- <div [class.hidden]="toDisplay" id="chartdiv"></div> -->
+

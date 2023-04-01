@@ -1,0 +1,31 @@
+
+ 
+    <div id="iframe">
+        <!-- <iframe id="frameid"  style="width: 100%; height: 85vh; border: none;"></iframe> -->
+        <iframe id="frameid"  style="width: 100%;border: none;border-radius: 5px;background: #353c48;"></iframe>
+    </div>
+ 
+<div *ngIf="oncall" class="card-body">
+
+    <div class="keep-connect" style="text-align: center;">
+        <div class="connect-logo">
+            <img src="assets/img/logo.png">
+            <span class="logo-name">Webclient Disconnected</span>
+        </div>
+        
+        <div class="keep-connect">
+
+            <!-- <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel"> -->
+            <input class="btn btn-warning"  (click)="Activateiframe()" type="button" value="Connect">
+            
+            <h3>Keep connected with 3CX Webclient via Omni</h3>
+            <!-- <p>To reduce the data usage,<br>connect your device to Wi-Fi.</p> -->
+  
+          </div>
+        <!-- <h3>Sorry, No Tickets</h3> -->
+        <!-- <img style="border-radius: 55px;height: 337px;width: 508px;object-fit: cover;"
+            src="./assets/images/wallboard/phone-picture.png" alt="On Call"> -->
+          
+        <!-- <p > Ticket were empty <i class="fas fa-empty-set"></i></p> -->
+    </div>
+</div>

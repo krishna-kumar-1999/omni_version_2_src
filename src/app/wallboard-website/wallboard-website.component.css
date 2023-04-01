@@ -1,0 +1,130 @@
+#wallboardFullPanel .custom-wallboard-wrapper .card-header h4{
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+}
+
+
+#wallboardFullPanel .custom-wallboard-wrapper .card.top-title {
+    background: #959595;
+    color: #fff;
+    border-radius: 2px;
+    box-shadow: none;
+    margin-bottom: 8px;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .card-header {
+    border-radius: 0px;
+}
+
+
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box {
+    padding: 10px 14px;
+    border-radius: 0;
+    width: 100%;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box:nth-child(5) {
+    margin-right: 0;
+}
+
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box.blue-bg-clr {
+    background-color: #2296f3;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box.light-green-bg-clr {
+    background-color: #f34337;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box.red-bg-clr {
+    background-color: #e93857;
+}
+
+
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box .card-info {
+    display: flex;
+    flex-direction: column;    
+    justify-content: space-between;
+    height: 100%;
+}
+
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box .card-info .custom-wallboard-item-name {
+    line-height: 20px;
+    color: #e4e4e4;
+}
+
+
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box .custom-wallboard-icon {
+    position: absolute;
+    right: 12px;
+    top: 34px;    
+}
+
+#wallboardFullPanel .custom-wallboard-wrapper .custom-wallboard-box .custom-wallboard-icon {
+    filter: contrast(0.7);
+}
+
+
+
+
+
+
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card-header{
+    background: #2296f3;   
+    border-bottom: 2px solid #fff; 
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card-header h4{
+    color: #5a5a5a; 
+    font-size: 16px;  
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card{
+    border-radius: 1px;  
+    box-shadow: 1px 1px 9px #e2e2e2;
+}
+
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body .table-responsive {
+    height: 100%;
+    margin-bottom: 0;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body .table {    
+    margin-bottom: 0;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card.queue-details .card-header{
+    background: #00b36b;    
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card.queue-details .card-body tr th{
+    background: #00b36b;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body tr th{
+    padding: 8px 10px;
+    text-align: left;
+    height: 0;
+    position: relative;
+    background: #2296f3;
+    color: #5a5a5a;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body table tbody tr td{
+    padding: 8px 10px;
+    text-align: left;  
+    color: #5a5a5a;
+    font-weight: 700;
+}
+
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body table tbody tr:nth-child(odd){
+    background: #83d9d8;
+}
+
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body .table-bordered th{
+    border-right: 1px solid #fff!important;
+    border: none;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body .table-bordered td{
+    border-right: 1px solid #fff!important;
+    border: none;
+}
+
+
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body .table-bordered th:nth-child(6){    
+    border-right: none!important;
+}
+#wallboardFullPanel .custom-wallboard-wrapper .call-management-table .card .card-body .table-bordered td:nth-child(6){    
+    border-right: none!important;
+}
+.custom-wallboard-box{margin: 3px!important;}
+.custom-wallboard-wrapper .col{margin: 3px;}

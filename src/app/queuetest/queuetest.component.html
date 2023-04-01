@@ -1,0 +1,168 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-xl-8">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Call Report</h4>
+
+                </div>
+                <div class="card-body p-30">
+                    <form [formGroup]="getRep" (ngSubmit)="getReports()">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="from_dt">From Date</label>
+                                    <input type="date" id="from_dt" class="form-control" formControlName="from_dt">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="to_dt">To Date</label>
+                                    <input type="date" id="to_dt" class="form-control" formControlName="to_dt">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="to_dt">To Date</label>
+                                    <input type="date" id="to_dt" class="form-control" formControlName="to_dt">
+                                </div>
+                            </div>
+
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="getReports()">Generate Report</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Call History</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-md">
+                            <tr>
+                                <td colspan="12" class="search-text-tbl">
+                                    <div class="input-group"><input type="hidden" class="form-control" (keyup.enter)="listdata({'search_text':call_history_search.value})" #call_history_search>
+                                        <div class="input-group-append">
+                                            <input class="btn btn-primary" type="hidden" (click)="listdata({'search_text':call_history_search.value})">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Queue Number</th>
+                                <th>Date</th>
+                                <th>Avg Speed of Ans</th>
+                                <th>Aband > Sec</th>
+                                <th>Aband < Sec</th>
+                                <th>Avg Aband Time</th>
+                                <th>Avg Talk Time</th>
+                                <th>Total Ans Calls</th>
+                                <th>Total Aband Calls</th>
+                            </tr>
+                            <tr *ngFor="let item of queuelistdata;let i=index" >
+                                <td>{{offset_count+i+1}}</td>
+                                <td>{{item.queue_number}}</td>
+                                <td>{{item.dt_time}}</td>
+                                <td>{{item.avg_ans_sped_time}}</td>
+                                <td>{{item.grater_then_abd_count}}</td>
+                                <td>{{item.less_then_abd_count}}</td>
+                                <td>{{item.total_abd_time}}</td>
+                                <td>{{item.call_q_ans}}</td>
+                                <td>{{item.Answered_Call}}</td>
+                                <td>{{item.Missed_Call}}</td>
+                            </tr>
+                            <tr *ngIf="recordNotFound == true">
+                                <td colspan="12">Data not found</td>
+                            </tr>
+
+                             </table>
+                             <div>
+                                <!-- <div class="row"> -->
+                                    <div class="col-md-12">
+                                        <div class="form-group totalsec">
+                                            <label for="to_dt">Total</label>
+                                            <input type="text" id="total" class="form-control" disabled>
+                                        </div>
+                                    </div>
+                                <!-- </div> -->
+                             </div>
+                         </div>
+                     </div>
+                     <div class="card-footer text-right" *ngIf="recordNotFound == false">
+                        <nav class="d-inline-block">
+                            <ul class="pagination mb-0" *ngIf="paginationData.info == 'show'">
+
+                                <li class="page-item">
+                                    <a [class]="paginationData.backtab=='show' ? 'page-link' :'page-link disabled'" href="javascript:void(0)" (click)="paginationData.backtab=='show' ? listdata({'search_text':call_history_search.value,'offset':paginationData.start}) : false"><i class="fas fa-angle-left"></i></a>
+                                </li>
+                                <li class="page-item" *ngIf="paginationData.backtab =='show'">
+                                    <a class="page-link" href="javascript:void(0)" (click)="listdata({'offset':paginationData.back})"><i class="fas fa-angle-double-left"></i></a>
+                                </li>
+
+
+                                <li [class]="pagination.load ==false ? 'page-item active' :'page-item'" *ngFor="let pagination of paginationData.data;let i=index">
+                                    <a class="page-link" href="javascript:void(0)" (click)=" pagination.load ==true ? listdata({'offset':pagination.offset_count}) : false">{{pagination.btn_length}} <span class="sr-only" *ngIf="pagination.load ==false">(current)</span></a>
+                                </li>
+
+                                <li class="page-item" *ngIf="paginationData.nexttab =='show'">
+                                    <a class="page-link" href="javascript:void(0)" (click)="listdata({'offset':paginationData.next})"><i class="fas fa-angle-double-right"></i></a>
+                                </li>
+
+                                <li class="page-item">
+                                    <a [class]="paginationData.nexttab =='show' ? 'page-link' : 'page-link disabled'" href="javascript:void(0)" (click)="paginationData.nexttab =='show' ? listdata({'offset':paginationData.end}) : false"><i class="fas fa-angle-right"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- 
+
+<div class="modal fade bd-example-modal-md" id="play-audio">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myLargeModalLabel">Audio Player</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                                            <audio controls>
+  <source src="assets/3cx_audio.wav" type="audio/wav">
+  </audio>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <div class="buttons">
+                        <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+                        <input type="submit" class="btn btn-primary update_agent" value="Update" [disabled]="!editDept.valid">
+                    </div>
+                </div>
+        </div>
+    </div>
+</div> -->

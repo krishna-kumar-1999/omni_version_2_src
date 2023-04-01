@@ -1,0 +1,60 @@
+.col-md-6.contact-play-div {
+    display: flex;
+    align-items: center;
+}
+a.play-record{
+    font-size: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.col-md-6.contact-play-div  p{
+    margin: auto;
+    margin-left: 0;
+}
+
+
+.refine-text{
+    color: red !important;
+    text-decoration: underline !important;
+    font-weight: 700;
+    cursor: pointer !important;
+}
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+}
+
+.loading-phone{
+    position: relative;
+    width: 35px;
+    top: 35px;
+    left: 335px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
+}
+strong{
+    display: block;
+}
+.p-15{
+    overflow: scroll!important;
+    height: 90vh;
+}
+
+.inner{
+  
+    display: -webkit-box !important;
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.has-color-bg .row:nth-child(even) .card, .has-color-table-row tr:nth-child(even){
+    background-color: #e5f1fd;
+}

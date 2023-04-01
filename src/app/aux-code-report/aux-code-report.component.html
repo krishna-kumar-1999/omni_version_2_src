@@ -1,0 +1,144 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-7 col-md-7 col-lg-7">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Aux code Report</h4>
+                    
+                </div>
+                <div class="card-body p-30">
+                    <form [formGroup]="getRep" (ngSubmit)="getReports()">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="aget_ids">Select Agent</label>
+                                    <select name="aget_ids" multiple id="aget_ids" class="form-control has-multiple-select" formControlName="aget_ids">
+                                        <option value="{{this.uadmin_id}}">{{this.user_name}} - {{this.agent_name}}</option>
+                                        <option *ngFor="let user of usersL" value="{{user.user_id}}">{{user.user_name}} - {{user.agent_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="auxcode_name">Select Aux code</label>
+                                    <select name="auxcode_name"  id="auxcode_name" class="form-control " formControlName="auxcode_name">
+                                        <option value="0" selected>All</option>
+                                        <option *ngFor="let auxcode of auxcodes" value="{{auxcode.auxcode_name}}">{{auxcode.auxcode_name}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="auxcode_name">Queue Status</label>
+                                    <select name="que_status"  id="que_status" class="form-control" formControlName="que_status">
+                                        <option value="" selected>All</option>
+                                        <option value="1" selected>Login</option>
+                                        <option value="0" selected>Logout</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="from_date">From Date</label>
+                                    <input type="date" id="from_date" class="form-control" formControlName="from_date">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="to_date">To Date</label>
+                                    <input type="date" id="to_date" class="form-control" formControlName="to_date">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+
+                        
+
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" (click)="getReports()">Generate Report</button>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div> 
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Queue History</h4>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                      <table class="table table-bordered table-striped table-md">
+                        <tr>
+                                <td colspan="12" class="search-text-tbl">
+                                    <div class="input-group"><input type="text" class="form-control" (keyup.enter)="callHistoryList({'search_text':call_history_search.value})" #call_history_search>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" (click)="callHistoryList({'search_text':call_history_search.value})"><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>#</th>
+                                <th>Agent Name</th>
+                                <th>Aux Code</th>
+                                <th>Type</th>
+                                <th>Time</th>
+                            </tr>
+                            <tbody>
+                                <tr *ngFor="let history of call_history_list;let i=index" >
+                                    <td>{{offset_count+i+1}}</td>
+                                    <td>{{history.agent_name}}</td>
+                                    <td>{{history.reason}}</td>
+                                    <td>{{history.type}}</td>
+                                    <td>{{this.serverService.toTimeZone(history.time_stamp)}}</td>
+                                </tr>
+                                <tr *ngIf="recordNotFound == true">
+                                 <td colspan="12">Data not found</td>
+                             </tr>
+                         </tbody>
+                     </table>
+                 </div>
+             </div>
+             <div class="card-footer text-right" *ngIf="recordNotFound == false">
+                <nav class="d-inline-block">
+                    <ul class="pagination mb-0" *ngIf="paginationData.info == 'show'">
+
+                        <li class="page-item">
+                            <a [class]="paginationData.backtab=='show' ? 'page-link' :'page-link disabled'" href="javascript:void(0)" (click)="paginationData.backtab=='show' ? callHistoryList({'search_text':call_history_search.value,'offset':paginationData.start}) : false"><i class="fas fa-angle-left"></i></a>
+                        </li>
+                        <li class="page-item" *ngIf="paginationData.backtab =='show'">
+                            <a class="page-link" href="javascript:void(0)" (click)="callHistoryList({'search_text':call_history_search.value,'offset':paginationData.back})"><i class="fas fa-angle-double-left"></i></a>
+                        </li>
+
+
+                        <li [class]="pagination.load ==false ? 'page-item active' :'page-item'" *ngFor="let pagination of paginationData.data;let i=index">
+                            <a class="page-link" href="javascript:void(0)" (click)=" pagination.load ==true ? callHistoryList({'search_text':call_history_search.value,'offset':pagination.offset_count}) : false">{{pagination.btn_length}} <span class="sr-only" *ngIf="pagination.load ==false">(current)</span></a>
+                        </li>
+
+                        <li class="page-item" *ngIf="paginationData.nexttab =='show'">
+                            <a class="page-link" href="javascript:void(0)" (click)="callHistoryList({'search_text':call_history_search.value,'offset':paginationData.next})"><i class="fas fa-angle-double-right"></i></a>
+                        </li>
+
+                        <li class="page-item">
+                            <a [class]="paginationData.nexttab =='show' ? 'page-link' : 'page-link disabled'" href="javascript:void(0)" (click)="paginationData.nexttab =='show' ? callHistoryList({'search_text':call_history_search.value,'offset':paginationData.end}) : false"><i class="fas fa-angle-right"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

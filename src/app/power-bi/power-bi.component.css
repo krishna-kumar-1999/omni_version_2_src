@@ -1,0 +1,27 @@
+.mandatory{
+    color: red !important;
+    margin-left: 5px;
+}
+.error_msg{
+    color:red !important;
+}
+.box{
+    padding: 0;
+}
+.border-box{
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 12px;
+
+}
+.border-boxs{
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 0px;
+}
+.btn-left{
+    margin-left: -24px;
+}
+.push-url{
+    margin-top: 21px;
+}

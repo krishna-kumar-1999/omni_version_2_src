@@ -1,0 +1,116 @@
+
+<div class="section-body">
+<div class="row" style="margin-top: 8%;">
+    <div class="col-12 col-lg-2">
+
+    </div>
+
+    <div class="col-12 col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Firmware Update</h4>
+             
+            </div>
+            <div class="card-body p-30">
+                <img src="assets/img/logo.png" class="mb-4" alt="" style="width: 131px; display: flex;margin: 10px auto;">
+                <div class="license-button">
+                    <span class="license-key">{{this.omni_license_key}}</span>
+                </div>
+                <h4 *ngIf="hasUpdate" style="font-size: 1.2rem;">We Have New Update for You. Please Update to the latest omni version {{this.hasUpdateVersion}}</h4>
+                <h4 *ngIf="hasUpdate == false" style="font-size: 1.2rem;">Currently you are on updated version ({{this.Omni_version}})</h4>
+
+                <div class="row text-center" *ngIf="hasUpdate">
+                    <div class="col-md-12 mt-3">
+                        <div class="btn-group">
+                            <button class="btn btn-success " type="button" (click)="versionUpdate()">
+                                <i class="fa fa-cloud"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-12 col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Mr VoIP Update</h4>
+            </div>
+            <div class="card-body p-30">
+                <img src="assets/img/mrvoip-icon.png" class="mb-4" alt="" style="width: 100px; display: flex;margin: 10px auto;">
+                <div class="license-button">
+                    <span class="license-key">{{this.mrvoip_license_key}}</span>
+                </div>
+                <h4 *ngIf="hasUpdateMrvoip" style="font-size: 1.2rem;">We Have New Update for You. Please Update to the latest Mr.VoIP version {{this.mrvoipUpdatedVersion}}</h4>
+                <h4 *ngIf="hasUpdateMrvoip == false" style="font-size: 1.2rem;">Currently you are on updated version ({{this.Mrvoip_version}})</h4>
+             
+                <div class="row text-center" *ngIf="hasUpdateMrvoip" >
+                    <div class="col-md-12 mt-3">
+                        <div class="btn-group">
+                            <button class="btn btn-success " type="button" (click)="updateMEMrvoip()">
+                                <i class="fa fa-cloud"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="col-12 col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>Mr VoIP API Update</h4>
+            </div>
+            <div class="card-body p-30">
+                <img src="assets/img/mrvoip-icon.png" class="mb-4" alt="" style="width: 100px; display: flex;margin: 10px auto;">
+                <div class="license-button">
+                    <span class="license-key">{{this.mrvoip_license_key}}</span>
+                </div>
+                <h4 *ngIf="hasUpdateMrvoip_api" style="font-size: 1.2rem;">We Have New Update for You. Please Update to the latest Mr.VoIP API version {{this.mrvoip_api_UpdatedVersion}}</h4>
+                <h4 *ngIf="hasUpdateMrvoip_api == false" style="font-size: 1.2rem;">Currently you are on updated version ({{this.Mrvoip_version}})</h4>
+             
+                <div class="row text-center" *ngIf="hasUpdateMrvoip_api" >
+                    <div class="col-md-12 mt-3">
+                        <div class="btn-group">
+                            <button class="btn btn-success " type="button" (click)="updateMEMrvoip_api()">
+                                <i class="fa fa-cloud"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+
+
+
+    <div *ngIf="hasUpdatewebRTC"  class="col-12 col-lg-3">
+        <div class="card">
+            <div class="card-header">
+                <h4>WebRTC Update</h4>
+            </div>
+            <div class="card-body p-30">
+                <img src="https://seeklogo.com/images/W/webrtc-logo-39B36FAC51-seeklogo.com.png" class="mb-4" alt="" style="width: 100px; display: flex;margin: 10px auto;">
+                <h4 style="font-size: 1.2rem;">We Have New Update for You. Please Update to the latest WebRTC version</h4>
+                <div class="row text-center">
+                    <div class="col-md-12 mt-3">
+                        <div class="btn-group">
+                            <button class="btn btn-success " type="button" (click)="updatewebRTC()">
+                                <i class="fa fa-cloud"></i>Update
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+     <div class="col-12 col-lg-2">        
+    </div>
+</div>
+</div>

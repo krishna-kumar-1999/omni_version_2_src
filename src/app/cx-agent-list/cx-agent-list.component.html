@@ -1,0 +1,190 @@
+<!-- <div id="agents" class="tab-pane fade active show"> -->
+	<div class="section-body">
+		<div class="row">
+			<div class="col-12 col-md-12 col-lg-12">
+				<input type="hidden" value="" id="mrVoipAData" (click)="changeAgentsdata()">
+				<input type="hidden" value="" id="sendonload" (click)="sendOnload()">
+				<input type="hidden" value="" id="single_agent" (click)="single_agent()">
+				<input type="hidden" id="reconnect_socketwal" (click)="initSocket()">
+
+	<!-- <h4 class="mb-4">Agents List</h4> -->			
+	
+<div style="display: flex;
+align-items: center;">
+	<div class="discussion search " style="width: 100%;">
+
+		<span class="fa fa-search form-control-feedback"></span>
+		<div class="buttonIn" style="position: relative;">
+			<input type="text" id="agentsSearch" placeholder="Search people or enter number..." [(ngModel)]="searchValue" (keyup)="searchfilter()">
+			<!-- <span class="clear-icon" *ngIf="showontype" (click)="clearText()">
+				<i style="cursor: pointer;" class="fas fa-times close-icons"></i>
+			</span>		 -->
+		</div>
+
+				
+	</div>
+
+		<div class="dropdown select-option header-select-dropdown pt-1 mr-2">
+			<div class="select-option-label" data-toggle="dropdown"
+				class="dropdown-toggle filter-btn info badge badge-success">
+				<div class="dropdown-title">{{this.view_name}} <i class="fas fa-chevron-down"></i>
+					&nbsp;</div>
+			</div>
+
+
+			<div class="dropdown-menu drop-menu-width">
+				<div class="pullDown">
+					<a href="javascript:void(0)" class="dropdown-item"
+					(click)="changeMylayout('All','All')">
+					<div class="green-bg-status status-bg"></div>All
+				</a>
+					<a href="javascript:void(0)" class="dropdown-item"
+					(click)="changeMylayout(gl.group_id,gl.group_name)" *ngFor = "let gl of groupList">
+					<div class="green-bg-status status-bg"></div>{{gl.group_name}}
+				</a>
+
+				</div>
+			</div>
+		</div>
+
+</div>
+
+	<div class="contact-list agents-list">
+		<div class="row">
+			<div class="col-xl-3 col-lg-4 col-md-6 card-holder" *ngFor="let ag of agentsQueData">
+				<div class="card mb-3">
+					<div class="card-body">
+						<ul class="contact-details-list">
+							<li>
+							<ul style="padding-left:18px;">
+
+							<li style="position: relative;">
+								<span class="user-img"><img [src]="ag.agent_pic" onerror="this.src='assets/images/user.jpg'"></span>
+								<span id="{{ag.agent_no}}_states">
+									<!-- id="{{ag.agent_no}}_state_Indi" -->
+									<span [class]="ag.state == 'Available' ? 'presence circle-state available' : ag.state == 'Away' ? 'presence circle-state away' :  ag.state == 'Out of office' ? 'presence  circle-state out_of_office' :  ag.state == 'Do Not Disturb' ? 'presence circle-state wash-room' : ag.state == 'AUX' ? 'presence circle-state meeting': ag.state == 'Busy' ? 'presence circle-state busy':'presence circle-state out_of_office' "></span>
+								</span>
+							</li>
+							<li class="contact-card-info">
+								<h6 class="mb-1" id="{{ag.agent_no}}_agent">{{ag.agent}} <span class="mb-1 mt-2" id="{{ag.agent_no}}_no" style="font-size: 12px;
+									font-weight: 600;"> {{ag.agent_no}} </span>  </h6>
+																		<span  class="mb-1 mt-2" id="{{ag.agent_no}}_mailids">{{ag.agentemail}}</span>
+								<!-- <p class="mb-1 mt-2" id="{{ag.agent_no}}_no">{{ag.agent_no}}</p> -->
+								<p class="mb-1 mt-2"  id="{{ag.agent_no}}_newstates"><span [class]="ag.state == 'Available' ? ' agent-new-status available' : ag.state == 'Away' ? ' agent-new-status away' :  ag.state == 'Out of office' ? 'agent-new-status out_of_office' :  ag.state == 'Do Not Disturb' ? ' agent-new-status wash-room' : ag.state == 'AUX' ? 'agent-new-status meeting': ag.state == 'Busy' ? 'agent-new-status busy':'agent-new-status out_of_office' ">{{ag.state}}</span></p>
+								<p class="mb-1 mt-2">
+									<!-- <span  [class]="ag.state == 'Available' ? 'presence available' : ag.state == 'Away' ? 'presence away' :  ag.state == 'Out of office' ? 'presence out_of_office' :  ag.state == 'Do Not Disturb' ? 'presence wash-room' : ag.state == 'AUX' ? 'presence meeting': ag.state == 'Busy' ? 'presence busy':'presence out_of_office' " id="{{ag.agent_no}}_state_Indi"></span> -->
+																
+									<!-- {{ag.state}} -->
+								</p>
+							</li>
+						</ul>	
+	
+						</li>
+							<!-- <a href="javascript:;" class="btn contact-call btn-circle btn-success m-b-xs" (click)="clictToCall(ag.agent_no)"><i class="fas fa-phone pr-0" title="Click to Call"  ></i></a> -->
+		
+
+						<li><span class="iconshow">
+						<ul style="	display: flex;">
+							<li class="mr-3" (click)="clictToCall(ag.agent_no)">
+								<i class="fas fa-phone hover-icons"></i>
+							</li>
+							<!-- <li  class="mr-3">
+								<i class="fas fa-video hover-icons"></i>
+							</li> -->
+							<li  (click)="toChat()" class="mr-3">
+								<i  class="far fa-comment-alt hover-icons"></i>
+							</li>
+						</ul>
+					   </span></li>
+
+					</ul>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="col-xl-3 col-lg-4 col-md-6 card-holder">
+				<div class="card mb-3">
+					<div class="card-body">
+						<ul class="contact-details-list">
+							<li>
+								<span class="user-img"><img src="assets/images/user.jpg"></span>
+							</li>
+							<li class="contact-card-info">
+								<h6 class="mb-1">Test</h6>
+								<p class="mb-1 mt-2">710</p>
+							</li>
+							<a href="javascript:;" class="btn contact-call btn-circle btn-success m-b-xs" ><i class="fas fa-phone"></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 card-holder">
+				<div class="card mb-3">
+					<div class="card-body">
+						<ul class="contact-details-list">
+							<li>
+								<span class="user-img"><img src="assets/images/user.jpg"></span>
+							</li>
+							<li class="contact-card-info">
+								<h6 class="mb-1">Test 1</h6>
+								<p class="mb-1 mt-2">611</p>
+							</li>
+							<a href="javascript:;" class="btn contact-call btn-circle btn-success m-b-xs" ><i class="fas fa-phone"></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 card-holder">
+				<div class="card mb-3">
+					<div class="card-body">
+						<ul class="contact-details-list">
+							<li>
+								<span class="user-img"><img src="assets/images/user.jpg"></span>
+							</li>
+							<li class="contact-card-info">
+								<h6 class="mb-1">Test 2</h6>
+								<p class="mb-1 mt-2">702</p>
+							</li>
+							<a href="javascript:;" class="btn contact-call btn-circle btn-success m-b-xs" ><i class="fas fa-phone"></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 card-holder">
+				<div class="card mb-3">
+					<div class="card-body">
+						<ul class="contact-details-list">
+							<li>
+								<span class="user-img"><img src="assets/images/user.jpg"></span>
+							</li>
+							<li class="contact-card-info">
+								<h6 class="mb-1">Test 3</h6>
+								<p class="mb-1 mt-2">756</p>
+							</li>
+							<a href="javascript:;" class="btn contact-call btn-circle btn-success m-b-xs" ><i class="fas fa-phone"></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-xl-3 col-lg-4 col-md-6 card-holder">
+				<div class="card mb-3">
+					<div class="card-body">
+						<ul class="contact-details-list">
+							<li>
+								<span class="user-img"><img src="assets/images/user.jpg"></span>
+							</li>
+							<li class="contact-card-info">
+								<h6 class="mb-1">Test 4</h6>
+								<p class="mb-1 mt-2">731</p>
+							</li>
+							<a href="javascript:;" class="btn contact-call btn-circle btn-success m-b-xs" ><i class="fas fa-phone"></i></a>
+						</ul>
+					</div>
+				</div>
+			</div>	 -->
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+<!-- <app-item-output ></app-item-output> -->

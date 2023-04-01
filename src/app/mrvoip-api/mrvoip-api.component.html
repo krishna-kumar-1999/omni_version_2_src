@@ -1,0 +1,60 @@
+<div class="section-body">
+    <div class="row">
+      <div class="col-12 col-lg-12">
+          <div class="card" >
+              <div class="card-header">
+                  <h4>  Mr.VoIp API Settings</h4>
+                  <div class="col-md-2">
+                    <div class="form-group">
+                        <a href="https://omnitickets.mconnectapps.com/kb/#/view-articles?id=MjQ%3D&img=9" target="_blank" class="btn btn-success update_agent btn-left" style="margin-left: 355px;" download="documentation.pdf">Documentation</a>
+                        <!-- <a href="https://www.mconnectapps.com/newsletter-docs/PowerBI_Integration.pdf" target="_blank" class="btn btn-success update_agent btn-left" style="margin-left: 355px;" download="documentation.pdf">Documentation</a> -->
+                    </div>
+                   
+                </div> 
+              </div>
+              
+
+              
+              <div class="card-body p-30">
+                <div class="form-group border-box">
+                    <h3>Take your 3CX System to the<br>
+                        next level with a Custom API</h3>
+                        <p>With a customised and fully configurable API, you enable your 3CX call center software to be tailored to your exact business needs.<br> Reduce your call center’s downtime, get hassle-free updates and allow seamless integration with your CRM.<br> Using enhanced protocols data is transferred fast and effectively for a truly seamless calling experience. </p>
+                  <form [formGroup]="mr_voip_api">
+                    
+                <div class="row">
+                    <div class="col-md-6" *ngFor="let opt of options">
+                        <div class="form-check form-check-inline" style="margin-bottom: 15px;">
+                            <input type="checkbox" class="report_one" id="call_make"
+                                formControlName="call_make" value="call_make" [checked]="checked(opt.value)" (change)="GetStats(opt.value,$event.target.checked)">
+                            <label for="reports">
+                                <span style="-webkit-text-stroke-width: thin;">{{opt.name}}</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+          </form>
+          <div class="row">
+            <div class="col-md-6">
+                <div class="settings-btn-group fl">
+                    <div class="form-group">
+                        <input style="margin-left:0px" type="button" class="btn btn-success update_agent" *ngIf="this.update==true" value="Updated">
+                        <input style="margin-left:0px" type="button" class="btn btn-dark update_agent" *ngIf="this.update==false" value="Update" (click)="submit_data()">
+                     
+                    </div>
+                </div>
+            </div> 
+        </div>
+          </div>
+          
+        
+      </div>
+  </div> 
+  
+      </div>
+    </div>
+  </div>
+  
+  
+  
+ 

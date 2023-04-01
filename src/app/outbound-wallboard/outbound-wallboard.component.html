@@ -1,0 +1,251 @@
+<div class="section-body">
+	<div class="row">
+		<div class="col-12 col-md-12 col-lg-12">
+			<div class="card" id="wallboardFullPanel">
+				<input type="hidden" value="" id="ques_list" (click)="changeData()">
+				<input type="hidden" value="" id="sendonload" (click)="sendOnload()">
+				<input type="hidden" value="" id="agent_list" (click)="changeAgents()">
+				<input type="hidden" value="" id="mrVoipType" (click)="changeWallType()">
+				<input type="hidden" value="" id="mrVoipQData" (click)="changeQuesData()">
+				<input type="hidden" value="" id="mrVoipAData" (click)="changeAgentsdata()">
+				<div class="card-header">
+					<div class="max-icon" (click)="fullWindow()">
+						<i class="fas fa-compress feather"></i>
+					</div>
+					<h4>Wallboard</h4>
+					<div class="addBtn">
+						<div class="default-view">
+							<button type="button" class="btn btn-warning" (click)="fullWindow()"><i class="fas fa-compress-arrows-alt"></i> Default View</button>
+						</div>
+						<button *ngIf="show_act_wall" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addLicence" data-backdrop="static" >Activate Wallboard</button>
+
+					</div>
+				</div>
+
+				<div class="card-body wallboard-full-view custom-wallboard-three p-30">
+					<div class="custom-wallboard-wrapper">
+
+						<div class="card">
+							<div class="card-header">
+								<h4>AGENT OUTBOUND WALLBOARD</h4>
+								<div class="addBtn btn-group"  *ngIf="this.has_admin">
+									<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addQueue"><i class="fas fa-plus"></i> Add Agent</button>
+									<button type="button" class="btn btn-primary" (click)="reloadQueue()"><i class="fas fa-sync-alt"></i> Reset</button>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="wallboard-wrapper">
+
+							<div class="row no-gutters">
+								<div class="col">
+									<div class="wallboard-item-three normal-box light-green-bg-clr">
+										<h2 class="fl" id="oboffer"> 0</h2>
+										<h6 class="fl">CALL OFFER</h6>
+									</div>
+								</div>
+
+								<div class="col">
+									<div class="wallboard-item-three normal-box has-call-queue yellow-bg-clr">
+                                        <h2 class="fl" id="obans">0</h2>
+										<h6 class="fl">CALL ANSWERED</h6>
+										
+									</div>
+								</div>
+
+								<div class="col">
+									<div class="wallboard-item-three normal-box red-bg-clr">
+										<h2 class="fl" id="obabandoned">0</h2>
+										<h6 class="fl">Call Abandon</h6>
+									</div>
+								</div>
+
+								<div class="col">
+									<div class="wallboard-item-three normal-box blue-bg-clr">
+										<h2 class="fl" id="obagentloggedin">0</h2>
+										<h6 class="fl">Agent Logged-in status</h6>
+									</div>
+								</div>
+							</div>
+
+
+							<div class="row no-gutters">
+								<div class="col">
+									<div class="wallboard-item-three wall-large-box violet-bg-clr">
+										<div class="wall-3-title">Active Agents</div>
+										<div class="wall-large-box-scroll">
+										<ul>
+											<li *ngFor="let items of activeagents">{{items}}</li>
+											
+										</ul>
+									</div>
+									</div>
+								</div>
+
+								<div class="col">
+									<div class="wallboard-item-three wall-large-box dark-green-bg-clr">
+										<div class="wall-3-title">Idle Agents</div>
+										<div class="wall-large-box-scroll">
+										<ul>
+											<li *ngFor="let item2 of idleagents">{{item2}}</li>
+										</ul>
+									</div>
+									</div>
+								</div>
+
+								<div class="col">
+									<div class="wallboard-item-three wall-large-box ping-bg-clr">
+										<div class="wall-3-title">Wrap up Agents</div>
+										<div class="wall-large-box-scroll">
+										<ul>
+											<li *ngFor="let item of wrapupagents">{{item}}</li>
+										</ul>
+									</div>
+									</div>
+								</div>
+
+								<div class="col">
+									<div class="wallboard-item-three wall-large-box red-bg-clr">
+										<div class="wall-3-title">Not Ready Agents</div>
+										<div class="wall-large-box-scroll">
+										<ul>
+											<li *ngFor="let item of notreadyagents">{{item}}</li>
+										</ul>
+									</div>
+									</div>
+								</div>
+
+							</div>
+
+
+
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-md" id="addQueue">
+	<div class="modal-dialog modal-md">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="myLargeModalLabel">Add Agents</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="table-responsive">
+							<table class="table table-bordered table-striped table-md">
+								<tr>
+									<th>
+										<div class="pretty p-icon p-smooth">
+											<input type="checkbox"  (click)="slectAllQue()" id="selectAllQ" >
+											<div class="state p-warning">
+												<i class="icon material-icons">done</i>
+												<label></label>
+											</div>
+										</div>
+									</th>
+									<th>Agent Name</th>
+									<th>Agent No</th>
+								</tr>
+								<tbody>
+									<tr *ngFor="let item of agentsData">
+										<td>
+											<div class="pretty p-icon p-smooth">
+												<input type="checkbox" name="agents_check" value="{'OBAName':'{{item.obagent_name}}','no':'{{item.obagent_number}}'}" class="agents_check" [checked]="item.select == 1">
+												<div class="state p-warning">
+													<i class="icon material-icons">done</i>
+													<label></label>
+												</div>
+											</div>
+										</td>
+										<td>{{item.obagent_name}}</td>
+										<td>{{item.obagent_number}}</td>
+									</tr>
+
+								</tbody>
+
+							</table>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="modal-footer">
+				<div class="buttons">
+					<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+					<input type="submit" class="btn btn-primary update_agent" value="Update" (click)="getAgents()">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-md" id="addLicence">
+	<div class="modal-dialog modal-md">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="myLargeModalLabel">Activate Wallboard</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  <div class="row">
+			<div class="col-md-12">
+			  <div class="about-app">
+				<img src="assets/images/omni-channels-logo.jpg">
+			  </div>
+			  <div class="version-details" *ngIf="has_admin">
+				<h5>Your Wallboard is INACTIVE. Please, enter your Mr.VoIP Licence Key and press Submit or contact Admin</h5>
+			  </div>
+			  <div class="version-details" *ngIf="has_user">
+				<h5>Your Wallboard is Inactive, Please contact your admin</h5>
+			  </div>
+			  <div class="col-md-12 col-12"  *ngIf="has_admin">
+				<div class="form-group">
+					<label for="widget-name">Mr.VoIP Licence Key</label>
+					<input type="text" class="form-control" name="licence_key" id="licence_key">
+				</div>
+			</div>
+			</div>
+		  </div>
+		</div>
+  
+	
+
+		<div class="modal-footer" *ngIf="has_admin">
+			<div class="buttons">
+				<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+				<input type="button" class="btn btn-primary update_agent" value="Submit"  (click)="activateLicenseKey()">
+			</div>
+		</div>
+  
+	  </div>
+	</div>
+  </div>

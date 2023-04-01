@@ -1,0 +1,14 @@
+label,.form-check,#report{
+    display: flex;
+    align-items: center;
+    margin-bottom: 0rem;
+}
+.border-box {
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    padding: 12px;
+    margin-left: 0px;
+}
+.report_one{
+    margin-right: 6px;
+}

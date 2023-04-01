@@ -1,0 +1,421 @@
+<div class="section-body">
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            <div class="card">
+
+                <div class="card-body call-queue-wizard">
+                    <div id="wizard_horizontal" class="wizard clearfix">
+                        <div class="steps">
+                            <ul class="nav nav-tabs">
+
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#agentsQueue">
+                                        <span class="wizard-icon"><i class="fas fa-users"></i></span> Settings</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a (click)="getAddeduser()" class="nav-link" data-toggle="tab" href="#mainTab">
+                                        <span class="wizard-icon"><i class="fas fa-users"></i></span> User Sync</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <!-- Tab panes -->
+                        <div class="tab-content content">
+                            <!---- Tab List -->                      
+
+                            <div id="agentsQueue" class="body tab-pane active">
+                                <div class="card-header">
+                                    <h4>Microsoft SSO Settings</h4>
+                                    <div id="google_translate_element"></div>
+                                    <input type="hidden" id="checkring" (click)="checkring()">
+                                    <input type="hidden" id="refresh_page" (click)="dept_settings()">
+
+
+                                    <button *ngIf="shownbutton" class="float-right btn btn-success" style="font-size: 16px;">ACTIVATED</button>
+                             
+
+                                </div>
+                                <div class="card-body p-30">
+                                    <div class="row">
+                                        <div class="col-md-12 col-12">
+                                            <h3>Create Azure APP</h3>
+                                            <ul>
+                                                <li> Login to your Microsoft 365 account and go to "Azure Active
+                                                    Directory" -> "Enterprise Application"</li>
+                                                <!-- <li> Click on 'Enterprise Application' -> Create New App.</li> -->
+                                                <li> Click on 'Create own Application'.</li>
+                                                <li> Then it will ask for your 'App Name'.</li>
+                                                <li> Then Check on the third option and submit to create App.</li>
+                                            </ul>
+
+
+
+                                            <h4>Configure Single Sign on</h4>
+                                            <ul>
+                                                <li> Previous steps will get you to your Azure App.</li>
+                                                <li> Then you need to Click on 'Set up Single Sign on'.</li>
+                                                <li> Next Click on 'SAML'.</li>
+                                                <li> Then Edit you Basic SAML configuration.</li>
+                                            </ul>
+                                            <h4>Basic SAML configuration</h4>
+                                            <ul>
+                                                <li> Click 'EDIT' on Basic SAML configuration Block.</li>
+                                                <li> Enter your Entity ID manually.</li>
+                                                <li> Next Enter your Reply URL(Assertion Consumer Service URL) as <b>'
+                                                        {{SsoReplyURl}} '</b></li>
+                                                <li> Then Click 'Save'</li>
+                                            </ul>
+
+                                            <h6> Copy your App Entity ID and paste below</h6>
+
+                                            <div class="form-group">
+                                                <label>Identifier (Entity ID)</label>
+                                                <input type="text" class="form-control" id="sso_entity_id"  [(ngModel)]="sso_entity_id">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Reply URL (Assertion Consumer Service URL)</label>
+                                                <input disabled type="text" class="form-control" value="{{SsoReplyURl}}"
+                                                    id="sso_reply_url" [(ngModel)]="sso_reply_url">
+                                            </div>
+
+                                            <h4>Azure AD Identifier</h4>
+                                            <ul>
+                                                <li> Assuming your in the Setup Sigle Sign on with SAML Pgae in your
+                                                    Azure APP.</li>
+                                                <li> Go to the 4th Step 'Set Up - APP'. </li>
+                                                <li> Please copy the 'Azure AD Identifier'.</li>
+                                                <li> Then Paste it in the below input field.</li>
+                                            </ul>
+                                            <div class="form-group">
+                                                <label>Azure AD Identifier</label>
+                                                <input type="text" class="form-control" id="azure_ad_id" [(ngModel)]="azure_ad_id">
+                                            </div>
+                                            <h4>Add Users to Azure APP</h4>
+                                            <ul>
+                                                <li> Go to your Azure App dashboard.</li>
+                                                <li> Click on the 'user Groups'. </li>
+                                                <li> Next click the 'Add users' button.</li>
+                                                <li> Select the users that you want and click update.</li>
+                                            </ul>
+                                            <h4>Federation Metadata XML</h4>
+                                            <ul>
+                                                <li> Assuming your in the Setup Sigle Sign on with SAML Pgae in your
+                                                    Azure APP.</li>
+                                                <li> Go to the 3th Step 'SAML Signing Certificate'. </li>
+                                                <li> your Can See the 'Federation Metadata XML' at last row.</li>
+                                                <li> Then Download and upload it here.</li>
+                                            </ul>
+                                            <div class="form-group">
+                                                <label>Federation Metadata XML</label>
+                                                <input type="file" class="form-control" id="federation_metadata_xml">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="submit" class="btn btn-success update_agent"
+                                                    value="Activate SSO" (click)="activateSSO()">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!---- Tab List End -->
+<div id="mainTab" class="body tab-pane">
+    <!-- <div id="wizard_horizontal" class="wizard clearfix"> -->
+        <div class="steps">
+            <ul class="nav nav-tabs">                                 
+            <li class="nav-item p-3">
+            <a (click)="getAddeduser()" class="nav-link active" data-toggle="tab" href="#queueAdvanced1">
+                <span class="wizard-icon"><i class="fas fa-users-cog"></i></span> Omni</a>
+            </li>
+            <li class="nav-item p-3">
+            <a (click)="getAddeduser()" class="nav-link" data-toggle="tab" href="#queueNotifications1">
+                <span class="wizard-icon"><i class="fas fa-users"></i></span> Teams</a>
+            </li>    
+            </ul>
+            </div>
+        <!-- Tab panes -->
+        <div class="tab-content content">
+            <!---- Tab List -->
+            <div id="queueAdvanced1" class="body tab-pane active">
+                <div class="card-header">
+                    <h4><span class="wizard-icon"><i class="fas fa-users"></i></span> OMNI Users</h4>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4></h4>
+                                <div class="addBtn">
+                                    <button type="button" data-toggle="modal" data-target="#addAgentSSO"
+                                        class="btn btn-primary">+ Add</button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-md">
+                                        <tr>
+                                            <th>Extension</th>
+                                            <th>First Name</th>
+                                            <th>Email ID</th>
+                                            <!-- <th>Action</th> -->
+                                        </tr>
+                                        <tbody>
+                                            <tr *ngFor="let agent of omni_users">
+                                                <td>{{agent.sip_login}}</td>
+                                                <td>{{agent.agent_name}}</td>
+                                                <td>{{agent.email_id}}</td>
+                                                <!-- <td>
+                                                    <span class="user-icon" style="cursor: pointer;"><i
+                                                            class="far fa-trash-alt"></i></span>
+                                                </td> -->
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+            <!---- Tab List End -->
+            <!---- Tab List -->
+            <div id="queueNotifications1" class="body tab-pane">
+                <div class="card-header">
+                    <h4><span class="wizard-icon"><i class="fas fa-users"></i></span> Teams User</h4>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4></h4>
+                                <div class="addBtn">
+                                    <button type="button" data-toggle="modal" data-target="#addAgentTeams"
+                                        class="btn btn-primary">+ Add</button>
+                                </div>
+                            </div>
+                            <div class="card-body p-0">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped table-md">
+                                        <tr>
+                                            <th>Extension</th>
+                                            <th>First Name</th>
+                                            <th>Email</th>
+                                        </tr>
+                                        <tbody>
+                                            <tr *ngFor="let agent of teams_users">
+                                                <td>{{agent.sip_login}}</td>
+                                                <td>{{agent.agent_name}}</td>
+                                                <td>{{agent.email_id}}</td>
+                                                <!-- <td>
+                                                    <span class="user-icon" style="cursor: pointer;"><i
+                                                            class="far fa-trash-alt"></i></span>
+                                                </td> -->
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                          
+            </div>
+            <!---- Tab List End -->
+
+        </div>
+    <!-- </div> -->
+     </div>
+                      
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+    Add user omni
+ -->
+ <div class="modal fade bd-example-modal-md" id="addAgentSSO">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="myLargeModalLabel">Select agents</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <div class="row">
+    <div class="col-md-12">
+    <table>
+    <tr>
+    <!-- <td class="search-text-tbl">
+    <div class="input-group">
+    <input class="form-control" type="text">
+    <div class="input-group-append">
+    <button class="btn btn-primary">
+    <i class="fas fa-search"></i>
+    </button>
+    </div>
+    </div>
+    </td> -->
+    </tr>
+    </table>
+    </div>
+    </div>
+    
+    <div class="row has-row-space">
+    <div class="col-md-12">
+    <div class="addAgent">
+    <div class="table-responsive">
+    <table class="table table-bordered table-striped table-md">
+    
+    <tr>
+    <th style="width: 20px;">
+    <div class="pretty p-default">
+        <input type="checkbox"  (click)="slectAllQue()" id="selectAllQ">    <div class="state p-primary">
+    <label></label>
+    </div>
+    </div>   
+    </th>
+    <th>Extension</th>
+    <th>Name</th>
+    <th>Email </th>
+    </tr>
+    
+    <tbody>
+    <tr *ngFor="let agent of agents_list">
+    <td style="width: 20px;">
+    <div class="pretty p-default">
+    <input type="checkbox" (click)="slectuniqueque()" [attr.checked]="omnichecked && omnichecked.indexOf(agent.user_id) == -1 ? checked : ''"  class="ads_Checkbox_omni" value="{{agent.user_id}}" name="listusers[]">
+    <div class="state p-primary">
+    <label></label>
+    </div>
+    </div>   
+    </td>
+    <td>{{agent.sip_login}}</td>
+    <td>{{agent.agent_name}}</td>
+    <td>{{agent.email_id}}</td>
+    </tr>
+    
+    
+    
+    </tbody>
+    
+    </table>
+    </div>
+    </div>
+    
+    </div> 
+    </div>
+    </div>
+    
+    <div class="modal-footer">
+    <div class="buttons">
+    <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+    <input type="submit" class="btn btn-primary update_agent" value="Update" (click)="AddOmniUser()">
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>
+    <!-- 
+    Add user omni END
+ -->
+ <!-- 
+    Add user Teams
+ -->
+ <div class="modal fade bd-example-modal-md" id="addAgentTeams">
+    <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+    <div class="modal-header">
+    <h5 class="modal-title" id="myLargeModalLabel">Select agents</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+    <div class="modal-body">
+    <div class="row">
+    <div class="col-md-12">
+    <table>
+    <tr>
+    <!-- <td class="search-text-tbl">
+    <div class="input-group">
+    <input class="form-control" type="text">
+    <div class="input-group-append">
+    <button class="btn btn-primary">
+    <i class="fas fa-search"></i>
+    </button>
+    </div>
+    </div>
+    </td> -->
+    </tr>
+    </table>
+    </div>
+    </div>
+    
+    <div class="row has-row-space">
+    <div class="col-md-12">
+    <div class="addAgent">
+    <div class="table-responsive">
+    <table class="table table-bordered table-striped table-md">
+    
+    <tr>
+    <th style="width: 20px;">
+    <div class="pretty p-default">
+        <input type="checkbox" (click)="slectAllagent()" id="slectAllagent">
+    <div class="state p-primary">
+    <label></label>
+    </div>
+    </div>   
+    </th>
+    <th>Extension</th>
+    <th>Name</th>
+    <th>Email </th>
+    </tr>
+    
+    <tbody>
+    <tr *ngFor="let agent of agents_list">
+    <td style="width: 20px;">
+    <div class="pretty p-default">
+    <input type="checkbox" [attr.checked]="teamschecked && teamschecked.indexOf(agent.user_id) == -1 ? checked : ''"  class="ads_Checkbox_teams" value="{{agent.user_id}}" name="listusers[]">
+    <div class="state p-primary">
+    <label></label>
+    </div>
+    </div>   
+    </td>
+    <td>{{agent.sip_login}}</td>
+    <td>{{agent.agent_name}}</td>
+    <td>{{agent.email_id}}</td>
+    </tr>
+    
+    
+    
+    </tbody>
+    
+    </table>
+    </div>
+    </div>
+    
+    </div> 
+    </div>
+    </div>
+    
+    <div class="modal-footer">
+    <div class="buttons">
+    <input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="Cancel">
+    <input type="submit" class="btn btn-primary update_agent" value="Update" (click)="AddTeamsUser(this.param)">
+    </div>
+    </div>
+    
+    </div>
+    </div>
+    </div>

@@ -1,0 +1,429 @@
+<div class="section-body">
+	<div class="row">
+		<div class="col-12 col-md-12 col-lg-12">
+			<div class="card">
+				<div class="card-header">
+					<h4>Fax</h4>
+					<div class="addBtn">
+				    <a href="https://omni.mconnectapps.com/api/v1.0/pro_contents/fax.pdf"  target="_blank"><i style="font-size: 24px;float: right;" class="fa fa-exclamation-circle"></i></a>
+				    </div>
+				</div>  
+
+				<!-- <a href="https://omni.mconnectapps.com/api/v1.0/pro_contents/fax.pdf"  target="_blank"><i style="font-size: 24px;
+                    float: right;" class="fa fa-exclamation-circle"></i></a> -->
+				<div class="card-body">
+					<div id="wizard_vertical" class="wizard vertical">
+						<div class="steps">
+							<ul class="nav nav-tabs">
+								<li class="nav-item">
+									<a class="nav-link active" data-toggle="tab" (click)="getsendFaxs()" href="#sendFax">
+										<span class="wizard-icon"><i class="fas fa-fax"></i></span> Send Fax</a>
+									</li>
+									   <li class="nav-item">
+										<a class="nav-link" data-toggle="tab" (click)="ReceiveFax()" href="#receiveFax">
+											<span class="wizard-icon"><i class="fas fa-fax"></i></span> Receive Fax</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" data-toggle="tab" (click)="getDocs()" href="#faxDocuments">
+												<span class="wizard-icon"><i class="fas fa-file-alt"></i></span> Fax Documents</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" data-toggle="tab" (click)="getDID()" href="#myDid">
+													<span class="wizard-icon"><i class="fas fa-phone"></i></span> My DIDs</a>
+												</li>
+												<!-- <li class="nav-item">
+													<a class="nav-link" data-toggle="tab" href="#cdrReports">
+														<span class="wizard-icon"><i class="far fa-chart-bar"></i></span> CDR Reports</a>
+													</li> -->
+												</ul>
+											</div>
+											<!-- Tab panes -->
+											<div class="tab-content content">
+												<div id="sendFax" class="body tab-pane active">
+													<div class="card-header">
+														<h4>Send Fax</h4>
+														<!-- <li routerLinkActive="active" ><a href="javascript:void(0)" class="nav-link"> -->
+														<!-- <div class="addBtn">
+															<button type="button" (click)="newOutFax()" class="btn btn-primary">+ New Outbound Fax</button>
+														</div> -->
+														<div class="addBtn">
+															<button type="button" class="btn btn-primary" (click)=outboundfax()>+ New Outbound Fax</button>
+														</div>
+													</div>
+													<div class="table-responsive">
+														<table class="customDataTable table table-bordered table-striped table-md">
+																<tr>
+																	<th>ID</th>
+																	<th>Phone number</th>
+																	<th>Title</th>
+
+																	<th>Date and Time</th>
+																	<th>Status</th>
+																</tr>
+															<tbody>
+																<tr *ngFor="let fax of s_fax " >
+																	<td>{{fax.id}}</td>
+																	<td>{{fax.phone}}</td>
+																	<td>{{fax.title}}</td>
+																	<td>{{fax.created_at}}</td>
+																<td>{{fax.status}}</td>
+																</tr>
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+												<div id="receiveFax" class="body tab-pane fade">
+													<div class="card-header">
+														<h4>Receive Fax</h4>
+													</div>
+													<div class="table-responsive">
+														<table class="customDataTable table table-bordered table-striped table-md">
+																<tr>
+																	<th>ID</th> 
+																	<th>Phone number</th>
+																	<th>Status</th>
+																	<th>Email</th>
+																	<!-- <th>Operations</th> -->
+																</tr>
+															<tbody>
+																<tr *ngFor="let item of receive_faxs;let i=index">
+																	<td>{{i+1}}</td>
+																	<td>{{item.didnumber}}</td>
+																	<td>{{item.status}}</td>
+																	<td>{{item.email}}</td>
+																	<!-- <td>
+																		<a href="{{item.document_url}}" target="_blank"> <span class="user-icon"><i class="fas fa-download"></i></span></a> 
+																		<a href="{{item.document_url}}" target="_blank"> <span class="user-icon"><i class="fas fa-download"></i></span></a>
+															
+																</td> -->
+																</tr>
+																
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+												<div id="faxDocuments" class="body tab-pane fade">
+													<div class="card-header">
+														<h4>Fax Documents</h4>
+														<div class="addBtn">
+															<button type="button" (click)="addDocument()" class="btn btn-primary">+  Add Document</button>
+														</div>
+													</div>
+													<div class="table-responsive">
+														<table class="customDataTable table table-bordered table-striped table-md">
+															
+																<tr>
+																	<th>ID</th>
+																	<th>Document Name:</th>
+																	<th>Operations</th>
+																</tr>
+															
+															<tbody>
+																<tr *ngFor="let doc of docs " >
+																	<td>{{doc.doc_id}}</td>
+																	<td>{{doc.name}}</td>
+																	<td>
+																		<span class="user-icon"><i class="far fa-edit"  (click)="editDocumentfile(doc.doc_id)" ></i></span>
+																		<!-- <span class="user-icon"><i class="fas fa-download"></i></span> -->
+																		<a href="{{doc.document}}" class="user-icon" target="_blank" download><i class="fas fa-download"></i></a>
+																		<span class="user-icon"><i class="far fa-trash-alt" (click)="deleteDoc(doc.doc_id)"></i></span>
+																	</td>
+																</tr>
+																
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+												<div id="myDid" class="body tab-pane fade">
+													<div class="card-header">
+														<h4>My DIDs</h4>
+													</div>
+													<div class="table-responsive">
+														<table class="customDataTable table table-bordered table-striped table-md">
+																<tr>
+																	<th>DID Numer</th>
+																	<th>Title</th>
+																	<th>Assigned Email</th>
+																	<th>Operations</th>
+																	
+																</tr>
+															<tbody>
+																<tr *ngFor="let item of user_dids">
+																	<td>{{item.didnumber}}</td>
+																	<td> {{item.title}}</td>
+																	<td>{{item.email}}</td>
+																	<td>
+																		<span class="user-icon" (click)="editDID(item.did_id)" ><i class="fas fa-share"></i></span>
+																	</td>
+																</tr>
+
+															</tbody>
+														</table>
+													</div>
+												</div>
+
+												<!-- <div id="cdrReports" class="body tab-pane fade">
+													<div class="card-header">
+														<h4>My DIDs</h4>
+														<div class="addBtn">
+															<button type="button" (click)="newOutFax()" class="btn btn-primary"><i class="fas fa-download"></i> Export to CSV file</button>
+														</div>
+													</div>
+													<div class="table-responsive">
+														<table class="customDataTable table table-bordered table-striped table-md">
+																<tr>
+																	<th>Time start</th>
+																	<th>Time connect</th>
+																	<th>Time end</th>
+																	<th>Contact Phone</th>
+																	<th>Account Phone</th>
+																	<th>Status</th>
+																	<th>Amount</th>
+																	<th>Pages</th>
+																</tr>
+															<tbody>
+																<tr>
+																	<td>09: 09:15</td>
+																	<td>09: 10:45</td>
+																	<td>09: 29:45</td>
+																	<td>390605674</td>
+																	<td>905909490</td>
+																	<td>Suceess</td>
+																	<td>$50</td>
+																	<td>2</td>
+																</tr>
+																<tr>
+																	<td>07: 25:15</td>
+																	<td>07: 29:45</td>
+																	<td>07: 58:45</td>
+																	<td>3543543534</td>
+																	<td>765765875687</td>
+																	<td>Suceess</td>
+																	<td>$82</td>
+																	<td>6</td>
+																</tr>
+
+															</tbody>
+														</table>
+													</div>
+												</div> -->
+
+											</div>
+
+					 </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!----
+    Add Document form
+------->
+
+<div class="modal fade bd-example-modal-md" id="add_docform">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Add Document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+ 
+            <div class="modal-body">
+                <form [formGroup]="addDoc" id="add_docform" class="question-panel fl" (ngSubmit)="addDocumentfile()">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="form-group">
+                                       <label for="name">Document Name</label>
+                                       <input type="text" id="name"  class="form-control">
+                                   </div>
+                                </div>
+					     	</div>
+						<div class="card">
+							<div class="card-header">
+								<div class="form-group">
+								   <label for="document_file">Upload Document (pdf, png, tiff, jpeg and Office files are supported only)</label>
+								   <input type="file" id="document_file"  class="form-control">
+							   </div>
+						   </div>
+					   </div>
+					   <div class="card">
+						<div class="card-header">
+							<div class="form-group">
+							   <label for="type">Fax Quality Type</label>
+							   <select id="type" class="form-control" formControlName="type">
+								   <option disabled>Please select an option below</option>
+								   <option>Standard</option>
+								   <option >Fine</option>
+								   <option>Super</option>
+							   </select>
+						   </div>
+						</div>
+					 </div>
+					 <div class="card">
+						<div class="card-header">
+							<div class="form-group">
+							   <label for="answer">Description </label>
+							   <input type="text" id="description" formControlName="description" class="form-control">
+						   </div>
+						</div>
+					 </div>
+                    </div>
+                </div>
+
+                        <div class="col-md-6">
+                            <div class="buttons">
+                            <input type="button" data-dismiss="modal" class="btn btn-secondary" value="Cancel">
+							<input type="submit" class="btn btn-success" value="Add">
+                            <input type="hidden" id="refresh_page" (click)="getDocs()">
+							
+                        </div>
+                    </div>
+
+            </form>
+        </div>
+
+  </div>
+  </div>
+</div>
+
+
+<!--------------
+	Update Doc Form
+-------------->
+<div class="modal fade bd-example-modal-md" id="edit_docform">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Update Document</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form [formGroup]="editDoc" id="edit_docform" class="question-panel fl" (ngSubmit)="updateDoc(edit_id)">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="form-group">
+                                       <label for="name">Document Name</label>
+                                       <input type="text" id="name" formControlName="name" class="form-control">
+                                   </div>
+                                </div>
+					     	</div>
+						<div class="card">
+							<div class="card-header">
+								<div class="form-group">
+								   <label for="file">Upload Document (pdf, png, tiff, jpeg and Office files are supported only)</label>
+								   <input type="file" id="file"  class="form-control">
+							   </div>
+						   </div>
+					   </div>
+					   <div class="card">
+						<div class="card-header">
+							<div class="form-group">
+							   <label for="type">Fax Quality Type</label>
+							   <select id="type" class="form-control" formControlName="type">
+								   <option disabled>Please select an option below</option>
+								   <option>Standard</option>
+								   <option >Fine</option>
+								   <option>Super</option>
+							   </select>
+						   </div>
+						</div>
+					 </div>
+					 <div class="card">
+						<div class="card-header">
+							<div class="form-group">
+							   <label for="description">Description </label>
+							   <input type="text" id="description" formControlName="description" class="form-control">
+						   </div>
+						</div>
+					 </div>
+                    </div>
+                </div>
+
+                        <div class="col-md-6">
+                            <div class="buttons">
+                            <input type="button" data-dismiss="modal" class="btn btn-secondary" value="Cancel">
+							<input type="submit" class="btn btn-success" value="Add"  [disabled]="!editDoc.valid">
+                            <input type="hidden" id="refresh_page" (click)="getDocs()">
+							
+                            </div>
+                       </div>
+
+            </form>
+        </div>
+
+  </div>
+  </div>
+</div>
+
+
+<!--------------------------------
+    DID ASSIGN form
+    ----------------------------------->
+    <div class="modal fade bd-example-modal-md" id="did-assign">
+    	<div class="modal-dialog modal-md">
+    		<div class="modal-content">
+    			<div class="modal-header">
+    				<h5 class="modal-title" id="myLargeModalLabel">DID Information</h5>
+    				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    					<span aria-hidden="true">&times;</span>
+    				</button>
+    			</div>
+    			<div class="modal-body">
+    				<form [formGroup]="assignDidForm" class="fl">
+    					<div class="card">
+    						<div class="card-body">
+    							<div class="row">
+    								<div class="col-md-10 col-12">
+    									<div class="form-group">
+    										<label for="did_number">DID Number:</label>
+    										<input type="text" id="did_number" formControlName="did_number" class="form-control">
+    									</div>
+									</div>
+								</div>
+									<div class="row">
+											<div class="col-md-10 col-12">
+												<div class="form-group">
+													<label>Service</label>
+													<input type="text" value="Fax to Email" class="form-control" readonly>
+												</div>
+											</div>
+									</div>
+									<div class="row">
+											<div class="col-md-10 col-12">
+												<div class="form-group">
+													<label for="did_email">Email</label>
+													<input type="text" id="did_email" formControlName="did_email" class="form-control">
+												</div>
+											</div>
+									</div>
+    							
+    						</div>
+    					</div>
+    					<div class="col-md-6">
+    						<div class="buttons">
+    							<input type="button" data-dismiss="modal" class="btn btn-secondary" value="Cancel">
+    							<input type="submit" class="btn btn-success" value="update" (click)="assignOpDID(this.oper_did_id,this.title)">
+								
+    						</div>
+    					</div>
+    				</form>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+

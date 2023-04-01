@@ -1,0 +1,38 @@
+.topnav input[type=text] {
+  float: right;
+  padding: 6px;
+  margin-top: 8px;
+  margin-right: 16px;
+  border: none;
+  font-size: 17px;
+}
+/* body {
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+} */
+
+#chartdiv {
+width: 100%;
+height: 500px;
+}
+.card_rm {
+background-color: #fff;
+border-radius: 10px;
+border: none;
+position: fixed;
+margin-bottom: 30px;
+}
+/* .hidden { display: none } */
+/* .chartWrapper {
+  position: relative;
+}
+
+.chartWrapper > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.chartAreaWrapper {
+  width: 15000px;
+  overflow-x: scroll;
+} */

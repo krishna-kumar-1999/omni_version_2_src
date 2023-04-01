@@ -1,0 +1,801 @@
+<div class="section-body edit-form call-contact-modal">
+	<input type="hidden" id="user_number">
+	<input type="hidden" id="wrapup_callID">
+	<input type="hidden" id="queue_ids2">
+
+	<div style="margin-left: 27px;" class="card">
+		<div class="card-header">
+			<h4><i class="fa fa-address-book" aria-hidden="true"></i> {{contact_name}}</h4>
+			<!-- <p>Contact</p> -->
+
+		</div>
+	</div>
+
+
+	<form [formGroup]="addContact" (ngSubmit)="addContactown()">
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Add Contacts</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="form-panel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contact_owner">Contact Owner <span style="color: red;">*</span></label>
+                                        <input type="text" id="contact_owner" class="form-control" formControlName="contact_owner" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="pbx_count">Lead Source</label>
+
+                                        <input formControlName="lead_source" type="text" name="first_name" class="form-control" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="contact_owner">Full Name</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <select name="sal" id="sal" class="form-control" >
+                                                    <option selected="selected" value="Mr.">Mr.</option>
+                                                    <option value="Mrs.">Mrs.</option>
+                                                    <option value="Miss">Miss</option>
+                                                </select>
+                                            </span>
+                                            <input formControlName="first_name" type="text" name="first_name" class="form-control" placeholder="Full Name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="last_name">Last Name</label>
+                                        <input type="text" id="last_name" class="form-control" formControlName="last_name" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="account_name">Account Name</label>
+                                        <input type="text" id="account_name" class="form-control" formControlName="account_name" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="title">Title</label>
+                                        <input type="text" id="title" class="form-control" formControlName="title" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">Email <span style="color: red;">*</span></label>
+                                        <input type="email" id="email" class="form-control" formControlName="email" >
+                                        <label class="error-message message-small" *ngIf="!addContact.get('email').valid && addContact.get('email').touched ">Please enter the valid email id</label>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department">Department</label>
+                                        <select name="departments"  id="departments" class="form-control">
+                                            <option value='0'> Select Department </option>
+                                            <option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+                                            </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department">Responsible Department</label>
+                                        <select name="res_departments"  id="res_departments" class="form-control">
+                                            <option value='0'> Select Department </option>
+                                            <option *ngFor="let dept of departments" value="{{dept.dept_id}}">{{dept.department_name}}</option>
+                                            </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="activity">Activity</label>
+                                        <input type="text" id="activity" class="form-control" formControlName="activity" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+
+                                    <div class="input-group">
+                                        <label for="phone"><b>Phone (Primary Number)</b> <span style="color: red;">*</span></label>
+                                        <span class="input-group-addon">
+                                          <input type="country" id="country_code" class="form-control" placeholder="country code" formControlName="country_code" >
+                                        </span>
+                                        <input type="text" id="phone" class="form-control" formControlName="phone" >
+                                    </div>
+                                    <p>While adding an extension, the country code may be '0'</p>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="home_phone">Home Phone</label>
+                                        <input type="text" id="home_phone" class="form-control" formControlName="home_phone" >
+                                    </div>
+                                </div>
+
+                                <!-- <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="office_phone">Office Phone</label>
+                                        <input type="text" id="office_phone" class="form-control" formControlName="office_phone" >
+                                    </div>
+                                </div> -->
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="fax">Fax</label>
+                                        <input type="text" id="fax" class="form-control" formControlName="fax" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mobile">Mobile</label>
+                                        <input type="text" id="mobile" class="form-control" formControlName="mobile" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dob">Date of Birth</label>
+                                        <input type="text" id="dob" class="form-control" formControlName="dob" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="assistant">Assistant</label>
+                                        <input type="text" id="assistant" class="form-control" formControlName="assistant" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="assitant_phone">Asst Phone</label>
+                                        <input type="text" id="assitant_phone" class="form-control" formControlName="assitant_phone" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="reports_to">Reports To</label>
+                                        <input type="text" id="reports_to" class="form-control" formControlName="reports_to" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email_opt_out">Email Opt Out</label>
+                                        <input type="checkbox" class="form-control" formControlName="email_opt_out">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="skype">Skype</label>
+                                        <input type="text" id="skype" class="form-control" formControlName="skype" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="secondary_email">Secondary Email</label>
+                                        <input type="text" id="secondary_email" class="form-control" formControlName="secondary_email" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="twitter">Twitter</label>
+                                        <input type="text" id="twitter" class="form-control" formControlName="twitter" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="reporting_to">Reporting To</label>
+                                        <input type="text" id="reporting_to" class="form-control" formControlName="reporting_to" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+            
+
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Address Information</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="form-panel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mailing_street">Mailing Street</label>
+                                        <input type="text" id="mailing_street" class="form-control" formControlName="mailing_street" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="other_street">Other Street</label>
+                                        <input type="text" id="other_street" class="form-control" formControlName="other_street" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mailing_city">Mailing City</label>
+                                        <input type="text" id="mailing_city" class="form-control" formControlName="mailing_city" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="other_city">Other City</label>
+                                        <input type="text" id="other_city" class="form-control" formControlName="other_city" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mailing_province">Mailing Province</label>
+                                        <input type="text" id="mailing_province" class="form-control" formControlName="mailing_province" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="other_province">Other Province</label>
+                                        <input type="text" id="other_province" class="form-control" formControlName="other_province" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mailing_postal_code">Mailing Postal Code</label>
+                                        <input type="text" id="mailing_postal_code" class="form-control" formControlName="mailing_postal_code" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="other_postal_code">Other Postal Code</label>
+                                        <input type="text" id="other_postal_code" class="form-control" formControlName="other_postal_code" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="mailing_country">Mailing Country</label>
+                                        <input type="text" id="mailing_country" class="form-control" formControlName="mailing_country">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="other_country">Other Country</label>
+                                        <input type="text" id="other_country" class="form-control" formControlName="other_country">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Social Media Information</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="form-panel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="whatsapp_number">WhatsApp Number</label>
+                                        <input type="text"  id="whatsapp_number" class="form-control" formControlName="whatsapp_number" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="line">LINE</label>
+                                        <input type="text"  id="line" class="form-control" formControlName="line" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="facebook_url">Facebook_url</label>
+                                        <input type="text"  id="facebook_url" class="form-control" formControlName="facebook_url" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="wechat">WeChat</label>
+                                        <input type="text"  id="wechat" class="form-control" formControlName="wechat" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="viber">Viber</label>
+                                        <input type="text"  id="viber" class="form-control" formControlName="viber" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="telegram">Telegram</label>
+                                        <input type="text"  id="telegram" class="form-control" formControlName="telegram" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="instagram_url">Instagram Url</label>
+                                        <input type="text"  id="instagram_url" class="form-control" formControlName="instagram_url" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="linkedin">LinkedIn</label>
+                                        <input type="text"  id="linkedin" class="form-control" formControlName="linkedin" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Note Information</h4>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="form-panel">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="notes">Notes<i class="far fa-edit"></i></label>
+                                        <textarea id="notes" class="form-control" formControlName="notes"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="department">AUX code</label>
+                                        <select name="auxcodes"  id="auxcodes" class="form-control">
+                                            <option value='0'> Select AUX Code </option>
+                                            <option *ngFor="let auxcode of auxcodes" value="{{auxcode.auxcode_name}}">{{auxcode.auxcode_name}}</option>
+                                          </select>
+                                    </div>
+    
+    
+                                </div>
+                            </div>
+                            <br />
+                            <div class="buttons">
+                                <input type="button" class="btn btn-primary" type="submit" value="Add New Contact" [disabled]="!addContact.valid"  >
+                            </div>
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+    
+    </form>
+    
+</div>
+
+
+
+<div class="card" *ngIf="dailyfood">
+	<div class="card-header" *ngIf="this.has_external_contact == '0'">
+		<h4>Has DSK Access</h4>
+	</div>
+	<div class="card-header" *ngIf="this.has_external_contact == '1'">
+		<h4>Contact</h4>
+	</div>
+	<div class="card-body p-0" *ngIf="this.has_external_contact == '0'">
+		<iframe [src]="this.dailyfoodurl " id="dailyfIframe" class="dailyfIfram" width="100%" height="100%"
+			frameborder="0" allowfullscreen></iframe>
+	</div>
+	<div class="card-body p-0" *ngIf="this.has_external_contact == '1'">
+		<div id="dailyfIframes">
+
+		</div>
+	</div>
+</div>
+
+<div class="settingSidebar">
+	<a href="javascript:void(0)" class="settingPanelToggle" (click)="toggleClass()">
+		<span title="Add Wrapup Code" class="plus-icon"><i class="fas fa-plus" style="margin: 0px;"></i></span>
+		<span class="minus-icon"><i class="fas fa-minus" style="margin: 0px;"></i></span>
+	</a>
+
+	<div class="settingSidebar-body ps-container ps-theme-default">
+		<form>
+			<div class=" fade show active">
+				<button *ngIf="this.no_contact==true" class="btn btn-primary" (click)="AddContact()"
+					style="float: right;margin: 9px 20px 0px 0px;"> Add Contact</button>
+
+				<div class="setting-panel-header">Wrapup Code
+
+
+				</div>
+				<div class="p-15">
+
+					<div class="row">
+						<!-- <div class="col-md-12" *ngFor="let item of questions">
+       					<div class="form-group">
+       						<label for="department">Question</label>
+       						<p>{{item.question}}</p>
+       					</div>	
+       				</div> -->
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="department">Wrap Up Category</label>
+								<select (change)="getAuxCode()" name="auxcodes" id="auxcodes_pop" class="form-control">
+									<option value='0'> Select Category </option>
+									<option *ngFor="let auxcode of auxcode_Category" value="{{auxcode.id}}">
+										{{auxcode.category_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="department">Wrap Up Code</label>
+								<select name="auxcodes" id="auxcodes_subcat" class="form-control">
+									<option value='0'> Select Wrapup Code </option>
+									<option *ngFor="let auxcode of auxcodes" value="{{auxcode.auxcode_name}}">
+										{{auxcode.auxcode_name}}</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="form-group">
+								<label for="notes">Notes <i class="far fa-edit"></i></label>
+								<textarea id="notes" class="form-control"></textarea>
+							</div>
+						</div>
+						<div class="col-md-12">
+							<div class="buttons form-group">
+								<input type="button" class="btn btn-secondary" (click)="toggleClass()" value="Close"
+									type="button">
+								<input type="button" class="btn btn-primary" value="Update Wrapup"
+									(click)="addWrapupcode()">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="dialer-call-action">
+			<div class="row">
+				<!-- <div class="col-md-12" *ngIf="show_ans">
+					<div class="pulse call-attend-btn" (click)="acceptIncomeCall()">
+						<a href="javascript:;" class="btn btn-success">
+							<img src="assets/images/custom-wallboard/call-answered.svg" height="18"
+								class="mr-2 shake-animation"> Answer Call from {{get_dailer_value}}</a>
+					</div>
+				</div>
+				<div class="col-md-6" (click)="closeModelPopup()" *ngIf="show_mini_butons">
+					<a href="javascript:;" class="btn btn-warning fl"><i class="far fa-window-maximize"></i>
+						Minimize</a>
+				</div>
+				<div class="col-md-6" (click)="declineIncomeCall()" *ngIf="show_del">
+					<a href="javascript:;" class="btn btn-danger fl"><i class="fas fa-phone-slash"></i> Decline</a> -->
+				<div class="col-md-12 d-flex justify-content-center" *ngIf="show_ans">
+					<h6>Incoming Call from {{get_dailer_value}}</h6>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="col-md-4 d-flex justify-content-center" *ngIf="show_ans">
+					<div class="call-attend-btn" (click)="acceptIncomeCall()">
+						<a href="javascript:;" class="pulse btn btn-success">
+							<i class="fas fa-phone shake-animation"></i>
+							<span class="btn-action-text">Answer</span></a>
+						<!-- <span class="btn-action-text">Answer Call from {{get_dailer_value}}</span></a> -->
+					</div>
+				</div>
+				<div class="col-md-4 d-flex justify-content-center" (click)="declineIncomeCall()" *ngIf="show_del">
+					<a href="javascript:;" class="btn btn-danger fl"><i class="fas fa-phone-slash"></i>
+						<span class="btn-action-text">Decline</span> </a>
+				</div>
+				<div class="col-md-4 d-flex justify-content-center" (click)="closeModelPopup()"
+					*ngIf="show_mini_butons">
+					<a href="javascript:;" class="btn btn-warning fl"><i class="far fa-window-maximize"></i>
+						<span class="btn-action-text">Minimize </span></a>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</div>
+
+
+
+<div class="modal fade bd-example-modal-lg" id="add_refinement">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<form>
+				<div class="modal-header">
+					<h5 class="modal-title" id="myLargeModalLabel">Refinement Search</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+
+					<div class="row">
+
+
+						<!-- <img src="assets/images/test.gif" alt=""> -->
+
+						<div class="col-md-11">
+
+							<div class="form-group">
+								<label>Account Name <span style="color:brown;font-size:12px;">(click
+										enter after typing account name)</span></label>
+								<!-- <select name="add_cat_id" id="add_cat_id" class="form-control">
+									<option value='0'> Select Category </option>
+									<option *ngFor="let cat of cat_query_list" value="{{cat.id}}">
+										{{cat.category_name}}</option>
+									</select> -->
+
+								<!-- <input list="cities" type="text" id="account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (keyup.enter)="searchnumAccount()"
+									(input)="autosuggestAccName()" />
+									<datalist id="cities">
+										<option *ngFor="let test of listsuggestion" value="{{test.accountid}}" >
+									</datalist>
+										<span *ngIf="show_failed" style="color: red;">No contact Found</span> -->
+
+								<!-- <input list="datasid" name="city" value="" id="account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (keyup.enter)="searchnumAccount()"
+									(input)="autosuggestAccName()"> -->
+								<!-- <input list="datasid" name="city" value="" id="account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (keyup.enter)="autosuggestAccName()"
+									> -->
+								<input  name="city" value="" id="account_name" class="form-control"
+									placeholder="Enter atleast 5 Character" (input)="autosuggestAccName()" (keyup.enter)="searchnumAccount()"
+									>
+
+								<!-- <datalist id="datasid">
+									<i class="fas fa-angle-left"></i>
+									<option value="{{ls.name}}" *ngFor="let ls of listsuggestion">{{ls.name}}</option>
+              
+								</datalist> -->
+								<div class="card padding-15" *ngIf="showdatalist"> 
+									<ul class="pagination mb-0" *ngFor="let ls of listsuggestion">
+										<li class="page-item" style="cursor: pointer;" (click)="sentDataInInput(ls.name)">{{ls.name}}</li>
+									</ul>
+									<ul class="pagination mb-3 mt-2">
+										<li><a class="page-link" href="javascript:void(0)" (click)="prevPage()"><i class="fas fa-angle-left"></i></a></li>
+										<li><a  class="page-link" href="javascript:void(0)" (click)="nextPage()"><i class="fas fa-angle-right"></i></a></li>
+									</ul>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="col-md-1" style="padding-top:4%" *ngIf="showloading">
+							<img src="assets/images/test.gif" style="width: 40px;">
+						</div>
+
+					</div>
+
+					<div class="col-md-12" *ngIf="show_contact_value">
+						<div class="form-group">
+							<label for="add_acc_num">Contact Name</label>
+							<select name="add_acc_num" id="add_acc_num" class="form-control">
+								<option value='0'> Select contact </option>
+								<option *ngFor="let conc of conc_query_list" value="{{conc.contactid}}">
+									{{conc.fullname}}</option>
+							</select>
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal-footer" *ngIf="show_contact_value">
+					<div class="buttons">
+						<input type="button" (click)="cancelbutton()" class="btn btn-outline-secondary" value="Cancel">
+						<input type="button" class="btn btn-primary update_agent" value="Update"
+							(click)="searchGetContact()">
+						<!-- <input type="submit" class="btn btn-primary update_agent" value="Update"> -->
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+<div class="modal fade bd-example-modal-xl" id="showpop_timeline">
+	<div class="modal-dialog modal-xl">
+		<div class="modal-content">
+			<div class="modal-body">
+
+				<div id="accordion" class="accordion">
+					<div class="card mb-0">
+						<div class="card-header show" data-toggle="collapse" href="#collapseOne">
+							<h4><i class="fa fa-address-book" aria-hidden="true"></i> Call Details</h4>
+						</div>
+						<div id="collapseOne" class="card-body collapse show" data-parent="#accordion">
+							<div class="modal-body">
+
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Subject</strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Tsubject}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-9">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Phone</strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Tphone}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-3">
+											<div style="padding: 5px 25px;" class="ticket-message-details fl"><strong
+													style="min-width: 72px; float: left;">Direction</strong>
+												<span style="text-align: center;">
+													<span *ngIf="this.Tsubject=='Inbound Call'" class="callType"
+														style="color: #3d77a7;"><b>:&nbsp;&nbsp;<img
+																src="assets/images/incoming-call.svg">
+															Incoming</b></span>
+													<span *ngIf="this.Tsubject=='Outbound Call'" class="callType"
+														style="color: #3d77a7; "><b>:&nbsp;&nbsp; <img
+																src="assets/images/outgoing-call.svg">
+															Outgoing</b></span>
+													<span
+														*ngIf="this.Tsubject!='Outbound Call' && this.Tsubject!='Inbound Call'"
+														class="callType" style="color: #3d77a7;"><b>:&nbsp;&nbsp;<i
+																style="font-size: 17px;" class="fa fa-phone"></i>
+															{{this.Tsubject}}</b></span>
+												</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Description</strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Tdescription}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div *ngIf="this.user_type == 2" class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Recording :</strong>
+													<span style="text-align: center;">
+														<a style="cursor: pointer;color: aqua;" target="_blank"
+															href="{{this.Trecord}}" class="blk-clr"><b> &nbsp;&nbsp;
+																{{this.Trecord}}</b></a>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Wrapup </strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Twrapcode}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="message-thread-header">
+									<div class="row">
+										<div class="col-md-12">
+											<div class="thread-details-section fl">
+												<div style="padding: 5px 25px;" class="ticket-message-details fl">
+													<strong style="min-width: 72px; float: left;">Note <i
+															class="fas fa-list-alt"></i></strong>
+													<span style="text-align: center;">
+														<span class="blk-clr"><b>: &nbsp;&nbsp;
+																{{this.Twrapnote}}</b></span>
+													</span>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="buttons">
+					<input type="button" data-dismiss="modal" class="btn btn-outline-secondary" value="close">
+					<!-- <input type="button" class="btn btn-success update_agent" value="Submit" (click)="AddNote()"> -->
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

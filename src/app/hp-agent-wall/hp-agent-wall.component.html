@@ -1,0 +1,504 @@
+<div class="section-body">
+  <div class="row">
+    <input
+      type="hidden"
+      value=""
+      id="mrVoipType_user"
+      (click)="changeWallType()"
+    />
+    <input
+      type="hidden"
+      value=""
+      id="sendonload_user"
+      (click)="sendonloadUser()"
+    />
+    <input type="hidden" value="" id="Qcalldatas" (click)="Qcalldatasfunc()">
+    <input type="hidden" value="" id="recordNotFound" (click)="checkMe()"> 
+    <input type="hidden" value="" id="agent_list" (click)="changeAgents()">
+
+    <!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+            <div class="card mb-30 queue_features">
+                <div class="body">
+                    <div id="mail-nav">
+                        <span id="mc_event_list" (click)="mcEventList()"></span>
+                        <h5 class="b-b p-10 text-strong">Queue (4)</h5>
+                        <ul class="support-lables" id="mail-labels">
+                            <li><a href='javascript:void(0)'>All Queue</a></li>
+                            <li *ngFor="let mc_queue of mc_queue_list;let i=index"><a href='javascript:void(0)'>{{mc_queue.queue_name}}
+                                <span class="queue_list"><span class="queue_list_data badge badge-info" *ngIf="mc_queue.chat_feature==1">Chat</span> <span class="queue_list_data badge badge-secondary" *ngIf="mc_queue.email_feature==1">Mail</span>   <span class="queue_list_data badge badge-primary" *ngIf="mc_queue.call_feature==1">Call</span> </span>
+                            </a></li>
+                            <li><a href='javascript:void(0)' onclick='chatPanelView(1, "chat_queue_list")'>Sales <span class="queue_list"><span class="queue_list_data badge badge-info">Chat</span>  <span class="queue_list_data badge badge-primary">Call</span> <span class="queue_list_data badge badge-secondary">Mail</span>  </span></a></li>
+                            <li><a href='javascript:void(0)' onclick='chatPanelView(2, "chat_queue_list")'>Support <span class="queue_list"><span class="queue_list_data badge badge-info">Chat</span>  <span class="queue_list_data badge badge-primary">Call</span> <span class="queue_list_data badge badge-secondary">Mail</span>  </span></a></li>
+                            <li><a href='javascript:void(0)' onclick='chatPanelView(4, "chat_queue_list")'>General Enquiry  <span class="queue_list"><span class="queue_list_data badge badge-info">Chat</span>  <span class="queue_list_data badge badge-primary">Call</span> <span class="queue_list_data badge badge-secondary">Mail</span>  </span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-12">
+      <div class="card-body wallboard-full-view p-30">
+        <div class="wallboard-wrapper">
+          <div class="walloard-box violet-bg-clr">
+            <div class="wallboard-icon">
+              <img src="assets/images/wallboard/call-queue.svg" />
+            </div>
+            <div class="count-circle">
+              {{ this.total_call_wait_user }}
+            </div>
+            <div class="wallboard-item-name">
+              <h5>Call waiting</h5>
+            </div>
+          </div>
+
+          <div class="walloard-box blue-bg-clr">
+            <div class="wallboard-icon">
+              <img src="assets/images/wallboard/call.svg" />
+            </div>
+            <div class="count-circle">
+              {{ this.answerd_call_user }}
+            </div>
+            <div class="wallboard-item-name">
+              <h5>Answered calls</h5>
+            </div>
+          </div>
+
+          <div class="walloard-box red-bg-clr">
+            <div class="wallboard-icon">
+              <img src="assets/images/wallboard/abandoned-call.svg" />
+            </div>
+            <div class="count-circle">
+              {{ this.abandoned_user }}
+            </div>
+            <div class="wallboard-item-name">
+              <h5>Abandoned calls</h5>
+            </div>
+          </div>
+
+          <div class="walloard-box dark-green-bg-clr">
+            <div class="wallboard-icon">
+              <img src="assets/images/wallboard/total-calls.svg" />
+            </div>
+            <div class="count-circle">
+              {{ this.total_calls_user }}
+            </div>
+            <div class="wallboard-item-name">
+              <h5>Total calls</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="custom-wallboard-wrapper">
+            <div style="justify-content: space-between;" class="row no-gutters">
+                <div class="custom-wallboard-box green-bg-clr width-23"  > 
+                    <div class="wallboard-count-item">{{this.total_call_wait_user}} </div>
+                    <div class="custom-wallboard-item-name">Total call waiting</div>
+                    <div class="custom-wallboard-icon"><img src="assets/images/custom-wallboard/call-waiting.svg"></div>
+                </div>
+            
+                <div class="custom-wallboard-box yellow-bg-clr width-23"  > 
+                    <div class="wallboard-count-item">{{this.answerd_call_user}}</div>
+                    <div class="custom-wallboard-item-name">Answered Call</div>
+                    <div class="custom-wallboard-icon"><img src="assets/images/custom-wallboard/agent-busy.svg"></div>
+                </div>
+            
+                <div class="custom-wallboard-box ping-bg-clr width-23"  > 
+                    <div class="wallboard-count-item">{{this.abandoned_user}}</div>
+                    <div class="custom-wallboard-item-name">Abandoned Call</div>
+                    <div class="custom-wallboard-icon"><img src="assets/images/custom-wallboard/missed-call.svg"></div>
+                </div>
+            
+                <div class="custom-wallboard-box light-green-bg-clr width-23"  > 
+                    <div class="wallboard-count-item">{{this.total_calls_user}}</div>
+                    <div class="custom-wallboard-item-name">Total Calls</div>
+                    <div class="custom-wallboard-icon"><img src="assets/images/custom-wallboard/talk-time.svg"></div>
+                </div>                 
+               
+               
+            </div>				
+        </div> -->
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-12" *ngIf="show_supervisor">
+      <div class="col-lg-13">
+        <div class="card">
+          <div class="card-header">
+            <h4>QUEUE CALLS</h4>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table table-bordered table-striped table-md">
+                <tr>
+                  <th>QUEUE NAME</th>
+                  <th>QUEUE NO</th>
+                  <th>AGENT NO</th>
+                  <th>CALL TYPE</th>
+                  <th>ACTION</th>
+                </tr>
+                <tbody>
+                  <tr *ngFor="let item of Qcalldatas">
+                    <td>{{ item.q_name }}</td>
+                    <td>{{ item.q_no }}</td>
+                    <td>{{ item.ag_no }}</td>
+                    <td>{{ item.calltype }}</td>
+                    <td>
+                      <span
+                        *ngIf="item.calltype == 'Answered Call'"
+                        class="user-icon has-tooltip"
+                        style="cursor: pointer"
+                        ><i
+                          class="fa fa-share"
+                          (click)="
+                            tranferbutton(item.qcallid, this.has_hard_id)
+                          "
+                          ><span class="tooltip-modal">Transfer</span></i
+                        ></span
+                      >
+                      <span
+                        *ngIf="item.calltype == 'Answered Call'"
+                        class="user-icon has-tooltip"
+                        style="cursor: pointer"
+                        ><i
+                          class="fas fa-users"
+                          (click)="
+                            callbargein(
+                              item.ag_no,
+                              this.has_hard_id,
+                              this.extension
+                            )
+                          "
+                          ><span class="tooltip-modal">Barge in</span></i
+                        ></span
+                      >
+                      <span
+                        *ngIf="item.calltype == 'Answered Call'"
+                        class="user-icon has-tooltip"
+                        style="cursor: pointer"
+                        ><i
+                          class="fas fa-user-lock"
+                          (click)="
+                            callwhisper(
+                              item.ag_no,
+                              this.has_hard_id,
+                              this.extension
+                            )
+                          "
+                          ><span class="tooltip-modal">Whisper</span></i
+                        ></span
+                      >
+                      <span
+                        *ngIf="item.calltype == 'Answered Call'"
+                        class="user-icon has-tooltip"
+                        style="cursor: pointer"
+                        ><i
+                          class="fas fa-headphones"
+                          (click)="
+                            calllisten(
+                              item.ag_no,
+                              this.has_hard_id,
+                              this.extension
+                            )
+                          "
+                          ><span class="tooltip-modal">Listen</span></i
+                        ></span
+                      >
+                    </td>
+                  </tr>
+                  <tr *ngIf="this.recordNotFound == ''">
+                    <td colspan="16">No Calls in Queue</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-12">
+      <div class="card mc-list-card">
+        <div class="card-header">
+          <h4 class="d-inline">Call History</h4>
+          <div class="card-header-action">
+            <ul>
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_chat"
+                  (click)="viewMC('chat_view')"
+                  *ngIf="this.has_chat == '1'"
+                  ><img src="assets/img/mc-dashboard/chat.png" /><span
+                    class="tooltip-modal"
+                    >Chat</span
+                  ></a
+                >
+              </li>
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_mail"
+                  (click)="viewMC('sms_view')"
+                  *ngIf="this.has_sms == '1'"
+                  ><img src="assets/img/mc-dashboard/sms.svg" /><span
+                    class="tooltip-modal"
+                    >SMS</span
+                  ></a
+                >
+              </li>
+
+              <li class="has-tooltip">
+                <a href="#" id="mc_chat" target="_blank"
+                  ><img src="assets/img/mc-dashboard/call.png" /><span
+                    class="tooltip-modal"
+                    >Call</span
+                  ></a
+                >
+              </li>
+
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_mail"
+                  (click)="viewMC('mail_view')"
+                  *ngIf="this.has_e_ticket == '1' || this.has_i_ticket == '1'"
+                  ><img src="assets/img/mc-dashboard/tickets.png" /><span
+                    class="tooltip-modal"
+                    >Tickets</span
+                  ></a
+                >
+              </li>
+
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_chat"
+                  (click)="viewMC('wp_view')"
+                  *ngIf="this.has_whatsapp == '1'"
+                  ><img src="assets/img/mc-dashboard/whatsapp.webp" /><span
+                    class="tooltip-modal"
+                    >WhatsApp</span
+                  ></a
+                >
+              </li>
+
+              <!-- <li class="has-tooltip">
+                    <a href="javascript:void(0)" id="mc_chat" (click)="viewMC('wp_view')" *ngIf="this.has_whatsapp == '1'"><img src="assets/img/mc-dashboard/whatsapp.webp"><span class="tooltip-modal">WhatsApp</span></a>
+                </li> -->
+
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_chat"
+                  (click)="viewMC('fb_view')"
+                  *ngIf="this.has_fb == '1'"
+                  ><img src="assets/img/mc-dashboard/facebook.svg" /><span
+                    class="tooltip-modal"
+                    >Facebook</span
+                  ></a
+                >
+              </li>
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_chat"
+                  (click)="viewMC('tele_view')"
+                  *ngIf="this.has_tele == '1'"
+                  ><img src="assets/img/mc-dashboard/telegram.svg" /><span
+                    class="tooltip-modal"
+                    >Telegram</span
+                  ></a
+                >
+              </li>
+              <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_chat"
+                  (click)="viewMC('line_view')"
+                  *ngIf="this.has_line == '1'"
+                  ><img src="assets/img/mc-dashboard/line.png" /><span
+                    class="tooltip-modal"
+                    >LINE</span
+                  ></a
+                >
+              </li>
+              <!-- <li class="has-tooltip">
+                <a
+                  href="javascript:void(0)"
+                  id="mc_chat"
+                  (click)="viewMC('internal_chat')"
+                  *ngIf="this.h_int_chat == '1'"
+                  ><img src="assets/img/mc-dashboard/internal-chat.png" /><span
+                    class="tooltip-modal"
+                    >Internal Chat</span
+                  ></a
+                >
+              </li> -->
+              <li class="has-tooltip">
+                <a
+                  href="{{ this.chatBot_URL }}"
+                  id="mc_chat"
+                  target="_blank"
+                  *ngIf="this.has_chatbot == '1'"
+                  ><img src="assets/img/mc-dashboard/chatbot.png" /><span
+                    class="tooltip-modal"
+                    >Chatbot</span
+                  ></a
+                >
+              </li>
+              <!-- <a (click)="showdoc('https://uatassaabloyccapi.mconnectapps.com/api/v1.0/pro_contents/mc-Dashboard.pdf')"  target="_blank"><i style="font-size: 24px;
+                    float: right;" class="fa fa-question-circle"></i></a> -->
+            </ul>
+          </div>
+        </div>
+        <div class="card-body mc-list">
+          <ul class="list-unstyled list-unstyled-border">
+            <li class="media" *ngFor="let recent_call of mc_event_list">
+              <!-- <img alt="image" class="mr-3 rounded-circle" width="50" src="assets/img/users/user-5.png"> -->
+              <div class="media-body">
+                <div class="mb-1 float-right">
+                  <img src="assets/img/mc-dashboard/call.png" alt="Call" />
+                </div>
+              
+                <h6 class="media-title">
+                  <!--  class="contact-list-item" -->
+                  <div phone-attr="phone">
+                  <div *ngIf="this.show_caller_id == '1'">
+                      <h5
+                        *ngIf="
+                          this.show_caller_id == '1' &&
+                          recent_call.type == 'MissedCall'
+                        "
+                      >
+                        <div
+                          *ngIf="
+                            recent_call.from_no == this.extension &&
+                            recent_call.to_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/out-missed-call.jpg"
+                          /></span>
+                          Outgoing Call To {{ recent_call.to_no }} <span>{{(this.GetContactName(recent_call.to_no))}}</span>
+                        </div>
+                        <div
+                          *ngIf="
+                            recent_call.to_no == this.extension &&
+                            recent_call.from_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/missed-call.svg"
+                          /></span>
+                          Missed Call From {{ recent_call.from_no }} <span>{{(this.GetContactName(recent_call.from_no))}}</span>
+                        </div>
+                      </h5>
+                      <h5
+                        *ngIf="
+                          this.show_caller_id == '1' &&
+                          recent_call.type == 'AnswerdCall'
+                        "
+                      >
+                        <div
+                          *ngIf="
+                            recent_call.from_no == this.extension &&
+                            recent_call.to_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/outgoing-call.svg"
+                          /></span>
+                          Outgoing Call To {{ recent_call.to_no }} <span>{{this.GetContactName(recent_call.to_no)}}</span>
+                        </div>
+                        <div
+                          *ngIf="
+                            recent_call.to_no == this.extension &&
+                            recent_call.from_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/incoming-call.svg"
+                          /></span>
+                          Incoming Call From {{ recent_call.from_no }} <span>{{this.GetContactName(recent_call.from_no)}}</span>
+                        </div>
+                      </h5>
+                    </div>
+                    <div *ngIf="this.show_caller_id == '0'">
+                      <h5 *ngIf="recent_call.type == 'MissedCall'">
+                        <div
+                          *ngIf="
+                            recent_call.from_no == this.extension &&
+                            recent_call.to_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/missed-call.svg"
+                          /></span>
+                          Outgoing Call To XXXX
+                        </div>
+                        <div
+                          *ngIf="
+                            recent_call.to_no == this.extension &&
+                            recent_call.from_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/missed-call.svg"
+                          /></span>
+                          Missed Call From XXXX
+                        </div>
+                      </h5>
+                      <h5 *ngIf="recent_call.type == 'AnswerdCall'">
+                        <div
+                          *ngIf="
+                            recent_call.from_no == this.extension &&
+                            recent_call.to_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/outgoing-call.svg"
+                          /></span>
+                          Outgoing Call To XXXX
+                        </div>
+                        <div
+                          *ngIf="
+                            recent_call.to_no == this.extension &&
+                            recent_call.from_no != this.extension
+                          "
+                        >
+                          <span class="callType"
+                            ><img src="assets/images/incoming-call.svg"
+                          /></span>
+                          Incoming Call From XXXX
+                        </div>
+                      </h5>
+                    </div>
+                    <div class="text-small text-muted">
+                      <div class="bullet"></div>
+                      <!-- {{ recent_call.dt_time }} -->
+                      {{this.serverService.toTimeZone(recent_call.dt_time)}}
+                    </div>
+                  </div>
+                </h6>
+                <!-- <div class="text-small text-muted">
+                                    
+                                    <div class="bullet"></div> {{recent_call.dt_time}}</div> -->
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div id="message_panel_block">
+        <app-chat *ngIf="chatPageView == true"></app-chat>
+        <app-email *ngIf="mailPageView == true"></app-email>
+        <app-sms *ngIf="smsPageView == true"></app-sms>
+      </div>
+    </div>
+    <audio
+      id="beepaud"
+      src="https://omni.mconnectapps.com/webchat/images/beep.mp3"
+      preload="auto"
+    ></audio>
+  </div>
+</div>
